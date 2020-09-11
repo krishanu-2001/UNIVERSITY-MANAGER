@@ -1,9 +1,18 @@
 Clone this project
 
-pip3 install -r requirements.txt
+## EVERYTHING IS AUTOMATED  
+      Just create your sql server(sorry not automated yet!)  
+      Double click on makefile.bat -> will do all steps below
 
-Change the password in db.yaml to that of your MySQL's password
 
-Run the application by executing the command python3 app.py
+## MANUAL  
 
-The application runs on localhost:5000
+      if possible use venv
+
+      pip install -r requirements.txt
+
+      Change the password in db.yaml to that of your MySQL's password
+
+      Run the application by executing the command python app.py
+
+      The application runs on localhost:5000
