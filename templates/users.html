@@ -9,9 +9,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/app.css') }}">
 
-    <title>Hello, world!</title>
+    <title>e-univ</title>
   </head>
   <body>
+    <!-- Head template place in all files -->
+    <div class="univTitle">
+    <h1>E-University</h1>
+    </div>
+    <!-- Head template ends here -->
+
     <h1>Hello, {{request.args.get('name')}}</h1>
     <table border = 1>
         {% for user in userDetails %}
