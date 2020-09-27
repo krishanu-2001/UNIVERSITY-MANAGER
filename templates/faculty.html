@@ -18,18 +18,11 @@
     </div>
     <!-- Head template ends here -->
 
-    <div class="loginOptions row">
-      <div class="loginBox col-lg-6">
-        <h2>Student</h2>
-        <a href="login">login</a><br />
-        <a href="signup">signup</a>
+    <h1>Hello, {{request.args.get('name')}}</h1>
+      <div>
+        <a href="/flogout">Logout</a>
       </div>
-      <div class="loginBox col-lg-6">
-        <h2>faculty</h2>
-        <a href="/faclogin">login</a><br />
-        <a href="/facsignup">signup</a>
-      </div>
-    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
