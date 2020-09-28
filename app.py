@@ -90,7 +90,6 @@ def logout():
     flash = "logout successfully!"
     if(session.get('rollno')):
         session.pop('rollno')
-        print(session['rollno'])
     return render_template('index.html', flash = flash)
 
 
@@ -142,6 +141,87 @@ def studentprofile():
     if flag != 0:
         flash = ""
     return render_template('studentprofile.html', rollno = rollno)
+
+@app.route('/faclogin', methods=['GET', 'POST'])
+def faclogin():
+    flash = ""
+    flag = 1
+    if request.method == 'POST':
+        # Fetch form data
+        facultyDetails = request.form
+        fid = facultyDetails['fid']
+        password = facultyDetails['password']
+        hashedpassword = hashlib.md5(password.encode()).hexdigest()
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT COUNT(*), password, fname FROM faculty WHERE fid = '%s' "% (fid))
+        rv = cur.fetchall()
+        flag = (rv[0][0])
+        curpassword = (rv[0][1])
+        name = (rv[0][2])
+        mysql.connection.commit()
+        cur.close()
+        #give access here!!
+        if(flag >= 1 and hashedpassword == curpassword):
+            session['fid'] = fid
+            return redirect(url_for('faculty', name = name))
+        else:
+            flash = "wrong id or password!"
+            flag = 0
+    if flag != 0:
+        flash = ""
+    return render_template('faclogin.html', flash = flash)    
+@app.route('/facsignup', methods=['GET', 'POST'])
+def facsignup():
+    flash = ""
+    if request.method == 'POST':
+        # Fetch form data
+        facultyDetails = request.form
+        fid = facultyDetails['fid']
+        name = facultyDetails['name']
+        password = facultyDetails['password']
+        hashedpassword = hashlib.md5(password.encode()).hexdigest()
+        confpassword = facultyDetails['confpassword']
+        if (len(fid) == 0 or len(password) == 0 or len(name) == 0):
+            flash = "null values encountered"
+
+        elif (confpassword != password):
+            #pass
+            flash = "check password"
+        else:
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT COUNT(*) FROM faculty WHERE fid = '%s' "% (fid))
+            rv = cur.fetchall();
+            flag = (rv[0][0]);
+            if(flag >= 1):
+                flash = "already enrolled!"
+                mysql.connection.commit()
+                cur.close()
+            else:
+                cur.execute("INSERT INTO faculty(fid, fname, password) VALUES(%s, %s, %s)",(fid, name, hashedpassword))
+                mysql.connection.commit()
+                cur.close()
+                session['fid'] = fid
+                return redirect(url_for('faculty', name = name))
+    return render_template('facsignup.html', flash = flash) 
+@app.route('/faculty')
+def faculty():
+    cur = mysql.connection.cursor()
+    if(session.get('fid')):
+        facultyDetails = session['fid']
+        fid = session['fid']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM faculty WHERE fid = '%s' "% (fid))
+        rv = cur.fetchall();
+        cur.close()
+    else:
+        userDetails = "Not Authorized to access"
+    return render_template('faculty.html',facultyDetails=facultyDetails)
+@app.route('/flogout')
+def flogout():
+    flash = "logout successfully!"
+    if(session.get('fid')):
+        session.pop('fid')
+    return render_template('index.html', flash = flash)    
 
 
 if __name__ == '__main__':

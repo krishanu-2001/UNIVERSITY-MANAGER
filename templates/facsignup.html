@@ -18,18 +18,19 @@
     </div>
     <!-- Head template ends here -->
 
-    <div class="loginOptions row">
-      <div class="loginBox col-lg-6">
-        <h2>Student</h2>
-        <a href="login">login</a><br />
-        <a href="signup">signup</a>
-      </div>
-      <div class="loginBox col-lg-6">
-        <h2>faculty</h2>
-        <a href="/faclogin">login</a><br />
-        <a href="/facsignup">signup</a>
-      </div>
-    </div>
+    <form class="form-center" method="POST" action="">
+        <h1 style="color: maroon;">{{flash}}</h1>
+        <input type="text" name="fid" placeholder="Enter Faculty Id" />
+        <br>
+        <input type="text" name="name" placeholder="Enter Your Name" />
+        <br>
+        <input type="password" name="password" placeholder="Enter Password"/>
+        <br>
+        <input type="password" name="confpassword" placeholder="Confirm password " />
+        <br>
+        <input type="submit">
+      </form>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
