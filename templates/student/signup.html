@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form class="form-center" method="POST" action="">
+        <h1 style="color: maroon;">{{flash}}</h1>
+        <input type="text" name="rollno" placeholder="rollno" />
+        <br>
+        <input type="text" name="name" placeholder="name" />
+        <br>
+        <input type="password" name="password" placeholder="password"/>
+        <br>
+        <input type="password" name="confpassword" placeholder="confirm password " />
+        <br>
+        <input type="submit">
+      </form>
+
+
+{% endblock %}

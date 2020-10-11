@@ -2,7 +2,6 @@ from flask import *
 from flask_mysqldb import MySQL
 import yaml
 import hashlib
-import models.student_krish as student_krish
 
 app = Flask(__name__)
 app.secret_key = "abc"
@@ -17,14 +16,10 @@ app.config['MYSQL_DB'] = db['mysql_db']
 mysql = MySQL(app)
 
 
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
-
-#student starts here student starts here student starts here student starts here student starts here
-#student starts here student starts here student starts here student starts here student starts here
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -53,7 +48,7 @@ def login():
             flag = 0
     if flag != 0:
         flash = ""
-    return render_template('student/login.html', flash = flash)
+    return render_template('login.html', flash = flash)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -87,7 +82,7 @@ def signup():
                 cur.close()
                 session['rollno'] = rollno
                 return redirect(url_for('users', name = name))
-    return render_template('student/signup.html', flash = flash)
+    return render_template('signup.html', flash = flash)
 
 
 @app.route('/logout')
@@ -100,7 +95,7 @@ def logout():
 
 @app.route('/users')
 def users():
-    
+    cur = mysql.connection.cursor()
     if(session.get('rollno')):
         userDetails = session['rollno']
         rollno = session['rollno']
@@ -111,7 +106,7 @@ def users():
     else:
         userDetails = "Not Authorized to access"
 
-    return render_template('student/users.html',userDetails=userDetails)
+    return render_template('users.html',userDetails=userDetails)
 
 
 @app.route('/studentprofile', methods=['GET','POST'])
@@ -145,18 +140,8 @@ def studentprofile():
 
     if flag != 0:
         flash = ""
-    return render_template('student/studentprofile.html', rollno = rollno)
+    return render_template('studentprofile.html', rollno = rollno)
 
-#testing add_url_rule > code in student.krish file in models
-app.add_url_rule('/student_timetable', view_func=student_krish.student_timetable, methods=['GET','POST'])
-
-#student ends here student ends here student ends here student ends here student ends here student ends here
-#student ends here student ends here student ends here student ends here student ends here student ends here
-
-
-
-#faculty starts here faculty starts here faculty starts here faculty starts here faculty starts here faculty starts here
-#faculty starts here faculty starts here faculty starts here faculty starts here faculty starts here faculty starts here
 @app.route('/faclogin', methods=['GET', 'POST'])
 def faclogin():
     flash = ""
@@ -231,7 +216,6 @@ def faculty():
     else:
         facultyDetails = "Not Authorized to access"
     return render_template('faculty.html',facultyDetails=facultyDetails)
-
 @app.route('/flogout')
 def flogout():
     flash = "logout successfully!"
@@ -244,3 +228,4 @@ if __name__ == '__main__':
     flag = 0
     app.run(debug=True)
 
+# actual file replace with app.py

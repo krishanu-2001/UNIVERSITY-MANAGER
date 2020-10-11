@@ -1,0 +1,58 @@
+{% extends 'student/users.html' %}
+
+{% block view_users %}
+    <h1>Welcome to timetable</h1>
+   
+    <br /><br />
+    
+    <div class="timetableClass">
+    <table>
+    <tr>
+        <th></th>
+        {% for head in HeadingTT %}
+            <th>{{ head }}</th>
+        {% endfor %}
+    </tr>
+    {% for tday in timeTableInfo %}
+        <tr>
+        {% for tv in tday %}
+            {% if tv == tday[0] %}
+            <td>
+                <div class="">
+                        <div class="">
+                            {{tv}}
+                        </div>
+                </div>
+            </td>
+            {% else %}
+                <td>
+                    <div class="tvCard">
+                            <div class="tv_cname">
+                                {{tv[0]}}
+                            </div>
+                            <div class="tv_room">
+                                    {{tv[1]}}
+                            </div>
+                    </div>
+                </td>
+            {% endif %}
+
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+    <div class="timeTableQuery">
+        SQL QUERY
+        <div class="timeTableSql">
+            <br />SELECT * FROM 
+            <br />(SELECT cid, cname FROM enroll 
+            <br />NATURAL JOIN course_list
+            <br />WHERE sid = '%s') as temp, room_cid 
+            <br />WHERE temp.cid = room_cid.ccid;
+        </div>
+        <div class="timeTableSqlLabel">
+            <label>CODE IN <u>MODEL/STUDENT_KRISHANU</u></label>
+        </div>
+    </div>
+{% endblock %}

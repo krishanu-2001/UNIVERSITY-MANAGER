@@ -1,0 +1,35 @@
+{% extends 'student/users.html' %}
+
+{% block view_users %}
+
+    <h2>Fill Details</h2>
+    <form class="form-center" method="POST" action="">
+        {% if flash != '' %}
+        <h1 style="color: maroon;">{{flash}}</h1>
+        {% endif %}
+
+        <input type="text" name="rollno" placeholder="rollno" value={{rollno}} readonly/>
+        <br>
+        <input type="text" name="phone" placeholder="phone number" />
+        <br>
+        <input type="text" name="address" placeholder="address" />
+        <br>
+        <input type="text" name="cpi" placeholder="cpi" />
+        <br>
+        <input type="text" name="class" placeholder="class" />
+        <br>
+        <input type="text" name="program" placeholder="program" />
+        <br>
+        <input type="text" name="email" placeholder="email" />
+        <br>
+        <input type="text" name="dob_dd" placeholder="day" />
+        <br>
+        <input type="number" name="dob_mm" placeholder="month" />
+        <br>
+        <input type="number" name="dob_yy" placeholder="year" />
+        <br>
+
+        <input type="submit">
+      </form>
+
+{% endblock %}

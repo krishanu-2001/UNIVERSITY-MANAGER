@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form class="form-center" method="POST" action="">
+        {% if flash != '' %}
+        <h1 style="color: maroon;">{{flash}}</h1>
+        {% endif %}
+
+        <input type="text" name="rollno" placeholder="rollno" />
+        <br>
+        <input type="password" name="password" placeholder="password" />
+        <br>
+        <input type="submit">
+      </form>
+
+{% endblock %}

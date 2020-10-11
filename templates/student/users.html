@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+  {% block body %}
+    <div class="row">
+    <div class="col-lg-3 userLeftPanel">
+        <h1>Hello, </h1>
+        <h3>
+            {% for user in userDetails %}
+              <td> {{user[0]}} </td>
+            {% endfor %}
+        </h3>
+        <div class="row">
+        <a href="/studentprofile">
+          <div class="userProfileLabel userLeft">
+              profile
+          </div>
+        </a>
+        <a href="/logout">
+          <div class="userProfileLabel userRight">
+              logout
+          </div>
+        </a>
+        </div>
+        <a href="/student_timetable">
+          <div class="userListLabel">
+            Timetable
+          </div>
+        </a>
+
+    </div>
+    <div class="col-lg-9 userRightPanel">
+        
+        {% block view_users %}
+        <h1>this is users.html use jinja inheritance</h1>
+        {% endblock %}
+    </div>
+  </div>
+
+{% endblock %}
