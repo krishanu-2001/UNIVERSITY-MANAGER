@@ -226,12 +226,57 @@ def faculty():
         fid = session['fid']
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM faculty WHERE fid = '%s' "% (fid))
-        rv = cur.fetchall();
+        facultyDetails = cur.fetchall();
         cur.close()
     else:
         facultyDetails = "Not Authorized to access"
     return render_template('faculty.html',facultyDetails=facultyDetails)
-
+@app.route('/facultyprofile', methods=['GET','POST'])
+def facultyprofile():
+    fid = session['fid']
+    flash = ""
+    flag = 1
+    if request.method == 'POST':
+        # Fetch form data
+        facultyDetails = request.form
+        fid = facultyDetails['fid']
+        name = facultyDetails['name']
+        dob = facultyDetails['dob']
+        gender = facultyDetails['gender']
+        position = facultyDetails['position']
+        salary = facultyDetails['salary']
+        email = facultyDetails['email']
+        phone = facultyDetails['phone']
+        address = facultyDetails['address']
+        if(len(phone) > 0 and len(address) > 0 and len(gender) > 0 and len(name) > 0 and len(email) > 0 and len(dob) > 0 and len(position) > 0 and len(salary) > 0):
+            #pass
+            cur = mysql.connection.cursor()
+            cur.execute("UPDATE faculty SET phone = %s, address = %s, gender = %s, fname = %s, email = %s, dob = %s, position = %s, salary = %s WHERE fid = %s",(phone, address, gender, name, email, dob, position, salary, fid))
+            mysql.connection.commit()
+            cur.close()
+        else:
+            flash = "wrong id or password!"
+            flag = 0
+        #give access here!!
+    if flag != 0:
+        flash = ""
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM faculty WHERE fid = '%s' "% (fid))
+    facultyDetails = cur.fetchall()[0];
+    cur.close()    
+    return render_template('facultyprofile.html',facultyDetails=facultyDetails )    
+@app.route('/fhome')
+def fhome():
+    cur = mysql.connection.cursor()
+    if(session.get('fid')):
+        fid = session['fid']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM faculty WHERE fid = '%s' "% (fid))
+        name = cur.fetchall()[0][1];
+        cur.close()  
+    else:
+        name = "Not Authorized to access"
+    return redirect(url_for('faculty', name = name))
 @app.route('/flogout')
 def flogout():
     flash = "logout successfully!"
