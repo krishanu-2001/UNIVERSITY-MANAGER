@@ -227,10 +227,12 @@ def faculty():
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM faculty WHERE fid = '%s' "% (fid))
         facultyDetails = cur.fetchall();
+        cur.execute("SELECT * FROM course_list JOIN teaches ON course_list.cid=teaches.cid WHERE fid='%s' " %(fid))
+        courselist = cur.fetchall();
         cur.close()
     else:
         facultyDetails = "Not Authorized to access"
-    return render_template('faculty.html',facultyDetails=facultyDetails)
+    return render_template('faculty.html',facultyDetails=facultyDetails,courselist=courselist)
 @app.route('/facultyprofile', methods=['GET','POST'])
 def facultyprofile():
     fid = session['fid']
@@ -284,6 +286,43 @@ def flogout():
         session.pop('fid')
     return render_template('index.html', flash = flash)    
 
+#dept starts here dept starts here dept starts here dept starts here dept starts here
+#dept starts here dept starts here dept starts here dept starts here dept starts here
+
+@app.route('/department')
+def departmenthome():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT did,dname FROM department")
+    departments = cur.fetchall();
+    cur.close()    
+    return render_template('departmenthome.html',departments=departments)
+@app.route('/department/<id>')
+def department(id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT did,dname FROM department")
+    departments = cur.fetchall();
+    cur.execute("SELECT * FROM departmentview WHERE did='%s' "% (id))
+    deptinfo=cur.fetchall()[0];
+    cur.close()    
+    return render_template('department.html',departments=departments,deptinfo=deptinfo)    
+@app.route('/department/<id>/faculty')
+def department_faculty(id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM department WHERE did='%s' "% (id))
+    deptinfo=cur.fetchall()[0];
+    cur.execute("SELECT * FROM faculty JOIN works_in ON faculty.fid=works_in.fid JOIN department ON works_in.did ='%s' GROUP BY faculty.fid"% (id))
+    facultylist=cur.fetchall();
+    cur.close()    
+    return render_template('deptfaclist.html',facultylist=facultylist,deptinfo=deptinfo)   
+@app.route('/department/<id>/student')
+def department_student(id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM department WHERE did='%s' "% (id))
+    deptinfo=cur.fetchall()[0];
+    cur.execute("SELECT * FROM student WHERE student.did='%s' "% (id))
+    studentlist=cur.fetchall();
+    cur.close()    
+    return render_template('deptstudlist.html',studentlist=studentlist,deptinfo=deptinfo)   
 
 if __name__ == '__main__':
     flag = 0
