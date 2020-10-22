@@ -76,6 +76,86 @@ def student_timetable():
     else:
         userDetails = "Not Authorized to access"
         timeTableInfo = "Nothing to display"
-
+        HeadingTT = ""
     return render_template('student/student_timetable.html'
                 ,userDetails=userDetails, timeTableInfo=timeTableInfo, HeadingTT=HeadingTT)
+
+
+def student_course_list():
+    
+    if(session.get('rollno')):
+        userDetails = session['rollno']
+        rollno = session['rollno']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM student WHERE sid = '%s' ;"% (rollno))
+        rv = cur.fetchall();
+        
+        # join enroll and course_list wrt cid where sid = rollno
+        cur.execute('''SELECT sid,cid,room
+                        FROM enroll
+                        NATURAL JOIN course_list
+                        WHERE sid = '%s' ; 
+                        '''% (rollno))
+        rv = cur.fetchall()
+        cur.execute('''SELECT cid, cname, grade, hours FROM enroll 
+                        NATURAL JOIN course_list
+                        WHERE sid = '%s';
+                         '''% (rollno))
+        sv = cur.fetchall()
+        courselist = sv
+        cur.close()
+        mysql.connection.commit()
+
+
+    else:
+        userDetails = "Not Authorized to access"
+        timeTableInfo = "Nothing to display"
+        courselist = "nothing"
+
+    return render_template('student/student_course_list.html'
+                ,userDetails=userDetails, courselist=courselist)
+
+def student_course_reg():
+    courseList = ""
+    if(session.get('rollno')):
+        userDetails = session['rollno']
+        rollno = session['rollno']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM student WHERE sid = '%s' ;"% (rollno))
+        rv = cur.fetchall()
+        xlist = []
+        if request.method == 'POST':
+            clist = (request.form.getlist('courses'))
+            for cids in clist:
+                cur.execute('''
+                        INSERT IGNORE INTO enroll 
+                        (sid, cid, grade) VALUES
+                        ('%s', '%s', 'A');
+                        '''% (rollno, cids))
+
+
+        # join student and course list where class =( sem+1 )/ 2
+        cur.execute('''
+            SELECT fid, cid, cname, fname FROM 
+                faculty as A
+                NATURAL JOIN
+                (SELECT * from teaches
+                NATURAL JOIN
+                course_list WHERE cid in 
+                (SELECT cid FROM student, course_list 
+                WHERE class = (sem + 1)/2 AND sid = '%s')
+            ) as B;
+             '''% (rollno))
+        rv = cur.fetchall()
+        courselist = rv
+        mysql.connection.commit()
+        cur.close()
+        
+
+    else:
+        userDetails = "Not Authorized to access"
+        timeTableInfo = "Nothing to display"
+        courselist = "nothing"
+
+    return render_template('student/student_course_reg.html'
+                ,userDetails=userDetails, courselist=courselist)

@@ -1,0 +1,43 @@
+{% extends 'student/users.html' %}
+
+{% block view_users %}
+    <h1>Welcome to course registration</h1>
+   
+    <br /><br />
+    <div class="timetableClass">
+    <form method="POST">
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Enroll</th>
+            <th>Teacher</th>
+        </tr>
+    {% for course in courselist %}
+        <tr>
+            <td>{{course[2]}}</td> 
+            <td><input type="checkbox" name="courses" value={{course[1]}} /></td>
+            <td>{{ course[3] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <input type="submit" />
+    </form>
+    </div>
+    <div class="timeTableQuery">
+        SQL QUERY
+        <div class="timeTableSql">
+                <br />SELECT fid, cid, cname, fname FROM 
+                <br />faculty as A
+                <br />NATURAL JOIN
+                <br />(SELECT * from teaches
+                <br />NATURAL JOIN
+                <br />course_list WHERE cid in 
+                <br />(SELECT cid FROM student, course_list 
+                <br />WHERE class = (sem + 1)/2 AND sid = '%s')
+            <br />) as B;
+        </div>
+        <div class="timeTableSqlLabel">
+            <label>CODE IN <u>MODEL/STUDENT_KRISHANU</u></label>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'student/users.html' %}
+
+{% block view_users %}
+    <h1>Welcome to courselist</h1>
+   
+    <br /><br />
+    <div class="timetableClass">
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Grade</th>
+            <th>Hours</th>
+        </tr>
+    {% for course in courselist %}
+        <tr>
+            <td>{{ course[1] }}</td> 
+            <td>{{ course[2] }}</td>
+            <td>{{ course[3] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+    <div class="timeTableQuery">
+        SQL QUERY
+        <div class="timeTableSql">
+            <br />SELECT cid, cname, grades, hours FROM enroll 
+            <br />NATURAL JOIN course_list
+            <br />WHERE sid = '%s';
+        </div>
+        <div class="timeTableSqlLabel">
+            <label>CODE IN <u>MODEL/STUDENT_KRISHANU</u></label>
+        </div>
+    </div>
+{% endblock %}
