@@ -1,0 +1,22 @@
+{% extends 'admin/admin_home.html' %}
+
+{% block view_users %}
+    <h1>Please select student</h1>
+    <table>
+        <tr>
+            <th>rollno</th>
+            <th>name</th>
+        </tr>
+    {% for student in studentlist %}
+        {% set temp = "admin_studentprofile?rollno="~student[0] %}
+        <tr>
+        <td><a href={{temp}}>{{student[0]}}</a></td>
+        <td>{{student[1]}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <br /><br />
+    
+    
+    
+{% endblock %}

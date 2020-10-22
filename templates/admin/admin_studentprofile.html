@@ -1,0 +1,34 @@
+{% extends 'admin/admin_home.html' %}
+
+{% block view_users %}
+
+    <h2>Fill Details</h2>
+    <form class="form-center" method="POST" action="">
+        {% if flash != '' %}
+        <h1 style="color: maroon;">{{flash}}</h1>
+        {% endif %}
+        rollno: <input type="text" name="rollno" placeholder={{studentDetail[0][0]}} value={{rollno}} readonly/>
+        <br>
+        phone: <input type="text" name="phone" value={{studentDetail[0][2]}} />
+        <br>
+        address: <input type="text" name="address" value="{{studentDetail[0][3]}}" />
+        <br>
+        cpi: <input type="text" name="cpi" value="{{studentDetail[0][4]}}" />
+        <br>
+        class: <input type="text" name="class" value="{{studentDetail[0][5]}}" />
+        <br>
+        program: <input type="text" name="program" value="{{studentDetail[0][6]}}" />
+        <br>
+        email: <input type="text" name="email" value="{{studentDetail[0][7]}}" />
+        <br>
+        dob_dd: <input type="text" name="dob_dd" value="{{studentDetail[0][8]}}" />
+        <br>
+        dob_mm: <input type="number" name="dob_mm" value="{{studentDetail[0][9]}}" />
+        <br>
+        dob_yy: <input type="number" name="dob_yy" value="{{studentDetail[0][10]}}" />
+        <br>
+
+        <input type="submit">
+      </form>
+
+{% endblock %}

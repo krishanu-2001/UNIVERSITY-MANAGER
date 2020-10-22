@@ -2,34 +2,31 @@
 
 {% block view_users %}
 
-    <h2>Fill Details</h2>
+    <h2>See Details</h2>
     <form class="form-center" method="POST" action="">
         {% if flash != '' %}
         <h1 style="color: maroon;">{{flash}}</h1>
         {% endif %}
-
-        <input type="text" name="rollno" placeholder="rollno" value={{rollno}} readonly/>
+        rollno: <input type="text" name="rollno" placeholder={{studentDetail[0][0]}} value={{rollno}} readonly/>
         <br>
-        <input type="text" name="phone" placeholder="phone number" />
+        phone: <input type="text" name="phone" value={{studentDetail[0][2]}} readonly/>
         <br>
-        <input type="text" name="address" placeholder="address" />
+        address: <input type="text" name="address" value="{{studentDetail[0][3]}}" readonly/>
         <br>
-        <input type="text" name="cpi" placeholder="cpi" />
+        cpi: <input type="text" name="cpi" value="{{studentDetail[0][4]}}" readonly/>
         <br>
-        <input type="text" name="class" placeholder="class" />
+        class: <input type="text" name="class" value="{{studentDetail[0][5]}}" readonly/>
         <br>
-        <input type="text" name="program" placeholder="program" />
+        program: <input type="text" name="program" value="{{studentDetail[0][6]}}" readonly/>
         <br>
-        <input type="text" name="email" placeholder="email" />
+        email: <input type="text" name="email" value="{{studentDetail[0][7]}}" readonly/>
         <br>
-        <input type="text" name="dob_dd" placeholder="day" />
+        dob_dd: <input type="text" name="dob_dd" value="{{studentDetail[0][8]}}" readonly/>
         <br>
-        <input type="number" name="dob_mm" placeholder="month" />
+        dob_mm: <input type="number" name="dob_mm" value="{{studentDetail[0][9]}}" readonly/>
         <br>
-        <input type="number" name="dob_yy" placeholder="year" />
+        dob_yy: <input type="number" name="dob_yy" value="{{studentDetail[0][10]}}" readonly/>
         <br>
-
-        <input type="submit">
       </form>
 
 {% endblock %}

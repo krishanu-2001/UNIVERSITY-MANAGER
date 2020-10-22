@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 import yaml
 import hashlib
 import models.student_krish as student_krish
+import models.admin_krish as admin_krish
 
 app = Flask(__name__)
 app.secret_key = "abc"
@@ -116,44 +117,61 @@ def users():
 
 @app.route('/studentprofile', methods=['GET','POST'])
 def studentprofile():
-    rollno = session['rollno']
-    flash = ""
-    flag = 1
-    if request.method == 'POST':
-        # Fetch form data
-        userDetails = request.form
-        rollno = userDetails['rollno']
-        phone = userDetails['phone']
-        address = userDetails['address']
-        cpi = userDetails['cpi']
-        _class = userDetails['class']
-        program = userDetails['program']
-        email = userDetails['email']
-        dob_dd = userDetails['dob_dd']
-        dob_mm = userDetails['dob_mm']
-        dob_yy = userDetails['dob_yy']
-        if(len(phone) > 0 and len(address) > 0 and len(_class) > 0 and len(program) > 0 and len(email) > 0):
-            #pass
-            cur = mysql.connection.cursor()
-            cur.execute("UPDATE student SET phone = %s, address = %s, cpi = %s, class = %s, program = %s, email = %s, dob_dd = %s, dob_mm = %s, dob_yy = %s WHERE sid = %s",(phone, address, cpi, _class, program, email, dob_dd, dob_mm, dob_yy, rollno)  )
-            mysql.connection.commit()
-            cur.close()
-        else:
-            flash = "wrong id or password!"
-            flag = 0
-        #give access here!!
-
-    if flag != 0:
+    if(session.get('rollno')):
+        rollno = session['rollno']
         flash = ""
-    return render_template('student/studentprofile.html', rollno = rollno)
+        flag = 1
+        if request.method == 'POST':
+            # Fetch form data
+            userDetails = request.form
+            rollno = userDetails['rollno']
+            phone = userDetails['phone']
+            address = userDetails['address']
+            cpi = userDetails['cpi']
+            _class = userDetails['class']
+            program = userDetails['program']
+            email = userDetails['email']
+            dob_dd = userDetails['dob_dd']
+            dob_mm = userDetails['dob_mm']
+            dob_yy = userDetails['dob_yy']
+            if(len(phone) > 0 and len(address) > 0 and len(_class) > 0 and len(program) > 0 and len(email) > 0):
+                #pass
+                print("not allowed to update")
+            else:
+                flash = "wrong id or password!"
+                flag = 0
+            #give access here!!
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM student WHERE sid = '%s'"%(rollno))
+        studentDetail = cur.fetchall()
+        mysql.connection.commit()
+        if flag != 0:
+            flash = ""
+        return render_template('student/studentprofile.html', rollno = rollno, studentDetail = studentDetail)
+    
+    else:
+        return "not authorized to view"
+
 
 #testing add_url_rule > code in student.krish file in models
 app.add_url_rule('/student_timetable', view_func=student_krish.student_timetable, methods=['GET','POST'])
 app.add_url_rule('/student_course_list', view_func=student_krish.student_course_list, methods=['GET','POST'])
 app.add_url_rule('/student_course_reg', view_func=student_krish.student_course_reg, methods=['GET','POST'])
+app.add_url_rule('/student_course_reg', view_func=student_krish.student_course_reg, methods=['GET','POST'])
 
 #student ends here student ends here student ends here student ends here student ends here student ends here
 #student ends here student ends here student ends here student ends here student ends here student ends here
+
+
+#admin starts here admin starts here admin starts here admin starts here admin starts here admin starts here
+#admin starts here admin starts here admin starts here admin starts here admin starts here admin starts here
+
+app.add_url_rule('/admin_login', view_func=admin_krish.admin_login, methods=['GET','POST'])
+app.add_url_rule('/admin_home', view_func=admin_krish.admin_home, methods=['GET','POST'])
+app.add_url_rule('/admin_selectstudent', view_func=admin_krish.admin_selectstudent, methods=['GET','POST'])
+app.add_url_rule('/admin_studentprofile', view_func=admin_krish.admin_studentprofile, methods=['GET','POST'])
+#admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
+#admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 
 
 

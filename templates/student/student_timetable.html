@@ -42,17 +42,5 @@
     {% endfor %}
     </table>
     </div>
-    <div class="timeTableQuery">
-        SQL QUERY
-        <div class="timeTableSql">
-            <br />SELECT * FROM 
-            <br />(SELECT cid, cname FROM enroll 
-            <br />NATURAL JOIN course_list
-            <br />WHERE sid = '%s') as temp, room_cid 
-            <br />WHERE temp.cid = room_cid.ccid;
-        </div>
-        <div class="timeTableSqlLabel">
-            <label>CODE IN <u>MODEL/STUDENT_KRISHANU</u></label>
-        </div>
-    </div>
+    
 {% endblock %}

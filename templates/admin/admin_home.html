@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+  {% block body %}
+    <div class="row">
+    <div class="col-lg-3 userLeftPanel">
+       <h3>Welcome Admin</h3>
+        <div class="row">
+        <a href="#">
+          <div class="userProfileLabel userLeft" style="background-color: brown;">
+              <i class="fa fa-cog"></i>
+          </div>
+        </a>
+        <a href="/logout">
+          <div class="userProfileLabel userRight" style="background-color: brown;">
+              logout
+          </div>
+        </a>
+        </div>
+        <a href="/admin_selectstudent">
+          <div class="userListLabel">
+            <h4>
+            <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+            Students Settings
+            </h4>
+        </div>
+        </a>
+        <a href="#">
+          <br />
+          <div class="userListLabel">
+                <h4>
+                &nbsp;<i class="fa fa-book fa-2x" aria-hidden="true"></i>
+                &nbsp;&nbsp;Course Settings
+                </h4>
+          </div>
+        </a>
+        <a href="#">
+          <br />
+          <div class="userListLabel">
+                <h4>
+                &nbsp;<i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                &nbsp;&nbsp; Faculty Settings
+                </h4>
+        </div>
+        </a>
+
+    </div>
+    <div class="col-lg-9 userRightPanel">
+        
+        {% block view_users %}
+        <h1>this is users.html use jinja inheritance</h1>
+        {% endblock %}
+    </div>
+  </div>
+
+{% endblock %}
