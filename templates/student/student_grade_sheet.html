@@ -1,0 +1,48 @@
+{% extends 'student/users.html' %}
+
+{% block view_users %}
+    <h1>Welcome to courselist</h1>
+   
+    <br /><br />
+    <div class="timetableClass">
+    <table>
+        <tr>
+            <th>course id</th>
+            <th>Subject</th>
+            <th>Grade Mid<br />semester</th>
+            <th>Grades End<br />semester</th>
+            <th>Credits obtained</th>
+            <th>Grade points</th>
+        </tr>
+    {% for course in courselist %}
+        <tr>
+            <td>{{ course[0] }}</td>
+            <td>{{ course[1] }}</td> 
+            <td>{{ course[2] }}</td>
+            <td>{{ course[3] }}</td>
+            <td>{{ course[4] }}</td>
+            <td>{{ course[5] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+        <div class="row studentCpiTitle">
+            <div class="col-sm-3">
+                credits obtained <br />
+                {{credits}}
+            </div>
+            <div class="col-sm-3">
+                total credits <br />
+                {{total_credits}}
+            </div>
+            <div class="col-sm-3">
+                overall credits <br />
+                {{overall_credits}}
+            </div>
+            <div class="col-sm-3">
+                overall total credits <br />
+                {{overall_total}}
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

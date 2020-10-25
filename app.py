@@ -158,6 +158,7 @@ app.add_url_rule('/student_timetable', view_func=student_krish.student_timetable
 app.add_url_rule('/student_course_list', view_func=student_krish.student_course_list, methods=['GET','POST'])
 app.add_url_rule('/student_course_reg', view_func=student_krish.student_course_reg, methods=['GET','POST'])
 app.add_url_rule('/student_course_reg', view_func=student_krish.student_course_reg, methods=['GET','POST'])
+app.add_url_rule('/student_grade_sheet', view_func=student_krish.student_grade_sheet, methods=['GET','POST'])
 
 #student ends here student ends here student ends here student ends here student ends here student ends here
 #student ends here student ends here student ends here student ends here student ends here student ends here

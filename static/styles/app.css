@@ -96,20 +96,34 @@ td, th{
   position: absolute;
 }
 
+.studentCpiTitle{
+  font-size: 1.2em;
+  border: #000 solid 2px;
+  margin: 10px;
+  padding: 10px;
+  background-color: lavenderblush;
+  box-shadow: 4px 4px 1px rgba(168, 99, 8, 0.678);
+}
+
 .timetableClass{
   width: 80%;
   overflow: auto;
-  background-color: #f37554;
   margin: 40px;
+  background-color: lavender;
   border: #aaa4a5 3px solid;
 }
+.timetableClass>table, .temporary{
+  background-color: lavenderblush;
+  box-shadow: 4px 4px 1px rgba(168, 99, 8, 0.678);
+}
+
 
 .tvCard{
-  background-color:#dfd;
+  background-color: thistle;
 }
 
 .tv_cname{
-  background-color: #ddd;
+  background-color: seagreen;
   text-align: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;;
 }
@@ -118,7 +132,7 @@ td, th{
   font-size: 0.8em;
   text-align: right;
   margin-right: 10px;
-  background-color: #dfd;
+  background-color: thistle;
 }
 
 .timeTableQuery{

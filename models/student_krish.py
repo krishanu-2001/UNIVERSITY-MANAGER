@@ -2,6 +2,7 @@ from flask import *
 from flask_mysqldb import MySQL
 import yaml
 import hashlib
+from decimal import *
 
 app = Flask(__name__)
 app.secret_key = "abc"
@@ -40,6 +41,36 @@ def generateTT(rv, sv):
         TT[day][time][1] = str(room)
 
     return headingTT, TT
+
+''' sets credits through switch case '''
+def setCredits(sv, rv, cur_cpi):
+    temp = []
+    _credits = Decimal(0.00)
+    total_credits = Decimal(rv[0])
+    for row in sv:
+        x = []
+        count = 0
+        for col in row:
+            count += 1
+            x.append(col)
+            if(count == 4):
+                # do cases here
+                cpi = row[count]
+                val = 0.00
+                if(col == 'A' or col == 'AA'):
+                    val = Decimal(1.00) * cpi
+                elif (col == 'AB'):
+                    val = Decimal(0.90) * cpi
+                elif (col == 'B' or col == 'BB'):
+                    val = Decimal(0.80) * cpi
+                else:
+                    val = Decimal(0.70) * cpi
+                _credits += val
+                x.append(round(val,2))
+        temp.append(x)
+    overall_credits = cur_cpi * total_credits / 10
+    overall_credits += _credits
+    return temp, _credits, total_credits, overall_credits
 
 # endUtils
 
@@ -159,3 +190,56 @@ def student_course_reg():
 
     return render_template('student/student_course_reg.html'
                 ,userDetails=userDetails, courselist=courselist)
+
+
+def student_grade_sheet():
+    
+    if(session.get('rollno')):
+        userDetails = session['rollno']
+        rollno = session['rollno']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM student WHERE sid = '%s' ;"% (rollno))
+        rv = cur.fetchall();
+        getcontext().prec = 4
+        # join enroll and course_list wrt cid where sid = rollno
+        cur.execute('''SELECT SUM(credits)
+                        FROM enroll
+                        NATURAL JOIN course_list
+                        WHERE sid = '%s' ; 
+                        '''% (rollno))
+        rv = cur.fetchall()
+
+        cur.execute('''SELECT cpi from student where
+                        sid = '%s'; 
+                        '''% (rollno))
+        xv = cur.fetchall()
+        
+        cur.execute('''SELECT cid, cname, grade, grade_endsem,credits FROM enroll 
+                        NATURAL JOIN course_list
+                        WHERE sid = '%s';
+                         '''% (rollno))
+        sv = cur.fetchall()
+        courselist = sv
+        cur_cpi = xv[0][0]
+        # generate cpi params
+        
+        courselist, _credits, total_credits, overall_credits = setCredits(courselist, rv[0], cur_cpi)
+        overall_total = 2*total_credits
+        # cpi params ends
+        cur.close()
+        mysql.connection.commit()
+
+
+    else:
+        userDetails = "Not Authorized to access"
+        timeTableInfo = "Nothing to display"
+        courselist = "nothing"
+        _credits = 0.0
+        total_credits = 0.0
+        overall_credits = 0.0
+        overall_credits = 0.0
+
+    return render_template('student/student_grade_sheet.html'
+                ,userDetails=userDetails, courselist=courselist
+                ,credits = _credits, total_credits = total_credits,
+                 overall_credits = overall_credits, overall_total = overall_total)
