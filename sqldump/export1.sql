@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: okramice
+-- Host: localhost    Database: university
 -- ------------------------------------------------------
--- Server version	5.6.50-log
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!50503 SET NAMES latin1 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,14 +21,14 @@
 
 DROP TABLE IF EXISTS `course_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `course_list` (
-  `cid` int(11) NOT NULL,
+  `cid` int NOT NULL,
   `cname` varchar(45) DEFAULT NULL,
   `room` varchar(45) DEFAULT NULL,
   `hours` varchar(45) DEFAULT NULL,
-  `year` int(11) DEFAULT NULL,
-  `sem` int(11) DEFAULT NULL,
+  `year` int DEFAULT NULL,
+  `sem` int DEFAULT NULL,
   `credits` decimal(3,2) DEFAULT NULL,
   PRIMARY KEY (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -50,14 +50,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `department`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `department` (
-  `did` varchar(45) COLLATE latin1_bin NOT NULL,
-  `dname` varchar(45) COLLATE latin1_bin NOT NULL,
-  `building` varchar(45) COLLATE latin1_bin DEFAULT NULL,
-  `budget` int(11) DEFAULT NULL,
-  `contactno` varchar(45) COLLATE latin1_bin DEFAULT NULL,
-  `fid` int(11) DEFAULT NULL,
+  `did` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `dname` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `building` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
+  `budget` int DEFAULT NULL,
+  `contactno` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
+  `fid` int DEFAULT NULL,
   `since` date DEFAULT NULL,
   PRIMARY KEY (`did`),
   KEY `managed_by_idx` (`fid`),
@@ -82,7 +82,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `departmentview`;
 /*!50001 DROP VIEW IF EXISTS `departmentview`*/;
 SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 /*!50001 CREATE VIEW `departmentview` AS SELECT 
  1 AS `did`,
  1 AS `dname`,
@@ -102,10 +102,10 @@ SET character_set_client = @saved_cs_client;
 
 DROP TABLE IF EXISTS `enroll`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `enroll` (
-  `sid` int(11) NOT NULL,
-  `cid` int(11) NOT NULL,
+  `sid` int NOT NULL,
+  `cid` int NOT NULL,
   `grade` varchar(2) DEFAULT NULL,
   `grade_endsem` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`sid`,`cid`),
@@ -121,7 +121,7 @@ CREATE TABLE `enroll` (
 
 LOCK TABLES `enroll` WRITE;
 /*!40000 ALTER TABLE `enroll` DISABLE KEYS */;
-INSERT INTO `enroll` VALUES (190001029,1,'A','AA'),(190001029,2,'A','AA'),(190001090,2,'AB','B'),(190001090,3,'B','B');
+INSERT INTO `enroll` VALUES (190001029,1,'A','AA'),(190001029,2,'A','AA'),(190001090,2,'AB','BB'),(190001090,3,'B','B');
 /*!40000 ALTER TABLE `enroll` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,13 +131,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `faculty`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `faculty` (
-  `fid` int(11) NOT NULL,
+  `fid` int NOT NULL,
   `fname` varchar(45) CHARACTER SET latin1 NOT NULL,
   `phone` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
   `address` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
-  `salary` int(11) DEFAULT '45000',
+  `salary` int DEFAULT '45000',
   `email` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `password` varchar(45) CHARACTER SET latin1 NOT NULL,
@@ -163,12 +163,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `room_cid`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `room_cid` (
   `room` varchar(45) NOT NULL,
-  `time` int(11) NOT NULL,
-  `day` int(11) NOT NULL,
-  `ccid` int(11) DEFAULT NULL,
+  `time` int NOT NULL,
+  `day` int NOT NULL,
+  `ccid` int DEFAULT NULL,
   PRIMARY KEY (`room`,`time`,`day`),
   KEY `cid_idx` (`ccid`),
   KEY `cid_idx2` (`ccid`),
@@ -194,7 +194,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `room_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `room_list` (
   `room` varchar(45) NOT NULL,
   PRIMARY KEY (`room`)
@@ -217,9 +217,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `student`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `student` (
-  `sid` int(11) NOT NULL,
+  `sid` int NOT NULL,
   `sname` varchar(45) CHARACTER SET latin1 NOT NULL,
   `phone` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
   `address` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
@@ -227,49 +227,24 @@ CREATE TABLE `student` (
   `class` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
   `program` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
   `email` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `dob_dd` int(11) DEFAULT NULL,
-  `dob_mm` int(11) DEFAULT NULL,
-  `dob_yy` int(11) DEFAULT NULL,
+  `dob_dd` int DEFAULT NULL,
+  `dob_mm` int DEFAULT NULL,
+  `dob_yy` int DEFAULT NULL,
   `password` varchar(45) CHARACTER SET latin1 NOT NULL,
   `did` varchar(45) COLLATE latin1_bin DEFAULT NULL,
   PRIMARY KEY (`sid`),
   KEY `is_in_idx` (`did`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
+ 
 --
 -- Dumping data for table `student`
 --
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'avc','122','sada',9.90,'sda','dad','asda@ada.in',2,4,1986,'81dc9bdb52d04dc20036dbd8313ed055','CS'),(190001010,'kuldeep','4030506554','hotel plaxz',8.00,'3','cse','em2@em2.com',24,2,2001,'a8029adfae3bca6d42ac99453b200db9','EE'),(190001011,'abc',NULL,NULL,8.50,'2',NULL,NULL,NULL,NULL,NULL,'900150983cd24fb0d6963f7d28e17f72','CE'),(190001029,'krishanu','123456789','100-flats',9.00,'2','cse','email@email.com',1,2,2001,'56536b749a7fe62da7f62a04563acf32','CS'),(190001090,'monu','9134530222','123-lankenshire',9.67,'2','cse','cse190001030@iiti.ac.in',38,8,2001,'root','EE');
+INSERT INTO `student` VALUES (1,'avc','122','sada',9.90,'sda','dad','asda@ada.in',2,4,1986,'81dc9bdb52d04dc20036dbd8313ed055','CS'),(190001010,'kuldeep',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'a8029adfae3bca6d42ac99453b200db9','EE'),(190001011,'abc',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'900150983cd24fb0d6963f7d28e17f72','CE'),(190001029,'krishanu','123456789','100-flats',9.00,'2','cse','email@email.com',1,1,2001,'56536b749a7fe62da7f62a04563acf32','CS'),(190001090,'monu','9134530222','123-lankenshire',9.67,'2','cse','cse190001030@iiti.ac.in',38,8,2001,'root','EE');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `student_dept`
---
-
-DROP TABLE IF EXISTS `student_dept`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `student_dept` (
-  `sid` int(11) NOT NULL,
-  `dname` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`sid`),
-  UNIQUE KEY `dname_UNIQUE` (`dname`),
-  CONSTRAINT `sid` FOREIGN KEY (`sid`) REFERENCES `student` (`sid`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `student_dept`
---
-
-LOCK TABLES `student_dept` WRITE;
-/*!40000 ALTER TABLE `student_dept` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student_dept` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -278,10 +253,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teaches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `teaches` (
-  `fid` int(11) NOT NULL,
-  `cid` int(11) NOT NULL,
+  `fid` int NOT NULL,
+  `cid` int NOT NULL,
   PRIMARY KEY (`fid`,`cid`),
   KEY `cid_teaches_idx` (`cid`),
   CONSTRAINT `cid_teaches` FOREIGN KEY (`cid`) REFERENCES `course_list` (`cid`),
@@ -305,14 +280,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `works_in`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = latin1 */;
 CREATE TABLE `works_in` (
-  `fid` int(11) NOT NULL,
+  `fid` int NOT NULL,
   `did` varchar(45) COLLATE latin1_bin NOT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`fid`,`did`),
   KEY `did_idx` (`did`),
-  CONSTRAINT `fid` FOREIGN KEY (`fid`) REFERENCES `faculty` (`fid`)
+  CONSTRAINT `fid` FOREIGN KEY (`fid`) REFERENCES `faculty` (`fid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -353,4 +328,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-26 19:21:04
+-- Dump completed on 2020-10-21 15:58:36
