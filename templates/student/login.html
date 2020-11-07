@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <form class="form-center" method="POST" action="">
+<section class="section"> 
+<form class="form-center" method="POST" action="">
         {% if flash != '' %}
         <h1 style="color: maroon;">{{flash}}</h1>
         {% endif %}
@@ -12,5 +13,5 @@
         <br>
         <input type="submit">
       </form>
-
+</section>   
 {% endblock %}

@@ -1,29 +1,28 @@
 {% extends 'student/users.html' %}
 
 {% block view_users %}
-    <h1>Welcome to timetable</h1>
-   
-    <br /><br />
-    
-    <div class="timetableClass">
+    <h1 id="headCPIPage">-----------Time-Table-----------</h1>
+
+    <div class="studenttimetableClass">
     <table>
-    <tr>
-        <th></th>
+    <tr class="timmmingTimetableClass_tr1">
+        <th>Timmming</th>
         {% for head in HeadingTT %}
-            <th>{{ head }}</th>
+            <td>{{ head }}</td>
         {% endfor %}
     </tr>
+    
     {% for tday in timeTableInfo %}
-        <tr>
+        <tr id="daysTimetable">
         {% for tv in tday %}
             {% if tv == tday[0] %}
-            <td>
-                <div class="">
+            <th class="timmmingTimetableClass_tr2" >
+                <div class="daysTimetable">
                         <div class="">
                             {{tv}}
                         </div>
                 </div>
-            </td>
+            </th>
             {% else %}
                 <td>
                     <div class="tvCard">

@@ -1,10 +1,11 @@
 {% extends 'student/users.html' %}
 
 {% block view_users %}
-    <h1>Welcome to courselist</h1>
-   
-    <br /><br />
-    <div class="timetableClass">
+<section class="section"> 
+<div class="container">
+    <h1 id="headCPIPage">-----------Courses-----------</h1>
+    
+    <div class="timetableClass timetableClassCourse ">
     <table>
         <tr>
             <th>Subject</th>
@@ -20,5 +21,6 @@
     {% endfor %}
     </table>
     </div>
-    
+</div>    
+</section>
 {% endblock %}
