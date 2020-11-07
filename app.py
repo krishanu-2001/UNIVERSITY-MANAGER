@@ -171,6 +171,9 @@ app.add_url_rule('/admin_login', view_func=admin_krish.admin_login, methods=['GE
 app.add_url_rule('/admin_home', view_func=admin_krish.admin_home, methods=['GET','POST'])
 app.add_url_rule('/admin_selectstudent', view_func=admin_krish.admin_selectstudent, methods=['GET','POST'])
 app.add_url_rule('/admin_studentprofile', view_func=admin_krish.admin_studentprofile, methods=['GET','POST'])
+app.add_url_rule('/adminShowStudent', view_func=admin_krish.adminShowStudent, methods=['GET'])
+app.add_url_rule('/ExcelDownload', view_func=admin_krish.ExcelDownload, methods=['GET'])
+app.add_url_rule('/adminShowCourse', view_func=admin_krish.adminShowCourse, methods=['GET'])
 #admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 #admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 

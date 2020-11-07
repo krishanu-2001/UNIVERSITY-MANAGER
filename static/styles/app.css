@@ -296,6 +296,7 @@ border:2px solid #03b1ce ;
 .form-center{
     display: inline-block;
     width: 100%;
+    margin-top: 100px;
     text-align: center;
 }
 .roww{
@@ -318,3 +319,104 @@ border-color: #f22;
 
 
 /* NavBar */
+
+/* adding news section on main page */
+
+.newsTitle{
+  font-size: 2em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 10px;
+  margin-left: 30px;
+  padding: 10px;
+}
+
+.newsBody{
+  font-size: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 30px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.newsImage{
+  border-right: 2px whitesmoke solid;
+  height: 100%;
+  overflow: hidden;
+  
+}
+
+.newsImageAct{
+  width: 150px;
+  height: 150px;
+  border: 0px red solid;
+  border-radius: 20px;
+}
+
+.newsCard{
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 20px;
+  min-height: 100px;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 2px grey;
+  margin-bottom: 20px;
+}
+
+.newsBtn{
+  text-align: center;
+  width: 150px;
+  border: 2px black solid;
+  background-color: white;
+}
+
+/* news section end */
+
+/* admin section */
+.adminSetting{
+  background-image: url("../img/plain1.jpeg");
+  width: 100%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  min-height: 100%;
+  padding: 20px;
+}
+
+.adminSubmit{
+  margin-left: 100px;
+}
+
+.chkadmin{
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.adminOption{
+  font-size: 1.5em;
+}
+
+/*admin student*/
+.centre_large{
+  font-size: 30px;
+  height: 400px;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.centre_large:hover{
+  font-size: 30px;
+  box-shadow: 0px 0px 2px 5px #444;
+  text-align: center;
+  z-index: 999;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.centre_large > i{
+  font-size: 150px;
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 50px;
+}
+/*ends */
+
+/* ends here */

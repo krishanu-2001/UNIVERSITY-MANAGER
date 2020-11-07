@@ -2,16 +2,22 @@
 
 {% block view_users %}
     <h1>Please select student</h1>
-    <table>
-        <tr>
-            <th>rollno</th>
-            <th>name</th>
+    <table style="background-color: white;">
+        <tr style="background-color: lightgrey;">
+            <th>Rollno</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Cpi</th>
         </tr>
     {% for student in studentlist %}
         {% set temp = "admin_studentprofile?rollno="~student[0] %}
         <tr>
         <td><a href={{temp}}>{{student[0]}}</a></td>
-        <td>{{student[1]}}</td>
+        <td><b>{{student[1]}}</b></td>
+        <td>{{student[2]}}</td>
+        <td>{{student[7]}}</td>
+        <td>{{student[4]}}</td>
         </tr>
     {% endfor %}
     </table>

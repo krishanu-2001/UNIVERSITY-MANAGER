@@ -1,3 +1,6 @@
 flask
 flask-mysqldb
 pyyaml
+Flask-Excel
+pyexcel-xlsx
+

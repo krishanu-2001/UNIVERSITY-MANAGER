@@ -1,0 +1,37 @@
+{% extends 'admin/admin_home.html' %}
+
+{% block view_users %}
+    <div class="newsCard">
+        <div class="newsTitle">
+            Welcome to Student Administration
+        </div>
+    </div>
+    <div class="row">
+        <!-- Cards here -->
+        <div class="col-lg-4 centre_large" style="background-color: aquamarine;">
+            <i class="fa fa-plus"></i>
+            <p>
+                <a href="/signup">ADD NEW STUDENT</a>
+            </p>
+        </div>
+        <!-- cards end -->
+        <!-- Cards here -->
+        <div class="col-lg-4 centre_large" style="background-color: lightskyblue    ;">
+            <i class="fa fa-edit"></i>
+            <p>
+                <a href="/admin_selectstudent">EDIT STUDENT PROFILE</a>
+            </p>
+        </div>
+        <!-- cards end -->
+        <!-- Cards here -->
+        <div class="col-lg-4 centre_large" style="background-color: lightcoral    ;">
+            <i class="fa fa-table"></i>
+            <p>
+                <a href="/ExcelDownload">DOWNLOAD STUDENT EXCEL</a>
+            </p>
+        </div>
+        <!-- cards end -->
+    </div>
+    
+    
+{% endblock %}

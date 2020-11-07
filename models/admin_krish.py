@@ -2,9 +2,12 @@ from flask import *
 from flask_mysqldb import MySQL
 import yaml
 import hashlib
+import flask_excel as excel
+import pyexcel_xlsx
 
 app = Flask(__name__)
 app.secret_key = "abc"
+excel.init_excel(app) # required since version 0.0.7
 
 # Configure db
 db = yaml.load(open('db.yaml'))
@@ -45,7 +48,7 @@ def admin_home():
 
 def admin_selectstudent():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * from student where 1 = 1")
+    cur.execute("SELECT * from student where 1 = 1;")
     rv = cur.fetchall()
     studentlist = rv
     mysql.connection.commit()
@@ -93,3 +96,26 @@ def admin_studentprofile():
     
     else:
         return "not authorized to view"
+
+def adminShowStudent():
+    return render_template('admin/adminShowStudent.html')
+
+def ExcelDownload():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * from student where 1 = 1;")
+    rv = cur.fetchall()
+
+    studentlist = [['rno','name','phone','address','cpi','sem','branch','email','dob_dd','dob_mm','dob_yy','password','class']]
+    for rows in rv:
+        temp = []
+        for items in rows:
+            temp.append(items)
+        studentlist.append(temp)
+
+    mysql.connection.commit()
+    cur.close()
+
+    return excel.make_response_from_array(studentlist, "xlsx")
+    
+def adminShowCourse():
+    return render_template('admin/adminShowCourse.html')
