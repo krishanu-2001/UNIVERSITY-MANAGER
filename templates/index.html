@@ -2,7 +2,7 @@
 
 
 {% block body %}
-  <div class="loginOptions row">
+<!-- <div class="loginOptions row">
     <div class="loginBox col-lg-6">
       <h2>Student</h2>
       <a href="login">login</a><br />
@@ -21,6 +21,154 @@
         <br /> id: root
         <br />password: password
       </div> 
-  </div>
-  
+  </div> -->
+<main class="l-main">
+  <!--===== HOME =====-->
+  <section class="home bd-grid" id="home">
+    <div class="home__data">
+      <h1 class="home__title">Hi,<br>University <br><span class="home__title-color">Management</span> System</h1>
+
+      <a href="#" class="button">LogIn</a>
+    </div>
+
+    <div class="home__social"> 
+      <a href="" class="home__social-icon"><i class='bx bxl-linkedin'></i></a> 
+      <a href="" class="home__social-icon"><i class='bx bxl-facebook'></i></a> 
+      <a href="" class="home__social-icon"><i class='bx bxl-twitter'></i></a> 
+    </div>
+
+    <div class="home__img">
+      <img src="/static/img/iitGreen.png" alt="">
+    </div>
+  </section>
+
+  <!--===== ABOUT =====-->
+  <section class="about section " id="about">
+    <h2 class="section-title">About</h2>
+
+    <div class="about__container bd-grid">
+      <div class="about__img">
+        <img src="/static/img/about.jpeg" alt="" style="width: 400px;">
+      </div>
+
+      <div>
+        <h2 class="about__subtitle">IIT Indore</h2>
+        <p class="about__text">Indian Institute of Technology, Indore, located in Madhya Pradesh, is one of the
+          Institutes of Technology established by the Government of India in 2009.
+          <br><b style="color: #4070F4;"><a
+              href="https://www.google.com/maps/search/Indian+Institute+of+Technology+Indore/@22.52035,75.9186743,16.51z">Address:</a>
+          </b> Khandwa Rd, Simrol, Madhya Pradesh 453552
+          <br><b style="color: #4070F4;"> Phone:</b> 07324 306 717.</p>
+      </div>
+    </div>
+  </section>
+
+  <!--===== SKILLS =====-->
+  <section class="skills section" id="details">
+    <h2 class="section-title">Details</h2>
+
+    <div class="skills__container bd-grid">
+      <div>
+        <h2 class="skills__subtitle">Achievements</h2>
+        <p class="skills__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit optio id vero amet,
+          alias architecto consectetur error eum eaque sit.</p>
+        <div class="skills__data">
+          <div class="skills__names">
+            <i class='fa fa-university skills__icon'></i>
+            <span class="skills__name">Campus</span>
+          </div>
+          <div class="skills__bar skills__campus">
+
+          </div>
+          <div>
+            <span class="skills__percentage">10<sub>/10</sub></span>
+          </div>
+        </div>
+        <div class="skills__data">
+          <div class="skills__names">
+            <i class='fa fa-graduation-cap  skills__icon'></i>
+            <span class="skills__name">Placement</span>
+          </div>
+          <div class="skills__bar skills__placement">
+
+          </div>
+          <div>
+            <span class="skills__percentage">10<sub>/10</sub></span>
+          </div>
+        </div>
+        <div class="skills__data">
+          <div class="skills__names">
+            <i class='fa fa-plus-square skills__icon'></i>
+            <span class="skills__name">Facilities</span>
+          </div>
+          <div class="skills__bar skills__facility">
+
+          </div>
+          <div>
+            <span class="skills__percentage">9<sub>/10</sub></span>
+          </div>
+        </div>
+        <div class="skills__data">
+          <div class="skills__names">
+            <i class='fa fa-car skills__icon'></i>
+            <span class="skills__name">Transportation</span>
+          </div>
+          <div class="skills__bar skills__transport">
+
+          </div>
+          <div>
+            <span class="skills__percentage">8.5<sub>/10</sub></span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <img src="/static/img/work3.jpg" alt="" class="skills__img">
+      </div>
+    </div>
+  </section>
+
+  <!--===== WORK =====-->
+  <section class="work section" id="gallery">
+    <h2 class="section-title">Gallery</h2>
+
+    <div class="work__container bd-grid">
+      <div class="work__img">
+        <img src="/static/img/9.jpeg" alt="">
+      </div>
+      <div class="work__img">
+        <img src="/static/img/2.jpeg" alt="">
+      </div>
+      <div class="work__img">
+        <img src="/static/img/3.jpeg" alt="">
+      </div>
+      <div class="work__img">
+        <img src="/static/img/4.jpeg" alt="">
+      </div>
+      <div class="work__img">
+        <img src="/static/img/5.jpeg" alt="">
+      </div>
+      <div class="work__img">
+        <img src="/static/img/6.jpeg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!--===== CONTACT =====-->
+  <section class="contact section" id="contact">
+    <h2 class="section-title">Contact</h2>
+
+    <div class="contact__container bd-grid">
+      <form action="" class="contact__form">
+        <input type="text" placeholder="Name" class="contact__input">
+        <input type="mail" placeholder="Email" class="contact__input">
+        <textarea name="" id="" cols="0" rows="10" class="contact__input"></textarea>
+        <input type="button" value="Send" class="contact__button button">
+      </form>
+    </div>
+  </section>
+</main>
+
+
+
 {% endblock %}

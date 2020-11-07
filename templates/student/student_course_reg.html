@@ -1,26 +1,29 @@
 {% extends 'student/users.html' %}
 
 {% block view_users %}
-    <h1>Welcome to course registration</h1>
-   
-    <br /><br />
-    <div class="timetableClass">
-    <form method="POST">
-    <table class="temporary">
-        <tr>
-            <th>Subject</th>
-            <th>Enroll</th>
-            <th>Teacher</th>
-        </tr>
-    {% for course in courselist %}
-        <tr>
-            <td>{{course[2]}}</td> 
-            <td><input type="checkbox" name="courses" value={{course[1]}} /></td>
-            <td>{{ course[3] }}</td>
-        </tr>
-    {% endfor %}
-    </table>
-    <input type="submit" />
-    </form>
+<div class="container">
+    <h1 id="headCPIPage">-----------course registration-----------</h1>
+
+    <div class="timetableClass ">
+        <form method="POST">
+            <table class="regCourseTable">
+                <tr class="regCourseheading">
+                    <th>Subject</th>
+                    <th>Professor</th>
+                    <th>Enroll</th>
+                </tr>
+                {% for course in courselist %}
+                <tr>
+                    <td>{{course[2]}}</td>
+                    <td>{{ course[3] }}</td>
+                    <td><input type="checkbox" name="courses" value={{course[1]}} /></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="containerbtn">
+                <input type="submit" value="SUBMIT" />
+            </div>
+        </form>
     </div>
+</div>
 {% endblock %}
