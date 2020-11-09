@@ -1,8 +1,8 @@
 {% extends 'admin/admin_home.html' %}
 
 {% block view_users %}
-    <h1>Please select student</h1>
-    <table style="background-color: white;">
+<!-- <h1>Please select student</h1>
+    <table style="background-color: white; margin: auto;">
         <tr style="background-color: lightgrey;">
             <th>Rollno</th>
             <th>Name</th>
@@ -21,8 +21,39 @@
         </tr>
     {% endfor %}
     </table>
-    <br /><br />
-    
-    
-    
+    <br /><br /> -->
+
+<div class="container">
+    <h1 id="headCPIPage">----------- Student Information -----------</h1>
+
+    <div class="timetableClass ">
+        <form method="POST">
+            <table class="regCourseTable">
+                <tr class="regCourseheading">
+                    <th>Name</th>
+                    <th>Rollno</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>CPI</th>
+                </tr>
+                {% for student in studentlist %}
+                {% set temp = "admin_studentprofile?rollno="~student[0] %}
+                <tr>
+                    <td><b>{{student[1]}}</b></td>
+                    <td><a href={{temp}}>{{student[0]}}</a></td>
+                    <td>{{student[2]}}</td>
+                    <td>{{student[7]}}</td>
+                    <td>{{student[4]}}</td>
+                </tr>
+                {% endfor %}
+               
+            </table>
+            <!-- <div class="containerbtn">
+                <input type="submit" value="SUBMIT" />
+            </div> -->
+        </form>
+    </div>
+</div>
+
+
 {% endblock %}
