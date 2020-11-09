@@ -1,0 +1,76 @@
+{% extends 'faculty.html' %}
+{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    
+    <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+
+    <!-- =====BOX ICONS===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/app.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+       $(document).on('click', '#save', function(event) {
+    event.preventDefault();
+    var data = $('tr').map(function() {
+    	var obj = {};
+    	$(this).find('input').each(function() {
+        	obj[this.name] = $(this).val();
+        });
+        return obj;
+    }).get();
+    const Url='/assigngrade/{{id}}';
+    axios({
+		method: 'post',
+        url: Url,
+        data: JSON.stringify(data)
+    })
+	.then()
+	.catch(err=>console.log(err))
+    }); 
+    </script>
+
+    <title>e-univ</title>
+{% endblock %}
+{% block view_users %}
+    <h1 id="headCPIPage">-----------Assign Grades-----------</h1>
+   
+    <br /><br />
+    <h1 id="headCPIPage">Course : {{cname}} </h1>
+    <div class="timetableClass">
+    <table>
+        <form id="assigngrade">
+        <thead>
+            <tr>
+                <th>Roll No.</th>
+                <th>Name</th>
+                <th>Midsem Grade</th>
+                <th>Endsem Grade</th>
+            </tr>
+        </thead>    
+        <tbody>
+            {% for i in range(coursestudentlist|length) %}
+                <tr>
+                    <td>{{ coursestudentlist[i][0] }}</td>
+                    <td>{{ coursestudentlist[i][1] }}</td>
+                    <div class="form-group">    
+                    <td style="display:none;"><input type="hidden" class="form-control" name="sid" value="{{ coursestudentlist[i][0] }}" /></td>    
+                    <td><input type="text" class="form-control" name="grademidsem" value="{{ coursestudentlist[i][2] }}" required></td>
+                    <td><input type="text" class="form-control" name="gradeendsem" value="{{ coursestudentlist[i][3] }}" required></td>
+                    </div>
+                </tr>
+            {% endfor %}
+        </tbody>  
+        </form>
+    </table>   
+    <input type="submit" class="btn btn-success" form="assigngrade" value="Submit" id="save">
+    </div>
+    
+{% endblock %}

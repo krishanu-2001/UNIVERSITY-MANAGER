@@ -680,7 +680,7 @@ color: #a2a6af
                             <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">Position</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <select name="position" >
+                                    <!-- <select name="position" >
                                         <option value="Professor" {% if facultyDetails[9]=="Professor" %} selected {% endif %}>
                                             Professor
                                         </option>
@@ -693,13 +693,8 @@ color: #a2a6af
                                         <option value="Visting Professor" {% if facultyDetails[9]=="Visting Professor" %} selected {% endif %}>
                                             Visting Professor
                                     </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Salary</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name="salary" value="{{facultyDetails[4]}}" readonly/>
+                                    </select> -->
+                                    <input type="text" name="position" value={{facultyDetails[9]}} readonly/>
                                 </div>
                             </div>
                         </fieldset>
@@ -733,7 +728,7 @@ color: #a2a6af
                         </div>
                     </form>
                     <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-                     <a class="btn btn-primary" href="/fhome">Back</a>
+                     <a class="btn btn-primary" href="/faculty">Back</a>
                     </div>
                 </div>
             </div>

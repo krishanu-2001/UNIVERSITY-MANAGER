@@ -54,7 +54,102 @@ def admin_selectstudent():
     mysql.connection.commit()
     cur.close()
     return render_template('admin/admin_selectstudent.html', studentlist = studentlist)
-
+def admin_selectdept():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * from department where 1 = 1")
+    departments = cur.fetchall()
+    cur.close()
+    return render_template('admin/admin_selectdept.html',departments=departments)    
+def admin_adddept():
+    if(session.get('aid')):
+        flash = ""
+        flag = 1
+        if request.method == 'POST':
+            # Fetch form data
+            deptDetails = request.form
+            did = deptDetails['did']
+            dname = deptDetails['dname']
+            building = deptDetails['building']
+            phone = deptDetails['phone']
+            budget = deptDetails['budget']
+            hodfid= deptDetails['hodfid']
+            hodsince= deptDetails['hodsince']
+            if (hodfid==''):
+                hodfid=None
+            if (hodsince==''):
+                hodsince=None    
+            if(len(phone) > 0 and len(did) > 0 and len(dname) > 0 and len(building) > 0 and len(budget) > 0):
+                #pass
+                cur = mysql.connection.cursor()
+                cur.execute("INSERT INTO department (did, dname, building, budget, contactno, fid,since) VALUES (%s, %s, %s, %s, %s, %s, %s)",(did, dname, building, budget, phone, hodfid, hodsince)  )
+                mysql.connection.commit()
+                cur.close()
+            else:
+                flash = "Some of The Values entered NOT VALID"
+                flag = 0
+            #give access here!!
+        if flag != 0:
+            flash = ""
+        return redirect(url_for('admin_selectdept'))    
+    else:
+        return "not authorized to view"    
+def admin_deletedept():
+    if(session.get('aid')):
+        flash = ""
+        flag = 1
+        if request.method == 'POST':
+            _id = str(request.json['id'])
+            cur = mysql.connection.cursor()
+            cur.execute("DELETE FROM department WHERE did=%s",[_id] )
+            mysql.connection.commit()
+            cur.close()
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * from department where 1 = 1")
+        departments = cur.fetchall()
+        cur.close()
+        if flag != 0:
+            flash = ""
+        return "Executed" 
+    else:
+        return "not authorized to view"
+def admin_editdept():
+    if(session.get('aid')):
+        flash = ""
+        flag = 1
+        if request.method == 'POST':
+            # Fetch form data
+            deptDetails = request.form
+            didorig=deptDetails['did_orig']
+            did = deptDetails['did']
+            dname = deptDetails['dname']
+            building = deptDetails['building']
+            phone = deptDetails['phone']
+            budget = deptDetails['budget']
+            hodfid= deptDetails['hodfid']
+            hodsince= deptDetails['hodsince']
+            if (hodfid==''):
+                hodfid=None  
+            if (hodsince==''):
+                hodsince=None     
+            if(len(did) > 0 and len(dname) > 0 and len(building) > 0 and len(phone) > 0 and len(budget) > 0):
+                #pass
+                cur = mysql.connection.cursor()
+                cur.execute("UPDATE department SET did = %s, dname = %s, building = %s, budget = %s, contactno = %s,fid= %s,since= %s WHERE did = %s",(did, dname, building, budget, phone, hodfid, hodsince, didorig)  )
+                mysql.connection.commit()
+                cur.close()
+            else:
+                flash = "Some of The Values entered NOT VALID"
+                flag = 0
+            #give access here!!
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * from department where 1 = 1")
+        departments = cur.fetchall()
+        cur.close()
+        if flag != 0:
+            flash = ""
+        return render_template('admin/admin_selectdept.html',departments=departments,flash=flash) 
+    else:
+        return "not authorized to view"       
 def admin_studentprofile():
     if(session.get('aid')):
         rollno = str(request.args.get("rollno"))

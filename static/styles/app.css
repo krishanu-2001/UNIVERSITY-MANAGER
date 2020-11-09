@@ -162,6 +162,23 @@ background-color: rgb(255, 255, 255);
 /* box-shadow: 4px 4px 1px rgba(168, 99, 8, 0.678); */
 }
 
+.timetableClass>table>thead{
+  display:block;
+}
+
+.timetableClass>table>tbody{
+  display:block;
+  overflow: auto;
+  height: 250px;
+}
+
+.timetableClass>table>tbody::-webkit-scrollbar {
+  display: none;
+}
+
+tbody td, thead th { 
+  width : 400px; 
+} 
 
 .tvCard{
 background-color: rgb(242, 243, 201);

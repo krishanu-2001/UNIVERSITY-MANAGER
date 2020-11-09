@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: localhost    Database: test1
+-- Host: localhost    Database: test
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -22,7 +22,6 @@
 DROP TABLE IF EXISTS `course_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-
 CREATE TABLE `course_list` (
   `cid` int NOT NULL,
   `cname` varchar(45) DEFAULT NULL,
@@ -31,7 +30,6 @@ CREATE TABLE `course_list` (
   `year` int DEFAULT NULL,
   `sem` int DEFAULT NULL,
   `credits` decimal(3,2) DEFAULT NULL,
-
   PRIMARY KEY (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -73,7 +71,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES ('CE','Civil Engineering','Pod 1D',800000,'9675854417',190001029,NULL),('CS','Computer Science','Pod 1A',1000000,'9876543201',1,NULL),('EE','Electrical Engineering','Pod 1B',900000,'2812729',2,NULL),('ME','Mechanical Engineering','Pod 1C',900000,'6282829',NULL,NULL);
+INSERT INTO `department` VALUES ('CE','Civil Engineering','Pod 1D',800000,'9675854417',190001029,NULL),('CS','Computer Science','Pod 1A',1000000,'9876543201',1,'2020-01-23'),('EE','Electrical Engineering','Pod 1B',900000,'2812729',2,NULL),('ME','Mechanical Engineering','Pod 1C',900000,'6282829',NULL,NULL);
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +121,7 @@ CREATE TABLE `enroll` (
 
 LOCK TABLES `enroll` WRITE;
 /*!40000 ALTER TABLE `enroll` DISABLE KEYS */;
-INSERT INTO `enroll` VALUES (190001029,1,'A','AA'),(190001029,2,'A','AA'),(190001090,2,'AB','BB'),(190001090,3,'B','B');
+INSERT INTO `enroll` VALUES (1,1,'AA','AB'),(1,3,'A',NULL),(190001029,1,'A','AA'),(190001029,2,'A','AA'),(190001090,2,'AB','B'),(190001090,3,'B','B');
 /*!40000 ALTER TABLE `enroll` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +153,7 @@ CREATE TABLE `faculty` (
 
 LOCK TABLES `faculty` WRITE;
 /*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
-INSERT INTO `faculty` VALUES (1,'Robert Williams','9999282822','221b , Baker street',50000,'aba@abc.in','1986-01-16','81dc9bdb52d04dc20036dbd8313ed055','Male',' Professor'),(2,'Helium','None','None',45000,'helium@institute.in','1994-01-13','81dc9bdb52d04dc20036dbd8313ed055','Female','Assistant Professor'),(3,'Freeman','None','None',45000,'freeman@bmail.com','2020-10-01','81dc9bdb52d04dc20036dbd8313ed055','Male','Visting Professor'),(110109,'krishanu',NULL,NULL,53000,NULL,NULL,'56536b749a7fe62da7f62a04563acf32','Male','Associate Professor'),(190001029,'krishanu',NULL,NULL,45000,NULL,NULL,'56536b749a7fe62da7f62a04563acf32','Male',NULL);
+INSERT INTO `faculty` VALUES (1,'Robert Williams','9999282822','221b , Baker street',50000,'aba@abc.com','1986-01-16','81dc9bdb52d04dc20036dbd8313ed055','Male','Professor'),(2,'Helium','None','None',45000,'helium@institute.in','1994-01-13','81dc9bdb52d04dc20036dbd8313ed055','Female','Assistant Professor'),(3,'Freeman','None','None',45000,'freeman@bmail.com','2020-10-01','81dc9bdb52d04dc20036dbd8313ed055','Male','Visting Professor'),(110109,'krishanu',NULL,NULL,53000,NULL,NULL,'56536b749a7fe62da7f62a04563acf32','Male','Associate Professor'),(190001029,'krishanu',NULL,NULL,45000,NULL,NULL,'56536b749a7fe62da7f62a04563acf32','Male',NULL);
 /*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +165,7 @@ DROP TABLE IF EXISTS `has`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `has` (
-  `has_did` varchar(45) COLLATE latin1_bin NOT NULL,
+  `has_did` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
   `has_pid` int NOT NULL,
   `date_implemented` date NOT NULL,
   PRIMARY KEY (`has_did`,`has_pid`),
@@ -195,7 +193,7 @@ DROP TABLE IF EXISTS `program`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `program` (
   `program_id` int NOT NULL,
-  `program_name` varchar(45) COLLATE latin1_bin DEFAULT NULL,
+  `program_name` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
   `program_duration` int DEFAULT NULL,
   PRIMARY KEY (`program_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
@@ -382,4 +380,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-29 17:35:08
+-- Dump completed on 2020-11-09 17:16:54

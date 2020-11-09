@@ -1,11 +1,14 @@
 from flask import *
+from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import yaml
 import hashlib
 import models.student_krish as student_krish
 import models.admin_krish as admin_krish
+import models.faculty_r as faculty_r
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = "abc"
 
 # Configure db
@@ -174,6 +177,10 @@ app.add_url_rule('/admin_studentprofile', view_func=admin_krish.admin_studentpro
 app.add_url_rule('/adminShowStudent', view_func=admin_krish.adminShowStudent, methods=['GET'])
 app.add_url_rule('/ExcelDownload', view_func=admin_krish.ExcelDownload, methods=['GET'])
 app.add_url_rule('/adminShowCourse', view_func=admin_krish.adminShowCourse, methods=['GET'])
+app.add_url_rule('/admin_selectdept', view_func=admin_krish.admin_selectdept, methods=['GET','POST'])
+app.add_url_rule('/admin_adddept', view_func=admin_krish.admin_adddept, methods=['GET','POST'])
+app.add_url_rule('/admin_deletedept', view_func=admin_krish.admin_deletedept, methods=['GET','POST'])
+app.add_url_rule('/admin_editdept', view_func=admin_krish.admin_editdept, methods=['GET','POST'])
 #admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 #admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 
@@ -202,7 +209,7 @@ def faclogin():
         #give access here!!
         if(flag >= 1 and hashedpassword == curpassword):
             session['fid'] = fid
-            return redirect(url_for('faculty', name = name))
+            return redirect(url_for('faculty'))
         else:
             flash = "wrong id or password!"
             flag = 0
@@ -240,7 +247,7 @@ def facsignup():
                 mysql.connection.commit()
                 cur.close()
                 session['fid'] = fid
-                return redirect(url_for('faculty', name = name))
+                return redirect(url_for('faculty'))
     return render_template('facsignup.html', flash = flash) 
 @app.route('/faculty')
 def faculty():
@@ -256,7 +263,20 @@ def faculty():
         cur.close()
     else:
         facultyDetails = "Not Authorized to access"
+        courselist={}
     return render_template('faculty.html',facultyDetails=facultyDetails,courselist=courselist)
+@app.route('/faculty/<id>')
+def facultypublicprofile(id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM faculty WHERE fid = '%s' "% (id))
+    facultyDetails = cur.fetchall()[0];
+    cur.execute("SELECT cname FROM course_list NATURAL JOIN teaches WHERE fid='%s' "% (id))
+    courselist = cur.fetchall();
+    cur.execute("SELECT dname FROM department WHERE did IN (SELECT did FROM works_in where fid='%s') "% (id))
+    department = cur.fetchall();
+    cur.close()
+    return render_template('facultypublicprofile.html',facultyDetails=facultyDetails,courselist=courselist,department=department) 
+
 @app.route('/facultyprofile', methods=['GET','POST'])
 def facultyprofile():
     fid = session['fid']
@@ -270,14 +290,13 @@ def facultyprofile():
         dob = facultyDetails['dob']
         gender = facultyDetails['gender']
         position = facultyDetails['position']
-        salary = facultyDetails['salary']
         email = facultyDetails['email']
         phone = facultyDetails['phone']
         address = facultyDetails['address']
-        if(len(phone) > 0 and len(address) > 0 and len(gender) > 0 and len(name) > 0 and len(email) > 0 and len(dob) > 0 and len(position) > 0 and len(salary) > 0):
+        if(len(phone) > 0 and len(address) > 0 and len(gender) > 0 and len(name) > 0 and len(email) > 0 and len(dob) > 0 and len(position) > 0):
             #pass
             cur = mysql.connection.cursor()
-            cur.execute("UPDATE faculty SET phone = %s, address = %s, gender = %s, fname = %s, email = %s, dob = %s, position = %s, salary = %s WHERE fid = %s",(phone, address, gender, name, email, dob, position, salary, fid))
+            cur.execute("UPDATE faculty SET phone = %s, address = %s, gender = %s, fname = %s, email = %s, dob = %s, position = %s WHERE fid = %s",(phone, address, gender, name, email, dob, position, fid))
             mysql.connection.commit()
             cur.close()
         else:
@@ -291,24 +310,15 @@ def facultyprofile():
     facultyDetails = cur.fetchall()[0];
     cur.close()    
     return render_template('facultyprofile.html',facultyDetails=facultyDetails )    
-@app.route('/fhome')
-def fhome():
-    cur = mysql.connection.cursor()
-    if(session.get('fid')):
-        fid = session['fid']
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM faculty WHERE fid = '%s' "% (fid))
-        name = cur.fetchall()[0][1];
-        cur.close()  
-    else:
-        name = "Not Authorized to access"
-    return redirect(url_for('faculty', name = name))
 @app.route('/flogout')
 def flogout():
     flash = "logout successfully!"
     if(session.get('fid')):
         session.pop('fid')
-    return render_template('index.html', flash = flash)    
+    return render_template('index.html', flash = flash)
+
+app.add_url_rule('/faculty_timetable', view_func=faculty_r.faculty_timetable, methods=['GET','POST'])
+app.add_url_rule('/assigngrade/<id>', view_func=faculty_r.assign_grade, methods=['GET','POST'])
 
 #dept starts here dept starts here dept starts here dept starts here dept starts here
 #dept starts here dept starts here dept starts here dept starts here dept starts here
@@ -328,13 +338,24 @@ def department(id):
     cur.execute("SELECT * FROM departmentview WHERE did='%s' "% (id))
     deptinfo=cur.fetchall()[0];
     cur.close()    
-    return render_template('department.html',departments=departments,deptinfo=deptinfo)    
+    return render_template('department.html',departments=departments,deptinfo=deptinfo)   
+@app.route('/getdepartmentbyid', methods=['GET','POST'])
+def getdepartmentbyid():
+    if request.method == 'POST':
+            _id = str(request.json['id'])
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT * FROM department WHERE did=%s",[_id] )
+            dept=cur.fetchall()[0]
+            department=[]
+            department.append({'did':dept[0],'dname':dept[1],'building':dept[2],'budget':dept[3],'contact':dept[4],'hodfid':dept[5],'hodsince':dept[6]})
+            cur.close()
+            return json.dumps(department)
 @app.route('/department/<id>/faculty')
 def department_faculty(id):
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM department WHERE did='%s' "% (id))
     deptinfo=cur.fetchall()[0];
-    cur.execute("SELECT * FROM faculty JOIN works_in ON faculty.fid=works_in.fid JOIN department ON works_in.did ='%s' GROUP BY faculty.fid"% (id))
+    cur.execute("SELECT * FROM faculty JOIN works_in ON faculty.fid=works_in.fid WHERE did ='%s' "% (id))
     facultylist=cur.fetchall();
     cur.close()    
     return render_template('deptfaclist.html',facultylist=facultylist,deptinfo=deptinfo)   
