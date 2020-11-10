@@ -634,7 +634,7 @@ img{
 
 
 #a{
-	display: block;
+	/* display: block; */
 	text-align: right;
 	text-decoration: none;
 	color: #999;
@@ -686,3 +686,29 @@ img{
 	}
 }
 
+/* admin profile */
+.adminprofile>input{
+  text-align: left;
+  font-size: 25px;
+  padding: 0 0 0 10px;
+  margin: 0 0 0 -29px;
+  width: 98%;
+}
+
+/* Student Profile */
+.studentInfoprofile{
+  text-align: left;
+  font-size: 37px;
+  margin: 0 0 0 -29px;
+  width: 98%;
+}
+
+.regProfileCode{
+  width: 90%;
+  height: 370px;
+  margin: 0 0 0 54px;
+  /* text-align: center; */
+  background-color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-variant: all-petite-caps;
+}

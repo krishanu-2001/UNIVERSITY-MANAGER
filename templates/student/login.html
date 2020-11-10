@@ -31,9 +31,11 @@
             <input type="password" name="password" class="input">
           </div>
         </div>
-        <a id=a href="#">Forgot Password?</a>
+        <a id=a style="display: block;" href="#">Forgot Password?</a>
         <input type="submit" class="btn" value="Login">
-        <a id=a href="/faclogin" style="margin: 0 24% 0 0; ">--- Here faculty login ---</a>
+        <!-- <a id=a href="/"  ></a> -->
+        <a id=a href="/faclogin" style="margin: 0 0% 0 0; ">Are you Faculty?</a> <span>|</span>
+        <a id=a href="/signup" style="margin: 0 3% 0 0; ">Create Account</a>
         {% if flash != '' %}
         <h5 style="color: rgb(255, 25, 25);">{{flash}}</h5>
         {% endif %}

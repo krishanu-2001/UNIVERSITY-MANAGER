@@ -36,11 +36,11 @@ padding-top: 20px;
 margin-top: 10px;
 color: #000;
 }
-
+/* 
 form > input {
   margin: 10px;
   padding: 10px;
-}
+} */
 
 table{
 margin: 0 0 20px 0;
@@ -61,14 +61,14 @@ box-shadow: 0 0 9px -1px rgba(0, 0, 0, 0.2), 0 0 1px 0 rgba(0, 0, 0, 0.19);
 
 .userRightPanel{
 margin-top: 10px;
-height: 80vh;
+height: 85vh;
 
 }
 
 .userListLabel{
 background-color: #add56d;
 border-radius: 10px;
-color: #000;
+color: #9a0000;;
 padding: 10px;
 }
 
@@ -97,7 +97,8 @@ position: absolute;
 }
 
 .CPItableClass>table {
-width: -webkit-fill-available;
+margin: auto;
+width: 95%;
 height: 165px;
 text-align: center;
 margin-bottom: 0px;
@@ -106,11 +107,12 @@ background-color: rgb(255, 255, 255);
 }
 
 #headCPIPage{
-margin-top: 10px;
+/* margin-top: 10px; */
+margin-bottom: 25px;
 text-align: center;
 font-variant: all-petite-caps;
 color: #000ca0;
-font-size: 33px;
+font-size: 39px;
 }
 
 #CPIreport{
@@ -133,7 +135,8 @@ font-variant: all-petite-caps;
 }
 
 .timetableClassCourse>table {
-width: -webkit-fill-available;
+margin: auto;
+width: 95%;
 height: fit-content;
 text-align: center;
 background-color: rgb(255, 255, 255);
@@ -155,7 +158,9 @@ margin-top: 15px;
 }
 
 .timetableClass>table, .temporary{
-width: -webkit-fill-available;
+margin: auto;
+margin-bottom: 30px;
+width: 95%;
 height: fit-content;
 text-align: center;
 background-color: rgb(255, 255, 255);
@@ -213,9 +218,17 @@ background-color: rgb(248 150 65 / 24%);
 
 .studenttimetableClass{
 overflow: auto;
+margin: auto;
+margin-bottom: 30px;
+width: 95%;
 margin-top: 15px;
 font-variant: unset;
 
+}
+
+#time{
+  font-size: 19px;
+  font-weight: bolder;
 }
 
 .studenttimetableClass>table{
@@ -250,6 +263,7 @@ height: 60px;
 text-align: center;
 padding-top: 20px;
 }
+
 
 /* registration table */
 .regCourseheading>th{
@@ -294,18 +308,22 @@ left: -9999px;
 
 #profile-image1 {
 cursor: pointer;
+margin: 15px;
 margin-bottom: 10px;
-width: 100px;
-height: 100px;
-border:2px solid #03b1ce ;
+width: 120px;
+height: 120px;
+border: 2px solid #03b1ce;
+border-radius: 58%;
+
 }
 
 .tital{ 
 font-size: 21px;
 color: #17a2b8;
 font-weight: normal;
-font-variant: all-petite-caps;
+/* font-variant: all-petite-caps; */
 }
+
 .bot-border{ 
 border-bottom: 1px aquamarine solid;
   margin:5px 0  5px 0;
@@ -328,7 +346,7 @@ border: 1px solid lightblue;
 border-radius: 1%;
 padding: 0px;
 }
-.paneldefault>.panel-heading{
+.panel-default>.panel-heading{
 color: #ff002f;
 background-color: #f5f5f5;
 border-color: #f22;
@@ -343,7 +361,7 @@ border-color: #f22;
   font-size: 2em;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin: 10px;
-  margin-left: 30px;
+  margin-left: 25%;
   padding: 10px;
 }
 
@@ -435,5 +453,3 @@ border-color: #f22;
   padding: 50px;
 }
 /*ends */
-
-/* ends here */

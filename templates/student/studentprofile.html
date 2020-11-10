@@ -2,143 +2,125 @@
 
 {% block view_users %}
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<!-- =========================== -->
+
+<div class="timetableClass userRightPanel" style="margin-top: 0px; height: 100%;">
+  <form method="POST">
+    {% if flash != '' %}
+    <h3 style="color: maroon;">{{flash}}</h3>
+    {% endif %}
+    <table class="regProfileCode">
+      <tr class="regCourseheading">
+        <th style="width: 29% ;  border: #3a4857 2px solid;"> <div align="center"> <img alt="User Pic"
+          src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
+          id="profile-image1" class="img-circle img-responsive">
+
+        <input id="profile-image-upload" class="hidden" type="file">
+        <div style="color:#999; font-size: 21px; font-weight: lighter; padding: 0px 0 10px 0;">click here to change profile image</div>
+        <!--Upload Image Js And Css-->
+        </div> 
+    </th>
+        <th style=" border: #3a4857 2px solid; padding-left: 75px; font-size: 140px;">user</th>
+        <th style=" border: #3a4857 2px solid; padding: 0 10px; font-size: 60px;"> information</th>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid; font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">First Name</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">Kuldeep</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Middle Name</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile"></span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Last Name</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">Singh</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">CPI</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">{{studentDetail[0][4]}}</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Semester</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">{{studentDetail[0][5]}}</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Program</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">{{studentDetail[0][6]}}</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Phone No</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">{{studentDetail[0][2]}}</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Email</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">{{studentDetail[0][7]}}</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Date of Birth</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">{{studentDetail[0][8]}}:{{studentDetail[0][9]}}:{{studentDetail[0][10]}}</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Date of Joining</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">23:7:2019</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Place of Birth</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
+        <td style=" border: white 2px solid;"><span class="studentInfoprofile">Bikaner</span></td>
+      </tr>
+
+      <tr>
+        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=" "
+            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Nationality</span></td>
+        <td style=" border: white 2px solid; color:#267caf; text-align: center;"> <span class=" ">:</span></td>
+        <td style=" border: white 2px solid;"> <span class="studentInfoprofile">Indian</span></td>
+      </tr>
+
+      <!-- <div class="clearfix"></div>
+                  <div class="bot-border"></div> -->
+    </table>
+    <div class="containerbtn">
+      <input type="submit" value="SUBMIT" />
+    </div>
+  </form>
+</div>
+
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 
-<section class="section"> 
-<div class="container">
-  <div class="row">
-
-    <!-- <h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
-
-
-    <div class="col-md-10 userProfileForm ">
-
-      <div class="panel paneldefault">
-        <div class="panel-heading">
-          <h4>User Profile</h4>
-        </div>
-        <div class="panel-body">
-
-          <div class="box box-info">
-
-            <div class="box-body">
-              <div class="col-sm-6">
-                <div align="center"> <img alt="User Pic"
-                    src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
-                    id="profile-image1" class="img-circle img-responsive">
-
-                  <input id="profile-image-upload" class="hidden" type="file">
-                  <div style="color:#999;">click here to change profile image</div>
-                  <!--Upload Image Js And Css-->
-                </div>
-                <br>
-                <!-- /input-group -->
-              </div>
-              <form method="POST" action="">
-                {% if flash != '' %}
-                <h3 style="color: maroon;">{{flash}}</h3>
-                {% endif %}
-                <div class="col-sm-6">
-                  <h3 style="color:#00b1b1; font-size: 35px;">A B C </h3></span>
-                  <span>
-                    <p>{{studentDetail[0][0]}}</p>
-                  </span>
-                </div>
-                <div class="clearfix"></div>
-                <hr style="margin:5px 0 5px 0; border: 0.1px solid aquamarine;">
-
-                <div class="col-sm-4 col-xs-6 tital ">First Name</div>
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2 col-xs-6 ">{{studentDetail[0][0]}}</div>
-
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Middle Name</div>
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2"> </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Last Name</div>
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2"> Saini</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">CPI</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2"> {{studentDetail[0][4]}}</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Class</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2"> {{studentDetail[0][5]}}</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Program</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2">{{studentDetail[0][5]}}</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Phone No</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2"> {{studentDetail[0][2]}}</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Email</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2">{{studentDetail[0][7]}}</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Date Of Birth</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2">{{studentDetail[0][8]}}:{{studentDetail[0][9]}}:{{studentDetail[0][10]}}</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Date Of Joining</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2">23:7:2019</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-
-                <div class="col-sm-4 col-xs-6 tital ">Place Of Birth</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2">Bikaner</div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-
-                <div class="col-sm-4 col-xs-6 tital ">Nationality</div>                
-                <span class="col-sm-2 tital ">:</span>
-                <div class="col-sm-2">Indian</div>
-
-                <!-- <div class="clearfix"></div>
-              <div class="bot-border"></div> -->
-
-                <!-- <div class="col-sm-5 col-xs-6 tital ">Relition:</div>
-              <div class="col-sm-7">Hindu</div> -->
-
-              </form>
-
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-
-          </div>
-
-
-        </div>
-      </div>
-    </div>
     <script>
       $(function () {
         $('#profile-image1').on('click', function () {
@@ -147,9 +129,6 @@
       });       
     </script>
 
-  </div>
-</div>
-</section>
 
 
 
