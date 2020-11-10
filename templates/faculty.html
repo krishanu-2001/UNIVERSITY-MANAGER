@@ -1,30 +1,20 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends 'base.html' %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/app.css') }}">
-
-    <title>e-univ</title>
-  </head>
-  <body>
-    <!-- Head template place in all files -->
-    <div class="univTitle">
-    <h1>E-University</h1>
-    </div>
-    <!-- Head template ends here -->
-
-    <h1>Hello, {{request.args.get('name')}}</h1>
-    <div class="loginOptions row">  
-        <a href="/facultyprofile">Profile</a>
-        <br/>
+{% block body %}
+<section class="section">
+<div class="row">
+  <div class="col-lg-3 userLeftPanel">
+    <h1>Hello, {{facultyDetails[0][1]}}</h1>
+    <div class="row">
+        <a href="/facultyprofile">
+          <div class="userProfileLabel userLeft">Profile</div>
+        </a>
+      <a href="/flogout">
+        <div class="userProfileLabel userRight">Logout</div>
+      </a>
     </div>
     <div class="loginOptions">
-      <a data-toggle="modal" href="" data-target=".bd-example-modal-lg">Your Courses</a>
+      <a data-toggle="modal" href="" data-target=".bd-example-modal-lg"><div class="userListLabel">Your Courses</div></a>
     </div>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -44,6 +34,7 @@
                 <th>Hours</th>
                 <th>Year</th>
                 <th>Semester</th>
+                <th></th>
               </tr>
               {% for i in range(courselist|length) %}
               <tr>
@@ -53,6 +44,7 @@
                   <td>{{ courselist[i][3] }}</td>
                   <td>{{ courselist[i][4] }}</td>
                   <td>{{ courselist[i][5] }}</td>
+                  <td><a href="/assigngrade/{{ courselist[i][0] }}">Assign Grades</a></td>
               </tr>
               {% endfor %}
             </table>
@@ -63,15 +55,19 @@
         </div>
       </div>
     </div>
-  
-    <div class="loginOptions row">
-        <a href="/flogout">Logout</a>
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  </body>
-</html>
+    <a href="/faculty_timetable">
+      <br />
+      <div class="loginOptions">
+        <div class="userListLabel">Timetable</div>
+      </div> 
+    </a>
+  </div>  
+    
+  <div class="col-lg-9 userRightPanel">      
+  {% block view_users %}
+      <h1>Welcome to Faculty Section</h1>
+  {% endblock %}
+  </div>
+</div>
+</section>
+{% endblock %}
