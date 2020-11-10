@@ -4,17 +4,17 @@
 <section class="section">
 <div class="row">
   <div class="col-lg-3 userLeftPanel">
-    <h1>Hello, {{facultyDetails[0][1]}}</h1>
+    <h1>Hello, <br>{{facultyDetails[0][1]}}</h1>
     <div class="row">
-        <a href="/facultyprofile">
+        <a style="text-decoration: none;" href="/facultyprofile">
           <div class="userProfileLabel userLeft">Profile</div>
         </a>
       <a href="/flogout">
         <div class="userProfileLabel userRight">Logout</div>
       </a>
     </div>
-    <div class="loginOptions">
-      <a data-toggle="modal" href="" data-target=".bd-example-modal-lg"><div class="userListLabel">Your Courses</div></a>
+    <div class="loginOptions" style="font-family: var(--body-font);">
+      <a data-toggle="modal" href="" data-target=".bd-example-modal-lg" style="text-decoration: none;"><div class="userListLabel"><h4>Your Courses</h4></div></a>
     </div>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -55,10 +55,11 @@
         </div>
       </div>
     </div>
-    <a href="/faculty_timetable">
+    <a style="text-decoration: none;" href="/faculty_timetable">
       <br />
-      <div class="loginOptions">
-        <div class="userListLabel">Timetable</div>
+      <div class="loginOptions" style="font-family: var(--body-font);">
+        <div class="userListLabel">
+          <h4>Timetable</h4></div>
       </div> 
     </a>
   </div>  
