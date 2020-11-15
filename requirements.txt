@@ -1,0 +1,8 @@
+flask
+flask-mysqldb
+pyyaml
+Flask-Excel
+pyexcel-xlsx
+flask_cors
+flask_mail
+

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<section class="section">
+<div class="row">
+  <div class="col-lg-3 userLeftPanel">
+    <h1>Hello, <br>{{facultyDetails[0][1]}}</h1>
+    <div class="row">
+        <a style="text-decoration: none;" href="/facultyprofile">
+          <div class="userProfileLabel userLeft">Profile</div>
+        </a>
+      <a href="/flogout">
+        <div class="userProfileLabel userRight">Logout</div>
+      </a>
+    </div>
+    <div class="loginOptions" style="font-family: var(--body-font);">
+      <a data-toggle="modal" href="" data-target=".bd-example-modal-lg" style="text-decoration: none;"><div class="userListLabel"><h4>Your Courses</h4></div></a>
+    </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Your Courses</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table>
+              <tr>
+                <th>Course Id</th>
+                <th>Course Name</th>
+                <th>Room</th>
+                <th>Hours</th>
+                <th>Year</th>
+                <th>Semester</th>
+                <th></th>
+              </tr>
+              {% for i in range(courselist|length) %}
+              <tr>
+                  <td>{{ courselist[i][0] }}</td>
+                  <td>{{ courselist[i][1] }}</td>
+                  <td>{{ courselist[i][2] }}</td>
+                  <td>{{ courselist[i][3] }}</td>
+                  <td>{{ courselist[i][4] }}</td>
+                  <td>{{ courselist[i][5] }}</td>
+                  <td><a href="/assigngrade/{{ courselist[i][0] }}">Assign Grades</a></td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a style="text-decoration: none;" href="/faculty_timetable">
+      <br />
+      <div class="loginOptions" style="font-family: var(--body-font);">
+        <div class="userListLabel">
+          <h4>Timetable</h4></div>
+      </div> 
+    </a>
+  </div>  
+    
+  <div class="col-lg-9 userRightPanel">      
+  {% block view_users %}
+      <h1>Welcome to Faculty Section</h1>
+  {% endblock %}
+  </div>
+</div>
+</section>
+{% endblock %}

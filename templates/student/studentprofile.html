@@ -1,0 +1,181 @@
+{% extends 'student/users.html' %}
+
+{% block view_users %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+
+<section class="section"> 
+<div class="container">
+  <div class="row">
+
+    <!-- <h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
+
+
+    <div class="col-md-10 userProfileForm ">
+
+      <div class="panel paneldefault">
+        <div class="panel-heading">
+          <h4>User Profile</h4>
+        </div>
+        <div class="panel-body">
+
+          <div class="box box-info">
+
+            <div class="box-body">
+              <div class="col-sm-6">
+                <div align="center"> <img alt="User Pic"
+                    src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
+                    id="profile-image1" class="img-circle img-responsive">
+
+                  <input id="profile-image-upload" class="hidden" type="file">
+                  <input type='file' accept='image/*' onchange='openFile(event)'>
+                  <!--Upload Image Js And Css-->
+                </div>
+                <br>
+                <!-- /input-group -->
+              </div>
+              <form method="POST" action="">
+                {% if flash != '' %}
+                <h3 style="color: maroon;">{{flash}}</h3>
+                {% endif %}
+                <div class="col-sm-6">
+                  <h3 style="color:#00b1b1; font-size: 35px;">{{studentDetail[0][1]}}</h3></span>
+                  <span>
+                    <p>{{studentDetail[0][0]}}</p>
+                  </span>
+                </div>
+                <div class="clearfix"></div>
+                <hr style="margin:5px 0 5px 0; border: 0.1px solid aquamarine;">
+
+                <div class="col-sm-4 col-xs-6 tital ">First Name</div>
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2 col-xs-6 ">{{studentDetail[0][1]}}</div>
+
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">Middle Name</div>
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2"> ___</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">Last Name</div>
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2"> Saini</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">CPI</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2"> {{studentDetail[0][4]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">Class</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2"> {{studentDetail[0][5]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">Program</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2">{{studentDetail[0][6]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">Phone No</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2"> {{studentDetail[0][2]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">Email</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2">{{studentDetail[0][7]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">Date Of Birth</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2">{{studentDetail[0][8]}}:{{studentDetail[0][9]}}:{{studentDetail[0][10]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-4 col-xs-6 tital ">Date Of Joining</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2">23:7:2019</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+
+                <div class="col-sm-4 col-xs-6 tital ">Place Of Birth</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2">{{studentDetail[0][3]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+
+                <!-- <div class="clearfix"></div>
+              <div class="bot-border"></div> -->
+
+                <!-- <div class="col-sm-5 col-xs-6 tital ">Relition:</div>
+              <div class="col-sm-7">Hindu</div> -->
+
+              </form>
+
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <script>
+      $(function () {
+        $('#profile-image1').on('click', function () {
+          $('#profile-image-upload').click();
+        });
+      });       
+    </script>
+
+  </div>
+</div>
+</section>
+
+
+
+<!-- <div class="container">
+  <h2 id="headCPIPage">Personal information</h2>
+  <form class="form-center" method="POST" action="">
+    {% if flash != '' %}
+    <h1 style="color: maroon;">{{flash}}</h1>
+    {% endif %}
+    rollno: <input type="text" name="rollno" placeholder={{studentDetail[0][0]}} value={{rollno}} readonly />
+    <br>
+    phone: <input type="text" name="phone" value={{studentDetail[0][2]}} readonly />
+    <br>
+    address: <input type="text" name="address" value="{{studentDetail[0][3]}}" readonly />
+    <br>
+    cpi: <input type="text" name="cpi" value="{{studentDetail[0][4]}}" readonly />
+    <br>
+    class: <input type="text" name="class" value="{{studentDetail[0][5]}}" readonly />
+    <br>
+    program: <input type="text" name="program" value="{{studentDetail[0][6]}}" readonly />
+    <br>
+    email: <input type="text" name="email" value="{{studentDetail[0][7]}}" readonly />
+    <br>
+    dob_dd: <input type="text" name="dob_dd" value="{{studentDetail[0][8]}}" readonly />
+    <br>
+    dob_mm: <input type="number" name="dob_mm" value="{{studentDetail[0][9]}}" readonly />
+    <br>
+    dob_yy: <input type="number" name="dob_yy" value="{{studentDetail[0][10]}}" readonly />
+    <br>
+  </form>
+</div> -->
+{% endblock %}

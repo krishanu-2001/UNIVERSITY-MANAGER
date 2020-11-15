@@ -1,0 +1,52 @@
+{% extends 'student/users.html' %}
+
+{% block view_users %}
+<h1 id="headCPIPage">-----------Courses Acquired-----------</h1>
+
+
+<div class="timetableClass">
+    <table>
+        <tr>
+            <th>Course ID</th>
+            <th>Subject</th>
+            <th>Grade Mid <br />Semester</th>
+            <th>Grades End <br />Semester</th>
+            <th>Credits obtained</th>
+            <th>Grade Points</th>
+        </tr>
+        {% for course in courselist %}
+        <tr>
+            <td>{{ course[0] }}</td>
+            <td>{{ course[1] }}</td>
+            <td>{{ course[2] }}</td>
+            <td>{{ course[3] }}</td>
+            <td>{{ course[4] }}</td>
+            <td>{{ course[5] }}</td>
+        </tr>
+
+
+{% endfor %}
+</table>
+</div>
+<div class="CPItableClass ">
+    <!-- <div class="col-sm-3 "> -->
+        <h6 id="CPIreport">-----------**REPORT**----------</h6>
+        <table>
+            <tr>
+                <th>Credits Obtained</th>
+                <th>Total Credits</th>
+                <th>Overall Credits</th>
+                <th>Overall Total Credits</th>
+            </tr>
+            <tr>
+                <td>{{credits}}</td>
+                <td>{{total_credits}}</td>
+                <td>{{overall_credits}}</td>
+                <td>{{overall_total}}</td>
+            </tr>
+        </table>
+
+    <!-- </div> -->
+</div>
+
+{% endblock %}

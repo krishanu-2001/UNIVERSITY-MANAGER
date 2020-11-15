@@ -1,0 +1,89 @@
+{% extends 'admin/admin_home.html' %}
+
+{% block view_users %}
+
+    <h2>Fill Details</h2>
+    <form class="form-center" method="POST" action="">
+        {% if flash != '' %}
+        <h1 style="color: maroon;">{{flash}}</h1>
+        {% endif %}
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Rollno</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="rollno" placeholder={{studentDetail[0][0]}} value={{rollno}} readonly/>
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Phone</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="phone" value={{studentDetail[0][2]}} />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Address</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="address" value="{{studentDetail[0][3]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Cpi</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="cpi" value="{{studentDetail[0][4]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Class</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="class" value="{{studentDetail[0][5]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div> 
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Program</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="program" value="{{studentDetail[0][6]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">email</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="email" value="{{studentDetail[0][7]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">dob_dd</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="dob_dd" value="{{studentDetail[0][8]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">dob_mm</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="number" name="dob_mm" value="{{studentDetail[0][9]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">dob_yy</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="number" name="dob_yy" value="{{studentDetail[0][10]}}" />
+          <div class="clearfix"></div>
+        </div>
+
+        <input type="submit" class="humble"/>
+      </form>
+
+      <!-- <div class="col-sm-4 col-xs-6 tital ">Email</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2">{{studentDetail[0][7]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div> -->
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}"> -->
+
+  <!-- <div class="">
+  <form class=" form-center " style =" height: 500px;" method="POST" action="">
+  {% if flash != '' %}
+  <h1 style="color: maroon;">{{flash}}</h1>
+  {% endif %}
+
+  <input type="text" name="adminid" placeholder="Admin id" />
+  <br>
+  <input type="password" name="password" placeholder="Password" />
+  <br>
+  <input type="submit">
+  </form>
+  </div> -->
+<section class="section loginPage">
+  <img class="wave" src="/static/img/wave.png">
+  <div>
+    <div class="imgg ">
+      <img src="/static/img/bg.svg"  class="wave">
+    </div>
+    <div class="login-content">
+      <!-- <form action="index.html"> -->
+      <form id=form method="POST" action="/admin_login">
+
+        <img src="/static/img/admin.png">
+        <h2 class="title">Admin</h2>
+        <div class="input-div one">
+          <div class="i">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="ddiv">
+            <h5>AdminID</h5>
+            <input type="text" name="adminid" class="input">
+          </div>
+        </div>
+        <div class="input-div pass">
+          <div class="i">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="div">
+            <h5>Password</h5>
+            <input type="password" name="password" class="input">
+          </div>
+        </div>
+        <a id=a style="display: block;" href="#">Forgot Password?</a>
+        <input type="submit" class="btn" value="Login">
+        {% if flash != '' %}
+        <h5 style="color: rgb(255, 25, 25);">{{flash}}</h5>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+  {% block body %}
+  <section class="section">
+    <div class="row">
+    <div class="col-lg-3 userLeftPanel">
+       <h3 style="margin: 14px 13% 0;">Welcome Admin</h3>
+        <div class="row">
+        <a href="/admin_home">
+          <div class="userProfileLabel userLeft" style="background-color: brown;">
+              <i class="fa fa-cog"></i>
+          </div>
+        </a>
+        <a href="/logout">
+          <div class="userProfileLabel userRight" style="background-color: brown;">
+              logout
+          </div>
+        </a>
+        </div>
+        <a style="text-decoration: none;" href="/adminShowStudent">
+          <div class="userListLabel">
+            <h4>
+            <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+            Students Settings
+            </h4>
+        </div>
+        </a>
+        <a style="text-decoration: none;" href="/adminShowCourse">
+          <br />
+          <div class="userListLabel">
+                <h4>
+                &nbsp;<i class="fa fa-book fa-2x" aria-hidden="true"></i>
+                &nbsp;&nbsp;Course Settings
+                </h4>
+          </div>
+        </a>
+        <a style="text-decoration: none;" href="#">
+          <br />
+          <div class="userListLabel">
+                <h4>
+                &nbsp;<i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                &nbsp;&nbsp; Faculty Settings
+                </h4>
+        </div>
+        </a>
+        <a style="text-decoration: none;" href="/admin_selectdept">
+          <br />
+          <div class="userListLabel">
+                <h4>
+                &nbsp;<i class="fa fa-building fa-2x" aria-hidden="true"></i>
+                &nbsp;&nbsp; Department Settings
+                </h4>
+        </div>
+        </a>
+
+    </div>
+    <div class="col-lg-9 userRightPanel">
+        
+        {% block view_users %}
+        <div class="newsCard">
+          <div class="newsTitle"> 
+            Welcome to Admin Section
+          </div>
+        </div>
+        <div class="newsCard" style="background-color: lightcoral;">
+        <div class="newsTitle" style="font-size: 1.5em;">
+          <i style="font-size: 40px;">&Mellintrf;&nbsp;</i> Manage Website functions
+        </div>
+        </div>
+        <div class="newsCard" style="background-color: lightcoral;">
+            <div class="newsTitle" style="font-size: 1.5em;">
+                <i style="font-size: 40px;">&Ascr;&nbsp;</i> Access analytical data for student and faculty records
+              </div>
+            </div>
+        <div class="newsCard" style="background-color: lightcoral;">
+            <div class="newsTitle" style="font-size: 1.5em;">
+                <i style="font-size: 40px;">&Cscr;&nbsp;</i> 
+                Course Addition and Enrollment Features
+              </div>
+            </div>
+        {% endblock %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

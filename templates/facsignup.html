@@ -1,0 +1,81 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+<section class="section loginPage">
+  <img class="wave" src="/static/img/wave.png">
+  <div>
+    <div class="imgg ">
+      <img src="/static/img/bg.svg"  class="wave">
+    </div>
+    <div class="login-content">
+    
+      <form id=form method="POST" action="">
+
+        <img src="/static/img/teacher.png">
+        <h2 class="title">Faculty</h2>
+        <div class="input-div one">
+          <div class="i">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="ddiv">
+            <h5>Username</h5>
+            <input type="text" name="fid" class="input">
+          </div>
+        </div>
+        <div class="input-div one">
+          <div class="i">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="ddiv">
+            <h5>Name</h5>
+            <input type="text" name="name" class="input">
+          </div>
+        </div>
+        <div class="input-div pass">
+          <div class="i">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="div">
+            <h5>Password</h5>
+            <input type="password" name="password" class="input">
+          </div>
+        </div>
+        <div class="input-div pass">
+          <div class="i">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="div">
+            <h5>Confirm Password</h5>
+            <input type="password" name="confpassword" class="input">
+          </div>
+        </div>
+        <input type="submit" class="btn" value="Register">
+        <a id=a href="/signup" style="margin: 0 0% 0 0; ">Are you Student? </a> <span>|</span>
+        <a id=a href="/faclogin" style="margin: 0 3% 0 0; ">Already Register</a>
+        {% if flash != '' %}
+        <h5 style="color: rgb(255, 25, 25);">{{flash}}</h5>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</section> 
+
+
+{% endblock %}
+
+
+    <!-- <form class="form-center" method="POST" action="">
+        <h1 style="color: maroon;">{{flash}}</h1>
+        <input type="text" name="fid" placeholder="Enter Faculty Id" />
+        <br>
+        <input type="text" name="name" placeholder="Enter Your Name" />
+        <br>
+        <input type="password" name="password" placeholder="Enter Password"/>
+        <br>
+        <input type="password" name="confpassword" placeholder="Confirm password " />
+        <br>
+        <input type="submit">
+      </form> -->
+
+  

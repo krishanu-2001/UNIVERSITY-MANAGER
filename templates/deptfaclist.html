@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Department Faculty List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    	body{
+            background-color: #a7d7d7;
+    background-image: linear-gradient(250deg, #aaa4a5 10%, #a7d7d7 10%);   
+}
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background-color: #a7d7d7;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#sidebar-wrapper {
+    box-shadow: inset -1px 0px 0px 0px #DDDDDD;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #000000;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+.active{
+    background-color:yellowgreen;
+}
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+#sidebar-wrapper li.active > a:after {
+    border-right: 17px solid #f4f3ef;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: -1px;
+}
+
+.sidebar-brand {
+    border-bottom: 1px solid rgba(102, 97, 91, 0.3);
+}
+
+.sidebar-brand {
+    padding: 18px 0px;
+    margin: 0 20px;
+}
+
+.navbar .navbar-nav > li > a p {
+    display: inline-block;
+    margin: 0;
+}
+p {
+    font-size: 16px;
+    line-height: 1.4em;
+}
+
+.navbar-default {
+    background-color:  #a7d7d7;
+    border:1px;
+    border-bottom: 1px solid #DDDDDD;
+}
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding: 5px;
+  text-align: center;
+}
+.ourTeam {
+    height:800px;
+}
+
+.ourTeam h2 {
+    color: rgb(0, 0, 0);
+    margin: 0 0 30px 0
+}
+
+.ourTeam .i {
+    margin-top: 30px
+}
+
+.ourTeam .i .c {
+    background: #fff;
+    -webkit-box-shadow: 0 4px 0 #2b86ac;
+    -moz-box-shadow: 0 4px 0 #2b86ac;
+    box-shadow: 0 4px 0 #2b86ac;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 110px
+}
+
+.ourTeam .i .c .wrap {
+    position: relative
+}
+
+.ourTeam .i .c .wrap img {
+    width: 100%;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease
+}
+
+.ourTeam .i .c .wrap .info {
+    padding: 30px 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease
+}
+
+.ourTeam .i .c .wrap .info .name {
+    margin: 0;
+    font-size: 24px;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin: 0 0 8px 0
+}
+
+.ourTeam .i .c .wrap .info .position {
+    margin: 0;
+    font-size: 14px;
+    font-size: 1.4rem;
+    color: #555659
+}
+
+.ourTeam .i .c .more {
+    position: absolute;
+    bottom: -100%;
+    width: 100%;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease
+}
+
+.ourTeam .i .c .more p {
+    margin: 0 18px 30px 18px;
+    line-height: 22px
+}
+
+.ourTeam .i .c .more .socials {
+    margin: 0 0 20px 0
+}
+
+.ourTeam .i .c .more .socials a {
+    display: inline-block;
+    line-height: 20px;
+    font-size: 16px;
+    font-size: 2.2rem;
+    color: #fff;
+    margin: 0 0 0 3px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    text-align: center;
+    -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, .1);
+    -moz-box-shadow: 0 3px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 3px 0 rgba(0, 0, 0, .1)
+}
+
+.ourTeam .i .c .more .socials a:first-child {
+    margin: 0
+}
+
+.ourTeam .i .c .more .socials a.facebook {
+    background: #3262b9
+}
+
+.ourTeam .i .c .more .socials a.facebook:hover {
+    background: #2d57a5
+}
+
+.ourTeam .i .c .more .socials a.twitter {
+    background: #3dd7e5
+}
+
+.ourTeam .i .c .more .socials a.twitter:hover {
+    background: #27d2e2
+}
+
+.ourTeam .i .c .more .socials a.google-plus {
+    background: #e23535
+}
+
+.ourTeam .i .c .more .socials a.google-plus:hover {
+    background: #de2020
+}
+
+.ourTeam .i .c .more .socials a.linkedin {
+    background: #069
+}
+
+.ourTeam .i .c .more .socials a.linkedin:hover {
+    background: #005580
+}
+
+.ourTeam .i .c:hover img {
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    -webkit-opacity: 0;
+    opacity: 0
+}
+
+.ourTeam .i .c:hover .info {
+    top: 0
+}
+
+.ourTeam .i .c:hover .more {
+    bottom: 0
+}
+
+btn-menu {
+    border-radius: 3px;
+    padding: 4px 12px;
+    margin: 14px 5px 5px 20px;
+    font-size: 14px;
+    float: left;
+}
+    </style>
+</head>
+<body>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div id="wrapper" class="wrapper-content">
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">
+                                <i class="ti-panel"></i>
+        						<p>Home</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/department/{{deptinfo[0]}}">
+                                <i class="ti-panel"></i>
+        						<p>Back</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="section ourTeam">
+                        <header class="text-center">
+                            <h2>{{deptinfo[1]}} Faculty List</h2>
+                        </header>
+                        <div class="row">
+                            {% for i in range(facultylist|length) %}
+                            <div class="col-xs-6 col-sm-4 col-md-3 i">
+                                <div class="c text-center">
+                                    <div class="wrap">
+                                        <img src= 
+                                        {% if facultylist[i][8]=="Male" %} "https://bootdey.com/img/Content/avatar/avatar1.png"
+                                    {% elif facultylist[i][8]=="Female" %} "https://bootdey.com/img/Content/avatar/avatar8.png"
+                                    {% else %} "https://i.stack.imgur.com/IHLNO.jpg"
+                                     {% endif %} alt="{{ facultylist[i][1] }}" width="270" height="270" class="img-responsive">
+                                        <div class="info">
+                                            <h3 class="name">{{ facultylist[i][1] }}</h3>
+                                            <h4 class="position">{{ facultylist[i][9] }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="more">
+                                       <p> Phone: {{ facultylist[i][2] }} <br/>
+                                        Address: {{ facultylist[i][3] }} <br/>
+                                        Email:
+                                        <a href = "mailto: {{facultylist[i][5]}}">{{facultylist[i][5]}}</a>
+                                    </p>
+                                        <div class="socials">
+                                            <button class="btn btn-primary"><a href="/faculty/{{ facultylist[i][0] }}">More Info</a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>   
+                            {% endfor %}  
+        </div>
+    </div>
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    var url = window.location.pathname;  
+    var activePage = url.substring(url.lastIndexOf('/')+1);
+    $('.sidebar-nav li a').each(function(){  
+        var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
+
+        if (activePage == currentPage) {
+            $(this).parent().addClass('active'); 
+        } 
+    });
+})	
+$(function(){
+    $(".btn-toggle-menu").click(function() {
+        $("#wrapper").toggleClass("toggled");
+    });
+})
+</script>
+</body>
+</html>

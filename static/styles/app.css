@@ -1,0 +1,470 @@
+body{
+  /* background-color: rgba(201, 234, 238, 0.979); */
+  background-color: rgb(230 238 239 / 60%);
+  margin: 0px;
+  padding: 0px;
+  /* background-image: linear-gradient(250deg, #aaa4a5 10%, #a7d7d7 10%); */
+}
+
+
+.row{
+margin: 0;
+padding: 0;
+}
+
+.univTitle{
+width: 100%;
+padding: 10px;
+height: 100px;
+border: 5px black solid;
+text-align: center;
+background-image: linear-gradient(250deg, #add56d 10%, #a4ddf3 10%);
+}
+
+.loginOptions{
+width: 100%;
+font-family: cursive;
+font-size: 30px;
+padding: 0px;
+margin: 0px;
+}
+
+.loginBox{
+width: 100%;
+text-align: center;
+padding-top: 20px;
+margin-top: 10px;
+color: #000;
+}
+/* 
+form > input {
+  margin: 10px;
+  padding: 10px;
+} */
+
+table{
+margin: 0 0 20px 0;
+}
+td, th{
+border: black 2px solid;
+/* padding: 10px 2px 10px 2px;
+min-width: 100px; */
+min-width: 85px;
+height: 73px;
+}
+
+.userLeftPanel{
+margin-top: 10px;
+height: 80vh;
+box-shadow: 0 0 9px -1px rgba(0, 0, 0, 0.2), 0 0 1px 0 rgba(0, 0, 0, 0.19);
+}
+
+.userRightPanel{
+margin-top: 10px;
+height: 85vh;
+
+}
+
+.userListLabel{
+background-color: #add56d;
+border-radius: 10px;
+color: #9a0000;;
+padding: 10px;
+}
+
+.userProfileLabel{
+background-color: #3f3dad;
+border-radius: 100px;
+color: #dfd;
+margin: 10px;
+padding: 15px;
+}
+
+.userListLabel:hover, .userProfileLabel:hover{
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.userLeft{
+
+}
+
+.userRight{
+text-align: right;
+margin-right: 20px;
+right: 0;
+position: absolute;
+}
+
+.CPItableClass>table {
+margin: auto;
+width: 95%;
+height: 165px;
+text-align: center;
+margin-bottom: 0px;
+background-color: rgb(255, 255, 255);
+/* box-shadow: 4px 4px 1px rgba(168, 99, 8, 0.678); */
+}
+
+#headCPIPage{
+/* margin-top: 10px; */
+margin-bottom: 25px;
+text-align: center;
+font-variant: all-petite-caps;
+color: #000ca0;
+font-size: 39px;
+}
+
+#CPIreport{
+text-align: center;
+font-size: 21px;
+font-weight: 500;
+color: rgb(215 45 45 / 95%);
+}
+
+
+.CPItableClass>table th {
+color: #3407F5;
+font-size: 22px;
+font-variant: all-petite-caps;
+}
+.timetableClass>table th {
+color: #ea6e6e;
+font-size: 20px;
+font-variant: all-petite-caps;
+}
+
+.timetableClassCourse>table {
+margin: auto;
+width: 95%;
+height: fit-content;
+text-align: center;
+background-color: rgb(255, 255, 255);
+font-size: 25px;
+font-variant: all-petite-caps;
+}
+.timetableClassCourse>table th {
+color: #ea6e6e;
+font-family: sans-serif;
+font-size: 25px;
+font-variant: all-petite-caps;
+min-width: 55px;
+height: 62px;
+}
+
+.timetableClass{
+overflow: auto;
+margin-top: 15px;
+}
+
+.timetableClass>table, .temporary{
+margin: auto;
+margin-bottom: 30px;
+width: 95%;
+height: fit-content;
+text-align: center;
+background-color: rgb(255, 255, 255);
+/* box-shadow: 4px 4px 1px rgba(168, 99, 8, 0.678); */
+}
+
+.timetableClass>table>thead{
+  display:block;
+}
+
+.timetableClass>table>tbody{
+  display:block;
+  overflow: auto;
+  height: 250px;
+}
+
+.timetableClass>table>tbody::-webkit-scrollbar {
+  display: none;
+}
+
+tbody td, thead th { 
+  width : 400px; 
+} 
+
+.tvCard{
+background-color: rgb(242, 243, 201);
+}
+
+.tv_cname{
+background-color: #afffd2;
+text-align: center;
+font-size: 1.3em;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;;
+}
+
+.tv_room{
+font-size: 1.1em;
+text-align: center;
+}
+#daysTimetable>th , #daysTimetable>td{
+padding: 0px;
+}
+
+.timmmingTimetableClass_tr1>h1{
+background-color: lightcoral;
+color:black ;
+}
+.timmmingTimetableClass_tr1{
+font-variant-caps: all-petite-caps;
+background-color: lightcoral;
+}
+.timmmingTimetableClass_tr2{
+background-color: rgb(248 150 65 / 24%);
+}
+
+.studenttimetableClass{
+overflow: auto;
+margin: auto;
+margin-bottom: 30px;
+width: 95%;
+margin-top: 15px;
+font-variant: unset;
+
+}
+
+#time{
+  font-size: 19px;
+  font-weight: bolder;
+}
+
+.studenttimetableClass>table{
+width: -webkit-fill-available;
+height: fit-content;
+text-align: center;
+background-color: rgb(255, 255, 255);
+/* box-shadow: 4px 4px 1px rgba(168, 99, 8, 0.678); */
+}
+
+.timeTableQuery{
+background-color: #dfd;
+border: 2px #ddd solid;
+border-radius: 10px;
+width: 500px;
+margin: 40px;
+padding: 10px; 
+font-size: 1.5em;
+}
+
+.timeTableSql{
+font-size: 0.8em;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.timeTableSqlLabel{
+font-size: 0.7em;
+background-color: #daa;
+padding: 0;
+margin-top: 40px;
+height: 60px;
+text-align: center;
+padding-top: 20px;
+}
+
+
+/* registration table */
+.regCourseheading>th{
+background-color: #3a4857;
+color: #ffea55;
+font-variant: all-petite-caps;
+font-size: 35px;
+font-weight: 600;
+}
+
+.regCourseTable{
+width: 90%;
+height: 370px;
+margin: 0 0 0 54px;
+text-align: center;
+background-color: rgb(255, 255, 255);
+font-size: 25px;
+font-variant: all-petite-caps;
+}
+
+.containerbtn>input{
+color: #fff;
+background-color: #28a745;
+border-color: #28a745;
+margin: auto;
+display: block;
+margin-top: 20px;
+padding: 10px 20px;
+font-size: 20px;
+border-radius: 10px;
+margin-top: 20px;
+margin-left: 31.5%;
+width:39%;
+}
+
+/* user profile */
+
+input.hidden {
+position: absolute;
+left: -9999px;
+}
+
+#profile-image1 {
+cursor: pointer;
+margin: 15px;
+margin-bottom: 10px;
+width: 120px;
+height: 120px;
+border: 2px solid #03b1ce;
+border-radius: 58%;
+
+}
+
+.tital{ 
+font-size: 21px;
+color: #17a2b8;
+font-weight: normal;
+/* font-variant: all-petite-caps; */
+}
+
+.bot-border{ 
+border-bottom: 1px aquamarine solid;
+  margin:5px 0  5px 0;
+}	
+
+.bot-border1 > input {
+  border: none ;
+  background-color: inherit;
+  margin: 3px;
+  padding: 5px;
+
+}
+
+.humble{
+  background-color: rgb(200,200,100);
+  height: 35px;
+  font-size: 13px;
+  width: 500px;
+}
+
+.form-center{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.roww{
+margin: 0px;
+padding: 0px;
+display: flex;
+flex-wrap: wrap;
+}
+
+.userProfileForm{
+border: 1px solid lightblue;
+border-radius: 1%;
+padding: 0px;
+}
+.panel-default>.panel-heading{
+color: #ff002f;
+background-color: #f5f5f5;
+border-color: #f22;
+}
+
+
+/* NavBar */
+
+/* adding news section on main page */
+
+.newsTitle{
+  font-size: 2em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 10px;
+  margin-left: 25%;
+  padding: 10px;
+}
+
+.newsBody{
+  font-size: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 30px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.newsImage{
+  border-right: 2px whitesmoke solid;
+  height: 100%;
+  overflow: hidden;
+  
+}
+
+.newsImageAct{
+  width: 150px;
+  height: 150px;
+  border: 0px red solid;
+  border-radius: 20px;
+}
+
+.newsCard{
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 20px;
+  min-height: 100px;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 2px grey;
+  margin-bottom: 20px;
+}
+
+.newsBtn{
+  text-align: center;
+  width: 150px;
+  border: 2px black solid;
+  background-color: white;
+}
+
+/* news section end */
+
+/* admin section */
+.adminSetting{
+  background-image: url("../img/plain1.jpeg");
+  width: 100%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  min-height: 100%;
+  padding: 20px;
+}
+
+.adminSubmit{
+  margin-left: 100px;
+}
+
+.chkadmin{
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.adminOption{
+  font-size: 1.5em;
+}
+
+/*admin student*/
+.centre_large{
+  font-size: 30px;
+  height: 400px;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.centre_large:hover{
+  font-size: 30px;
+  box-shadow: 0px 0px 2px 5px #444;
+  text-align: center;
+  z-index: 999;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.centre_large > i{
+  font-size: 150px;
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 50px;
+}
+/*ends */

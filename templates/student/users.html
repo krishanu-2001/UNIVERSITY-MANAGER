@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<section class="section">
+<div class="row" style=" height: 800px;">
+  <div class="col-lg-3 userLeftPanel">
+    <h1>Hello, </h1>
+    <h3>
+      {% for user in userDetails %}
+      <td> {{user[0]}} </td>
+      {% endfor %}
+    </h3>
+    <div class="row">
+      <a href="/studentprofile">
+        <div class="userProfileLabel userLeft">
+          profile
+        </div>
+      </a>
+      <a href="/logout">
+        <div class="userProfileLabel userRight">
+          logout
+        </div>
+      </a>
+    </div>
+    <a href="/student_timetable">
+      <div class="userListLabel">
+        Timetable
+      </div>
+    </a>
+    <a href="/student_course_list">
+      <br />
+      <div class="userListLabel">
+        Courses
+      </div>
+    </a>
+    <a href="/student_course_reg">
+      <br />
+      <div class="userListLabel">
+        Register courses
+        <i class="fa fa-lock" aria-hidden="true"></i>
+      </div>
+    </a>
+    <a href="/student_grade_sheet">
+      <br />
+      <div class="userListLabel">
+        Grade Sheet
+      </div>
+    </a>
+  </div>
+  <div class="col-lg-9 userRightPanel" style="padding:0; margin: 0px;">
+
+    {% block view_users %}
+    <h1 style="    margin: 12px 27%; font-size: 37px; display: block;">Welcome to Student Section</h1>
+    {% endblock %}
+  </div>
+</div>
+</section>
+{% endblock %}

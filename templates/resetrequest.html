@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<section class="section loginPage">
+  <img class="wave" src="/static/img/wave.png">
+  <div>
+    <div class="imgg ">
+      <img src="/static/img/bg.svg"  class="wave">
+    </div>
+    <div class="login-content">
+    
+      <form id=form method="POST" action="/resetpassword/{{user}}">
+
+        <img src="/static/img/avatar.svg">
+        <h2 class="title">{{ user }}</h2>
+        <div class="input-div one">
+          <div class="i">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="ddiv">
+            <h5>Username</h5>
+            <input type="text" name="id" class="input">
+          </div>
+        </div>
+        <input type="submit" class="btn" value="Request Password Reset">
+        <!-- <a id=a href="/"  ></a> -->
+        {% if flash != '' %}
+        <h5 style="color: rgb(255, 25, 25);">{{flash}}</h5>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</section> 
+
+
+<!-- <form class="form-center" method="POST" action="">
+       
+
+        <input type="text" name="rollno" placeholder="rollno" />
+        <br>
+        <input type="password" name="password" placeholder="password" />
+        <br>
+        <input type="submit">
+         {% if flash != '' %}
+        <h5 style="color: red;">{{flash}}!!</h5>
+        {% endif %}
+      </form>
+</section>    -->
+
+{% endblock %}

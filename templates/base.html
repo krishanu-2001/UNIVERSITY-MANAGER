@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    
+
+    <!-- =====BOX ICONS===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/app.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+
+    <title>e-univ</title>
+    {% endblock %}
+  </head>
+  <body>
+
+     <!--===== HEADER =====-->
+     <header class="l-header">
+      <nav class="nav bd-grid">
+          <div>
+            <a href="/" class="nav__logo"><img src="/static/img/logo 1.png" width="50px" alt=""></a>
+          </div>
+
+          <div class="nav__menu" id="nav-menu">
+              <ul class="nav__list">
+                  <li class="nav__item"><a href="/" class="nav__link active">Home</a></li>
+                  <li class="nav__item"><a href="/#about" class="nav__link">About</a></li>
+                  <li class="nav__item"><a href="/#details" class="nav__link">Details</a></li>
+                  <li class="nav__item"><a href="/#gallery" class="nav__link">Gallery</a></li>
+                  <li class="nav__item"><a href="/#contact" class="nav__link">Contact</a></li>
+                  <li class="nav__item"><a href="/signup" class="nav__link">Register</a>
+                  <!-- <div class="dropdown-content">
+                    <ul>
+                      <li class="nav__item"><a href="#" class="nav__link">Faculty</a>
+                      <li class="nav__item"><a href="#" class="nav__link">Student</a>
+                    
+                  </ul></div> -->
+                  </li>
+              </ul>
+          </div>
+
+          <div class="nav__toggle" id="nav-toggle">
+              <i class='bx bx-menu'></i>
+          </div>
+      </nav>
+  </header>
+
+  <main class="l-main">
+    <!--===== HOME =====-->
+  
+  <!-- Head template ends here -->
+  {% block body %}
+  <h1>Welcome to University Manager, How May I help you?</h1>
+  {% endblock %}
+
+  </main>
+
+<!--===== FOOTER =====-->
+<footer class="footer">
+  <p class="footer__title">@IIT-INDORE</p>
+
+  <div class="footer__admin">
+    <a href="/admin_login" >Admin</a>
+    <a  href="/department" >Department</a>
+  </div>
+  <div class="footer__social">
+    <!-- <a href="https://www.facebook.com/studentgym/" target="_blank" class="footer__icon"><i class='bx bxl-facebook'></i></a> -->
+    <a href="https://www.instagram.com/iitindoreofficial/?hl=en" target="_blank" class="footer__icon"><i class='fab fa-instagram-square'></i></a>
+    <a href="mailto:aoaa@iiti.ac.in"" target="_blank" class="footer__icon"><i class='fa fa-envelope-square'></i></a>
+    <a href="tel:7324-306717" target="_blank" class="footer__icon"><i class='fa fa-phone'></i></a>
+  </div>
+  <p>&#169; 2020 copyright all right reserved</p>
+</footer>
+
+  <!--===== SCROLL REVEAL =====-->
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+  <!--===== MAIN JS =====-->	
+  <script src="/static/js/main.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

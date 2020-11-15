@@ -1,0 +1,24 @@
+{% extends 'student/users.html' %}
+
+{% block view_users %}
+<div class="container">
+    <h1 id="headCPIPage">-----------Courses-----------</h1>
+    
+    <div class="timetableClass timetableClassCourse ">
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Grade</th>
+            <th>Hours</th>
+        </tr>
+    {% for course in courselist %}
+        <tr>
+            <td>{{ course[1] }}</td> 
+            <td>{{ course[2] }}</td>
+            <td>{{ course[3] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>    
+{% endblock %}
