@@ -3,6 +3,9 @@ from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import yaml
 import hashlib
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask_mail import Mail
+from flask_mail import Message
 import models.student_krish as student_krish
 import models.admin_krish as admin_krish
 import models.faculty_r as faculty_r
@@ -10,6 +13,7 @@ import models.faculty_r as faculty_r
 app = Flask(__name__)
 CORS(app)
 app.secret_key = "abc"
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
 # Configure db
 db = yaml.load(open('db.yaml'))
@@ -17,10 +21,38 @@ app.config['MYSQL_HOST'] = db['mysql_host']
 app.config['MYSQL_USER'] = db['mysql_user']
 app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'INSERT EMAIL HERE'
+app.config['MAIL_PASSWORD'] = 'INSERT PASSWORD HERE'
 
 mysql = MySQL(app)
+mail = Mail(app)
 
+#UTIL function
+def get_reset_token(id, expires_sec=600):
+    s = Serializer(app.config['SECRET_KEY'], expires_sec)
+    return s.dumps({'user_id': id}).decode('utf-8')
+def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return user_id
+def send_reset_mail(user,email,id):
+    token = get_reset_token(id)
+    msg = Message('Password Reset Request',
+                  sender='noreply@universitymanager.com',
+                  recipients=[email])
+    msg.body = f'''To reset your password, visit the following link:
+{url_for('reset_token', token=token, user=user , _external=True)}
+If you did not make this request then simply ignore this email and no changes will be made.
+'''
+    mail.send(msg)
 
+# endUtils
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -117,6 +149,81 @@ def users():
 
     return render_template('student/users.html',userDetails=userDetails)
 
+@app.route('/resetrequest/<user>')
+def resetrequest(user):
+    flash=""
+    return render_template('resetrequest.html', flash = flash, user=user)
+@app.route('/resetpassword/<user>', methods=['GET','POST'])
+def resetpassword(user):
+    flash="Reset link has been sent to your registered Email."
+    if request.method == 'POST':
+        # Fetch form data
+        userDetails = request.form
+        id = userDetails['id']
+    if(user=="student"):
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT email FROM student WHERE sid = '%s' "% (id))
+        rv = cur.fetchall()
+        if (rv==() ):
+            if(id==''):
+                flash="Invalid Username"
+                return render_template('resetrequest.html', flash = flash, user=user)       
+        else:
+            email=rv[0][0]
+            send_reset_mail(user,email,id) 
+        cur.close()
+        return render_template('student/login.html', flash = flash)
+    elif(user=="faculty"):
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT email FROM faculty WHERE fid = '%s' "% (id))
+        rv = cur.fetchall()
+        if (rv==() ):
+            if(id==''):
+                flash="Invalid Username"
+                return render_template('resetrequest.html', flash = flash, user=user)       
+        else:
+            email=rv[0][0]
+            send_reset_mail(user,email,id) 
+        cur.close()
+        return render_template('faclogin.html', flash = flash)
+    else:
+        return render_template('admin/admin_login.html', flash = flash)   
+
+@app.route('/reset_password/<user>/<token>', methods=['GET','POST'])
+def reset_token(user,token):
+    user_id=verify_reset_token(token)
+    flash=""
+    if user_id is None:
+        flash="Your token is Invalid or Expired."
+        return render_template('resetrequest.html', flash = flash, user=user)
+    if request.method == 'POST':
+        # Fetch form data
+        userDetails = request.form
+        password = userDetails['password'] 
+        cpassword = userDetails['confirmpassword']
+        hashedpassword = hashlib.md5(password.encode()).hexdigest()
+        if(password!=cpassword):
+            flash="Passwords do not match. Check Password."
+            render_template('resetpassword.html', flash = flash, user=user ,token=token)
+        else:
+            if(user=="student"):
+                cur = mysql.connection.cursor()
+                cur.execute("UPDATE student SET password = %s WHERE sid = %s",(hashedpassword, user_id))
+                mysql.connection.commit()
+                cur.close()
+                flash="Your password has been updated!"
+                return render_template('student/login.html', flash = flash)
+            elif(user=="faculty"):
+                cur = mysql.connection.cursor()
+                cur.execute("UPDATE faculty SET password = %s WHERE fid = %s",(hashedpassword, user_id))
+                mysql.connection.commit()
+                cur.close()
+                flash="Your password has been updated!"
+                return render_template('faclogin.html', flash = flash)
+            else:
+                return render_template('admin/admin_login.html', flash = flash)
+
+    return render_template('resetpassword.html', flash = flash, user=user ,token=token)     
 
 @app.route('/studentprofile', methods=['GET','POST'])
 def studentprofile():
