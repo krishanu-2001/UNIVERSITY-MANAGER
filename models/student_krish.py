@@ -46,6 +46,7 @@ def generateTT(rv, sv):
 def setCredits(sv, rv, cur_cpi):
     temp = []
     _credits = Decimal(0.00)
+    cur_cpi = Decimal(0.00)
     total_credits = Decimal(rv[0])
     for row in sv:
         x = []
@@ -53,6 +54,7 @@ def setCredits(sv, rv, cur_cpi):
         for col in row:
             count += 1
             x.append(col)
+            print(col)
             if(count == 4):
                 # do cases here
                 cpi = row[count]
@@ -64,7 +66,7 @@ def setCredits(sv, rv, cur_cpi):
                 elif (col == 'B' or col == 'BB'):
                     val = Decimal(0.80) * cpi
                 else:
-                    val = Decimal(0.70) * cpi
+                    val = Decimal(0.00) * cpi
                 _credits += val
                 x.append(round(val,2))
         temp.append(x)
@@ -161,7 +163,7 @@ def student_course_reg():
                 cur.execute('''
                         INSERT IGNORE INTO enroll 
                         (sid, cid, grade) VALUES
-                        ('%s', '%s', 'A');
+                        ('%s', '%s', 'N');
                         '''% (rollno, cids))
 
 
@@ -224,7 +226,7 @@ def student_grade_sheet():
         # generate cpi params
         
         courselist, _credits, total_credits, overall_credits = setCredits(courselist, rv[0], cur_cpi)
-        overall_total = 2*total_credits
+        overall_total = total_credits
         # cpi params ends
         cur.close()
         mysql.connection.commit()

@@ -329,6 +329,21 @@ border-bottom: 1px aquamarine solid;
   margin:5px 0  5px 0;
 }	
 
+.bot-border1 > input {
+  border: none ;
+  background-color: inherit;
+  margin: 3px;
+  padding: 5px;
+
+}
+
+.humble{
+  background-color: rgb(200,200,100);
+  height: 35px;
+  font-size: 13px;
+  width: 500px;
+}
+
 .form-center{
   display: inline-block;
   width: 100%;
