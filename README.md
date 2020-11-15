@@ -11,12 +11,15 @@ Clone this project
       
       2. Changing host / port / password / database name in db.yaml  
       
-      " Note the above step is necessary to ensure database works on your system "
+       Note the above step is necessary to ensure database works on your system 
 
 
 ## STEP 2  ( STARTING FLASK SERVER )  
-### WINDOWS -- EVERYTHING IS AUTOMATED
-      Double click on makefile.bat -> will do all steps below
+### WINDOWS -- EVERYTHING IS AUTOMATED  
+
+      Double click on makefile.bat -> will do all steps below  
+        
+      Ensure you are using python 3.7 and db.yaml is edited
 
 
 ## MANUAL  
@@ -25,7 +28,7 @@ Clone this project
 
       pip install -r requirements.txt
 
-      Change the password in db.yaml to that of your MySQL's password
+      Ensure you have edited db.yaml and imported mysql  
 
       Run the application by executing the command python app.py
 
