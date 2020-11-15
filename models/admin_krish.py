@@ -214,7 +214,6 @@ def ExcelDownload():
     
 def adminShowCourse():
     return render_template('admin/adminShowCourse.html')
-<<<<<<< HEAD
 
 
 def adminShowStudentByProgram():
@@ -222,5 +221,3 @@ def adminShowStudentByProgram():
     cur.execute("SELECT sid,program FROM student ORDER BY program;")
     variable = cur.fetchall()
     return render_template('admin/adminShowStudentByProgram.html',student = variable)
-=======
->>>>>>> 4c117d7621d9cb4a8f5648152eea267b36dfad30
