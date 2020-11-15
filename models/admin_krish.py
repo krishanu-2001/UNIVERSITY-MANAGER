@@ -214,3 +214,10 @@ def ExcelDownload():
     
 def adminShowCourse():
     return render_template('admin/adminShowCourse.html')
+
+
+def adminShowStudentByProgram():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT sid,program FROM student ORDER BY program;")
+    variable = cur.fetchall()
+    return render_template('admin/adminShowStudentByProgram.html',student = variable)

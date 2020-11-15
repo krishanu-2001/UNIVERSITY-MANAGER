@@ -287,6 +287,7 @@ app.add_url_rule('/admin_selectdept', view_func=admin_krish.admin_selectdept, me
 app.add_url_rule('/admin_adddept', view_func=admin_krish.admin_adddept, methods=['GET','POST'])
 app.add_url_rule('/admin_deletedept', view_func=admin_krish.admin_deletedept, methods=['GET','POST'])
 app.add_url_rule('/admin_editdept', view_func=admin_krish.admin_editdept, methods=['GET','POST'])
+app.add_url_rule('/adminShowStudentByProgram', view_func=admin_krish.adminShowStudentByProgram, methods=['GET'])
 #admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 #admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 

@@ -32,4 +32,6 @@ Clone this project
 
       Run the application by executing the command python app.py
 
+      Use python 3.7 u
+
       The application runs on localhost:5000
