@@ -22,7 +22,7 @@ Clone this project
       Ensure you are using python 3.7 and db.yaml is edited
 
 
-## MANUAL  
+### MANUAL  
 
       if possible use venv
 
