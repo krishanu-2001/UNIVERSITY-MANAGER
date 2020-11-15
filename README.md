@@ -4,7 +4,7 @@ Clone this project
       1. Mysql (preferably use Mysql Workbench 8.0)  
       
       2. Python 3.7 / 3.6 ( Not compatible with python 3.9 )  
-      
+ <br ><br ><br > 
         
 ## STEP 1  ( IMPORTING MYSQL DATABASE)
       1. Imporing export.sql in /sqldump folder to test database  
@@ -12,7 +12,7 @@ Clone this project
       2. Changing host / port / password / database name in db.yaml  
       
        Note the above step is necessary to ensure database works on your system 
-
+<br ><br ><br >
 
 ## STEP 2  ( STARTING FLASK SERVER )  
 ### WINDOWS -- EVERYTHING IS AUTOMATED  
