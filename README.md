@@ -32,6 +32,9 @@ Clone this project
 
       Run the application by executing the command python app.py
 
+<<<<<<< HEAD
       Use python 3.7 
 
+=======
+>>>>>>> 4c117d7621d9cb4a8f5648152eea267b36dfad30
       The application runs on localhost:5000
