@@ -1,7 +1,12 @@
-Clone this project
+Clone this project  
+  
+## Installing Requirements  
+      1. **Mysql** (preferably use Mysql Workbench 8.0)
+      2. **Python 3.7 / 3.6** ( Not compatible with python 3.9 )
 
-## EVERYTHING IS AUTOMATED  
-      Just create your sql server(sorry not automated yet!)  
+## WINDOWS  
+### EVERYTHING IS AUTOMATED  
+        
       Double click on makefile.bat -> will do all steps below
 
 
