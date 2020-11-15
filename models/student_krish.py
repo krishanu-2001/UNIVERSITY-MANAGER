@@ -122,7 +122,6 @@ def student_course_list():
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM student WHERE sid = '%s' ;"% (rollno))
         rv = cur.fetchall();
-        
         # join enroll and course_list wrt cid where sid = rollno
         cur.execute('''SELECT sid,cid,room
                         FROM enroll
@@ -150,6 +149,10 @@ def student_course_list():
 
 def student_course_reg():
     courseList = ""
+    flash = ""
+    if(session.get('flash')):
+        session.pop('flash')
+        flash = ""
     if(session.get('rollno')):
         userDetails = session['rollno']
         rollno = session['rollno']
@@ -161,11 +164,13 @@ def student_course_reg():
             clist = (request.form.getlist('courses'))
             for cids in clist:
                 cur.execute('''
-                        INSERT IGNORE INTO enroll 
-                        (sid, cid, grade) VALUES
-                        ('%s', '%s', 'N');
+                        INSERT IGNORE INTO admin_control 
+                        VALUES
+                        ('%s', '%s', 'NO');
                         '''% (rollno, cids))
-
+            
+            session['flash'] = "!Requests successfully sent"
+            flash = session['flash']
 
         # join student and course list where class =( sem+1 )/ 2
         cur.execute('''
@@ -191,7 +196,7 @@ def student_course_reg():
         courselist = "nothing"
 
     return render_template('student/student_course_reg.html'
-                ,userDetails=userDetails, courselist=courselist)
+                ,userDetails=userDetails, courselist=courselist, flash = flash)
 
 
 def student_grade_sheet():
@@ -210,12 +215,10 @@ def student_grade_sheet():
                         WHERE sid = '%s' ; 
                         '''% (rollno))
         rv = cur.fetchall()
-
         cur.execute('''SELECT cpi from student where
                         sid = '%s'; 
                         '''% (rollno))
         xv = cur.fetchall()
-        
         cur.execute('''SELECT cid, cname, grade, grade_endsem,credits FROM enroll 
                         NATURAL JOIN course_list
                         WHERE sid = '%s';

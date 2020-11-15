@@ -221,3 +221,57 @@ def adminShowStudentByProgram():
     cur.execute("SELECT sid,program FROM student ORDER BY program;")
     variable = cur.fetchall()
     return render_template('admin/adminShowStudentByProgram.html',student = variable)
+
+def admin_course_req():
+    if(session.get('aid')):
+        cur = mysql.connection.cursor()
+        cur.execute("""SELECT A.sid,B.cname,A.cid,A.option from admin_control as A
+                    NATURAL JOIN course_list as B
+                    WHERE A.cid = B.cid
+                        ;""")
+        rv = cur.fetchall();
+        cur.close()
+        mysql.connection.commit()
+    else:
+        print("unauthorized access")
+
+    return render_template('admin/admin_course_req.html', req = rv)
+
+def add_course_req(id):
+    if(session.get('aid')):
+        cur = mysql.connection.cursor()
+        x = id.split('_')
+        _sid = x[0]
+        _cid = x[1]
+        cur.execute('''
+                        INSERT IGNORE INTO enroll 
+                        (sid, cid, grade) VALUES
+                        ('%s', '%s', 'N');
+                        '''% (_sid, _cid))
+        cur.close()
+        mysql.connection.commit()
+        return redirect(("/del_course_req/%s"%(id)))
+    else:
+        print("unauthorized access")
+
+    return redirect(url_for('admin_course_req'))
+
+def del_course_req(id):
+    if(session.get('aid')):
+        cur = mysql.connection.cursor()
+        x = id.split('_')
+        _sid = x[0]
+        _cid = x[1]
+        print(_sid, _cid)
+        cur.execute('''
+                        DELETE FROM admin_control where 
+                        sid = '%s' AND cid='%s';
+                        '''% (_sid, _cid))
+        rv = cur.fetchall()
+        cur.close()
+        print(rv)
+        mysql.connection.commit()
+    else:
+        print("unauthorized access")
+
+    return redirect(url_for('admin_course_req'))

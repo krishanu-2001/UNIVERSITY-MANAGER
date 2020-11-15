@@ -9,6 +9,7 @@ from flask_mail import Message
 import models.student_krish as student_krish
 import models.admin_krish as admin_krish
 import models.faculty_r as faculty_r
+import models.course_krish as course_krish
 
 app = Flask(__name__)
 CORS(app)
@@ -24,8 +25,8 @@ app.config['MYSQL_DB'] = db['mysql_db']
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'INSERT EMAIL HERE'
-app.config['MAIL_PASSWORD'] = 'INSERT PASSWORD HERE'
+app.config['MAIL_USERNAME'] = 'universitymanagerg3@gmail.com'
+app.config['MAIL_PASSWORD'] = 'dbmsprojectG3'
 
 mysql = MySQL(app)
 mail = Mail(app)
@@ -288,6 +289,10 @@ app.add_url_rule('/admin_adddept', view_func=admin_krish.admin_adddept, methods=
 app.add_url_rule('/admin_deletedept', view_func=admin_krish.admin_deletedept, methods=['GET','POST'])
 app.add_url_rule('/admin_editdept', view_func=admin_krish.admin_editdept, methods=['GET','POST'])
 app.add_url_rule('/adminShowStudentByProgram', view_func=admin_krish.adminShowStudentByProgram, methods=['GET'])
+app.add_url_rule('/admin_course_req', view_func=admin_krish.admin_course_req, methods=['GET','POST'])
+app.add_url_rule('/add_course_req/<id>', view_func=admin_krish.add_course_req, methods=['GET','POST'])
+app.add_url_rule('/del_course_req/<id>', view_func=admin_krish.del_course_req, methods=['GET','POST'])
+
 #admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 #admin ends here admin ends here admin ends here admin ends here admin ends here admin ends here
 

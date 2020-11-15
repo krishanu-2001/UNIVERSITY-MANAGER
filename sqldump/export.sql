@@ -75,6 +75,35 @@ INSERT INTO `department` VALUES ('CE','Civil Engineering','Pod 1D',800000,'96758
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `admin_control`
+--
+
+DROP TABLE IF EXISTS `admin_control`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+
+CREATE TABLE `admin_control` (
+  `sid` int(11) NOT NULL,
+  `cid` int(11) NOT NULL,
+  `option` varchar(45) COLLATE latin1_bin NOT NULL DEFAULT 'YES',
+  PRIMARY KEY (`sid`,`cid`),
+  KEY `admin_ctrl` (`sid`,`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin COMMENT='admin controls store in yes no pairs';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_control`
+--
+
+LOCK TABLES `admin_control` WRITE;
+/*!40000 ALTER TABLE `admin_control` DISABLE KEYS */;
+INSERT INTO `admin_control` VALUES (0,0,'YES'), (1,2,'NO');
+/*!40000 ALTER TABLE `admin_control` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 --
 -- Temporary view structure for view `departmentview`
 --
@@ -106,8 +135,8 @@ DROP TABLE IF EXISTS `enroll`;
 CREATE TABLE `enroll` (
   `sid` int NOT NULL,
   `cid` int NOT NULL,
-  `grade` varchar(2) DEFAULT NULL,
-  `grade_endsem` varchar(2) DEFAULT NULL,
+  `grade` varchar(2) DEFAULT 'N',
+  `grade_endsem` varchar(2) DEFAULT 'N',
   PRIMARY KEY (`sid`,`cid`),
   KEY `cid_idx` (`cid`),
   CONSTRAINT `` FOREIGN KEY (`sid`) REFERENCES `student` (`sid`),
@@ -121,7 +150,7 @@ CREATE TABLE `enroll` (
 
 LOCK TABLES `enroll` WRITE;
 /*!40000 ALTER TABLE `enroll` DISABLE KEYS */;
-INSERT INTO `enroll` VALUES (1,1,'AA','AB'),(1,3,'A',NULL),(190001029,1,'A','AA'),(190001029,2,'A','AA'),(190001090,2,'AB','B'),(190001090,3,'B','B');
+INSERT INTO `enroll` VALUES (1,1,'AA','AB'),(1,3,'A','N'),(190001029,1,'A','AA'),(190001029,2,'A','AA'),(190001090,2,'AB','B'),(190001090,3,'B','B');
 /*!40000 ALTER TABLE `enroll` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -1,0 +1,41 @@
+{% extends 'admin/admin_home.html' %}
+
+{% block view_users %}
+
+<div class="container">
+    <h1>&Re;<span style="font-size:30px;">equests</span></h1>
+    ============= <br /><br />
+    {% for items in req %}
+        {% if items[0] != 0 and items[1]!=0 %}
+            <div class="row newsCard newsBody">
+                <div class="col-sm-4">
+                    <h5>STUDENT</h5>
+                    -------------- <br />
+                    &nbsp;&nbsp;{{items[0]}}
+                </div>
+                <div class="col-sm-5">
+                    <h5>SUBJECT</h5>
+                    -------------- <br />
+                    {{items[1]}}
+                </div>
+                <div class="col-sm-3">
+                        <br /> <br />
+                    <a href="add_course_req/{{items[0]}}_{{items[2]}}">  
+                    <button class="btn-primary">
+                    <i class="fa fa-check"></i>
+                    </button>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="del_course_req/{{items[0]}}_{{items[2]}}">  
+                    <button class="btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+{% endblock %}
