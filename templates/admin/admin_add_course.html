@@ -1,0 +1,62 @@
+{% extends 'admin/admin_home.html' %}
+
+{% block view_users %}
+
+    <h2>Fill Details</h2>
+    <form class="form-center" method="POST" action="">
+        {% if flash != '' %}
+        <h1 style="color: maroon;">{{flash}}</h1>
+        {% endif %}
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">cid</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="cid" placeholder="cid"/>
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">cname</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="cname" placeholder="cname" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">room</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="room" placeholder="room" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">hours</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="hours" placeholder="hours" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">year</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="year" placeholder="year" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+            <div class="col-sm-4 col-xs-6 tital ">sem</div>                
+            <span class="col-sm-2 tital ">:</span>
+            <input type="text" name="sem" placeholder="sem" />
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+        </div> 
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">credit</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="credit" placeholder="credit" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <input type="submit" class="humble"/>
+      </form>
+
+{% endblock %}

@@ -283,6 +283,7 @@ app.add_url_rule('/admin_selectstudent', view_func=admin_krish.admin_selectstude
 app.add_url_rule('/admin_studentprofile', view_func=admin_krish.admin_studentprofile, methods=['GET','POST'])
 app.add_url_rule('/adminShowStudent', view_func=admin_krish.adminShowStudent, methods=['GET'])
 app.add_url_rule('/ExcelDownload', view_func=admin_krish.ExcelDownload, methods=['GET'])
+app.add_url_rule('/ExcelDownload_course', view_func=admin_krish.ExcelDownload_course, methods=['GET'])
 app.add_url_rule('/adminShowCourse', view_func=admin_krish.adminShowCourse, methods=['GET'])
 app.add_url_rule('/admin_selectdept', view_func=admin_krish.admin_selectdept, methods=['GET','POST'])
 app.add_url_rule('/admin_adddept', view_func=admin_krish.admin_adddept, methods=['GET','POST'])
@@ -294,6 +295,7 @@ app.add_url_rule('/admin_deletefaculty', view_func=admin_krish.admin_deletefacul
 app.add_url_rule('/admin_editfaculty', view_func=admin_krish.admin_editfaculty, methods=['GET','POST'])
 app.add_url_rule('/adminShowStudentByProgram', view_func=admin_krish.adminShowStudentByProgram, methods=['GET'])
 app.add_url_rule('/admin_course_req', view_func=admin_krish.admin_course_req, methods=['GET','POST'])
+app.add_url_rule('/add_course', view_func=admin_krish.add_course, methods=['GET','POST'])
 app.add_url_rule('/add_course_req/<id>', view_func=admin_krish.add_course_req, methods=['GET','POST'])
 app.add_url_rule('/del_course_req/<id>', view_func=admin_krish.del_course_req, methods=['GET','POST'])
 

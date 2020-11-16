@@ -100,7 +100,7 @@ def admin_deletedept():
         if request.method == 'POST':
             _id = str(request.json['id'])
             cur = mysql.connection.cursor()
-            cur.execute("DELETE FROM department WHERE did=%s",[_id] )
+            cur.execute("DELETE FROM department WHERE did=%s",(_id) )
             mysql.connection.commit()
             cur.close()
         cur = mysql.connection.cursor()
@@ -244,7 +244,8 @@ def admin_editfaculty():
             flash = ""
         return redirect(url_for('admin_selectfaculty')) 
     else:
-        return "not authorized to view"            
+        return "not authorized to view" 
+                   
 def admin_studentprofile():
     if(session.get('aid')):
         rollno = str(request.args.get("rollno"))
@@ -315,6 +316,8 @@ def adminShowStudentByProgram():
     cur = mysql.connection.cursor()
     cur.execute("SELECT sid,program FROM student ORDER BY program;")
     variable = cur.fetchall()
+    mysql.connection.commit()
+    cur.close();
     return render_template('admin/adminShowStudentByProgram.html',student = variable)
 
 def admin_course_req():
@@ -370,3 +373,52 @@ def del_course_req(id):
         print("unauthorized access")
 
     return redirect(url_for('admin_course_req'))
+
+def ExcelDownload_course():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * from course_list where 1 = 1;")
+    rv = cur.fetchall()
+
+    courselist = [['cid','cname','room','hours','year','sem','credits']]
+    for rows in rv:
+        temp = []
+        for items in rows:
+            temp.append(items)
+        courselist.append(temp)
+
+    mysql.connection.commit()
+    cur.close()
+
+    return excel.make_response_from_array(courselist, "xlsx")
+
+def add_course():
+    if(session.get('aid')):
+        flash = ""
+        flag = 1
+        if request.method == 'POST':
+            # Fetch form data
+            userDetails = request.form
+            cid = userDetails['cid']
+            cname = userDetails['cname']
+            room = userDetails['room']
+            hours = userDetails['hours']
+            year = userDetails['year']
+            sem = userDetails['sem']
+            credit = userDetails['credit']
+            if(len(cname) > 0 and len(cid) > 0):
+                #pass
+                cur = mysql.connection.cursor()
+                cur.execute("insert ignore into course_list values (%s,%s,%s,%s,%s,%s,%s)",(cid, cname, room, hours, year, sem, credit)  )
+                mysql.connection.commit()
+                cur.close()
+            else:
+                flash = "wrong cid or cname!"
+                flag = 0
+            #give access here!!
+
+        if flag != 0:
+            flash = ""
+        return render_template('admin/admin_add_course.html')
+    
+    else:
+        return "not authorized to view"
