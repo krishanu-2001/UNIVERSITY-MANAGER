@@ -680,7 +680,7 @@ color: #a2a6af
                             <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">Position</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <!-- <select name="position" >
+                                    <select name="position" disabled >
                                         <option value="Professor" {% if facultyDetails[9]=="Professor" %} selected {% endif %}>
                                             Professor
                                         </option>
@@ -693,8 +693,7 @@ color: #a2a6af
                                         <option value="Visting Professor" {% if facultyDetails[9]=="Visting Professor" %} selected {% endif %}>
                                             Visting Professor
                                     </option>
-                                    </select> -->
-                                    <input type="text" name="position" value={{facultyDetails[9]}} readonly/>
+                                    </select>
                                 </div>
                             </div>
                         </fieldset>

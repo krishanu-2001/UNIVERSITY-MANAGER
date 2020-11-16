@@ -149,7 +149,102 @@ def admin_editdept():
             flash = ""
         return render_template('admin/admin_selectdept.html',departments=departments,flash=flash) 
     else:
-        return "not authorized to view"       
+        return "not authorized to view" 
+
+def admin_selectfaculty():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * from faculty where 1 = 1")
+    faculty = cur.fetchall()
+    cur.close()
+    return render_template('admin/admin_faculty.html',faculty=faculty)    
+def admin_addfaculty():
+    if(session.get('aid')):
+        flash = ""
+        flag = 1
+        if request.method == 'POST':
+            # Fetch form data
+            facultyDetails = request.form
+            fid = facultyDetails['fid']
+            fname = facultyDetails['fname']
+            address = facultyDetails['address']
+            phone = facultyDetails['phone']
+            salary = facultyDetails['salary']
+            email = facultyDetails['email']
+            dob = facultyDetails['dob']
+            gender = facultyDetails['gender']
+            position = facultyDetails['position']
+            did= facultyDetails['did']
+            password="password"
+            password = hashlib.md5(password.encode()).hexdigest()
+            if (did==''):
+                did=None    
+            if(len(phone) > 0 and len(fid) > 0 and len(fname) > 0 and len(address) > 0 and len(salary) > 0 and len(email) > 0 and len(dob) > 0):
+                #pass
+                cur = mysql.connection.cursor()
+                cur.execute("INSERT INTO faculty (fid, fname, address, salary, phone, email, dob, gender, position, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(fid, fname, address, salary, phone, email, dob, gender, position, password)  )
+                cur.execute("INSERT INTO works_in (fid, did) VALUES (%s, %s)",(fid,did)  )
+                mysql.connection.commit()
+                cur.close()
+            else:
+                flash = "Some of The Values entered NOT VALID"
+                flag = 0
+            #give access here!!
+        if flag != 0:
+            flash = ""
+        return redirect(url_for('admin_selectfaculty'))    
+    else:
+        return "not authorized to view"    
+def admin_deletefaculty():
+    if(session.get('aid')):
+        flash = ""
+        flag = 1
+        if request.method == 'POST':
+            _id = str(request.json['id'])
+            cur = mysql.connection.cursor()
+            cur.execute("DELETE FROM faculty WHERE fid=%s",[_id] )
+            mysql.connection.commit()
+            cur.close()
+        if flag != 0:
+            flash = ""
+        return "Executed" 
+    else:
+        return "not authorized to view"
+def admin_editfaculty():
+    if(session.get('aid')):
+        flash = ""
+        flag = 1
+        if request.method == 'POST':
+            # Fetch form data
+            facultyDetails = request.form
+            fidorig=facultyDetails['fid_orig']
+            fid = facultyDetails['fid']
+            fname = facultyDetails['fname']
+            address = facultyDetails['address']
+            phone = facultyDetails['phone']
+            salary = facultyDetails['salary']
+            email= facultyDetails['email']
+            dob= facultyDetails['dob']
+            gender= facultyDetails['gender']
+            position= facultyDetails['position']
+            did= facultyDetails['did']
+            if (did==''):
+                did=None    
+            if(len(phone) > 0 and len(fid) > 0 and len(fname) > 0 and len(address) > 0 and len(salary) > 0 and len(email) > 0 and len(dob) > 0):
+                #pass
+                cur = mysql.connection.cursor()
+                cur.execute("UPDATE faculty SET fid = %s, fname= %s, address= %s, salary= %s, phone= %s, email= %s, dob= %s, gender= %s, position= %s WHERE fid = %s",(fid, fname, address, salary, phone, email, dob, gender, position, fidorig)  )
+                cur.execute("UPDATE works_in SET fid = %s,did= %s WHERE fid = %s", (fid,did,fidorig) )
+                mysql.connection.commit()
+                cur.close()
+            else:
+                flash = "Some of The Values entered NOT VALID"
+                flag = 0
+            #give access here!!
+        if flag != 0:
+            flash = ""
+        return redirect(url_for('admin_selectfaculty')) 
+    else:
+        return "not authorized to view"            
 def admin_studentprofile():
     if(session.get('aid')):
         rollno = str(request.args.get("rollno"))

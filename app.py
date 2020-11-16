@@ -25,8 +25,8 @@ app.config['MYSQL_DB'] = db['mysql_db']
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'universitymanagerg3@gmail.com'
-app.config['MAIL_PASSWORD'] = 'dbmsprojectG3'
+app.config['MAIL_USERNAME'] = 'INSERT EMAIL HERE'
+app.config['MAIL_PASSWORD'] = 'INSERT PASSWORD HERE'
 
 mysql = MySQL(app)
 mail = Mail(app)
@@ -288,6 +288,10 @@ app.add_url_rule('/admin_selectdept', view_func=admin_krish.admin_selectdept, me
 app.add_url_rule('/admin_adddept', view_func=admin_krish.admin_adddept, methods=['GET','POST'])
 app.add_url_rule('/admin_deletedept', view_func=admin_krish.admin_deletedept, methods=['GET','POST'])
 app.add_url_rule('/admin_editdept', view_func=admin_krish.admin_editdept, methods=['GET','POST'])
+app.add_url_rule('/admin_selectfaculty', view_func=admin_krish.admin_selectfaculty, methods=['GET','POST'])
+app.add_url_rule('/admin_addfaculty', view_func=admin_krish.admin_addfaculty, methods=['GET','POST'])
+app.add_url_rule('/admin_deletefaculty', view_func=admin_krish.admin_deletefaculty, methods=['GET','POST'])
+app.add_url_rule('/admin_editfaculty', view_func=admin_krish.admin_editfaculty, methods=['GET','POST'])
 app.add_url_rule('/adminShowStudentByProgram', view_func=admin_krish.adminShowStudentByProgram, methods=['GET'])
 app.add_url_rule('/admin_course_req', view_func=admin_krish.admin_course_req, methods=['GET','POST'])
 app.add_url_rule('/add_course_req/<id>', view_func=admin_krish.add_course_req, methods=['GET','POST'])
@@ -363,6 +367,7 @@ def facsignup():
     return render_template('facsignup.html', flash = flash) 
 @app.route('/faculty')
 def faculty():
+    flash=""
     cur = mysql.connection.cursor()
     if(session.get('fid')):
         facultyDetails = session['fid']
@@ -376,7 +381,42 @@ def faculty():
     else:
         facultyDetails = "Not Authorized to access"
         courselist={}
-    return render_template('faculty.html',facultyDetails=facultyDetails,courselist=courselist)
+    return render_template('faculty.html',facultyDetails=facultyDetails,courselist=courselist,flash=flash)
+
+@app.route('/changepass/faculty', methods=['GET', 'POST'])
+def facchangepassword():
+    flash=""
+    cur = mysql.connection.cursor()
+    if(session.get('fid')):
+        fid = session['fid']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM faculty WHERE fid = '%s' "% (fid))
+        facultyDetails = cur.fetchall();
+        if request.method == 'POST':
+        # Fetch form data
+            formDetails = request.form
+            curpassword = formDetails['curpassword']
+            newpassword = formDetails['newpassword']
+            conpassword = formDetails['conpassword']
+            hashedpassword = hashlib.md5(curpassword.encode()).hexdigest()
+            hashednewpassword = hashlib.md5(newpassword.encode()).hexdigest()
+            passwordcheck=facultyDetails[0][7]
+            if (len(curpassword) == 0 or len(newpassword) == 0 or len(conpassword) == 0):
+                flash = "Null Values Encountered."
+                return render_template('facultychangepass.html',facultyDetails=facultyDetails,flash=flash)
+            elif (conpassword != newpassword):
+                flash = "Passwords do not match. Check password."
+                return render_template('facultychangepass.html',facultyDetails=facultyDetails,flash=flash)
+            elif (passwordcheck != hashedpassword):
+                flash = "Current Password is wrong."
+                return render_template('facultychangepass.html',facultyDetails=facultyDetails,flash=flash)    
+            else:
+                cur = mysql.connection.cursor()
+                cur.execute("UPDATE faculty SET password = %s WHERE fid = %s",(hashednewpassword,fid) )
+                mysql.connection.commit()
+                return redirect(url_for('faculty',flash="Password Changed."))
+    return render_template('facultychangepass.html',facultyDetails=facultyDetails,flash=flash)    
+    
 @app.route('/faculty/<id>')
 def facultypublicprofile(id):
     cur = mysql.connection.cursor()
@@ -428,6 +468,19 @@ def flogout():
     if(session.get('fid')):
         session.pop('fid')
     return render_template('index.html', flash = flash)
+@app.route('/getfacultybyid', methods=['GET','POST'])
+def getfacultybyid():
+    if request.method == 'POST':
+            _id = str(request.json['id'])
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT * FROM faculty WHERE fid=%s",[_id] )
+            fac=cur.fetchall()[0]
+            cur.execute("SELECT did FROM works_in WHERE fid=%s",[_id] )
+            did=cur.fetchall()[0]
+            faculty=[]
+            faculty.append({'fid':fac[0],'fname':fac[1],'phone':fac[2],'address':fac[3],'salary':fac[4],'email':fac[5],'dob':fac[6],'gender':fac[8],'position':fac[9],'did':did})
+            cur.close()
+            return json.dumps(faculty)   
 
 app.add_url_rule('/faculty_timetable', view_func=faculty_r.faculty_timetable, methods=['GET','POST'])
 app.add_url_rule('/assigngrade/<id>', view_func=faculty_r.assign_grade, methods=['GET','POST'])
@@ -479,7 +532,16 @@ def department_student(id):
     cur.execute("SELECT * FROM student WHERE student.did='%s' "% (id))
     studentlist=cur.fetchall();
     cur.close()    
-    return render_template('deptstudlist.html',studentlist=studentlist,deptinfo=deptinfo)   
+    return render_template('deptstudlist.html',studentlist=studentlist,deptinfo=deptinfo) 
+@app.route('/department/<id>/programs')
+def department_programs(id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM department WHERE did='%s' "% (id))
+    deptinfo=cur.fetchall()[0];
+    cur.execute("SELECT * FROM has JOIN program ON has.has_pid=program.program_id WHERE has_did ='%s' "% (id))
+    programlist=cur.fetchall();
+    cur.close()    
+    return render_template('deptprogramlist.html',programlist=programlist,deptinfo=deptinfo)       
 
 if __name__ == '__main__':
     flag = 0

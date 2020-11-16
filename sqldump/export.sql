@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: localhost    Database: test
+-- Host: localhost    Database: test1
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -14,6 +14,32 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `admin_control`
+--
+
+DROP TABLE IF EXISTS `admin_control`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin_control` (
+  `sid` int NOT NULL,
+  `cid` int NOT NULL,
+  `option` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL DEFAULT 'YES',
+  PRIMARY KEY (`sid`,`cid`),
+  KEY `admin_ctrl` (`sid`,`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin COMMENT='admin controls store in yes no pairs';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_control`
+--
+
+LOCK TABLES `admin_control` WRITE;
+/*!40000 ALTER TABLE `admin_control` DISABLE KEYS */;
+INSERT INTO `admin_control` VALUES (0,0,'YES'),(1,2,'NO');
+/*!40000 ALTER TABLE `admin_control` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `course_list`
@@ -74,35 +100,6 @@ LOCK TABLES `department` WRITE;
 INSERT INTO `department` VALUES ('CE','Civil Engineering','Pod 1D',800000,'9675854417',190001029,NULL),('CS','Computer Science','Pod 1A',1000000,'9876543201',1,'2020-01-23'),('EE','Electrical Engineering','Pod 1B',900000,'2812729',2,NULL),('ME','Mechanical Engineering','Pod 1C',900000,'6282829',NULL,NULL);
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
---
--- Table structure for table `admin_control`
---
-
-DROP TABLE IF EXISTS `admin_control`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-
-CREATE TABLE `admin_control` (
-  `sid` int(11) NOT NULL,
-  `cid` int(11) NOT NULL,
-  `option` varchar(45) COLLATE latin1_bin NOT NULL DEFAULT 'YES',
-  PRIMARY KEY (`sid`,`cid`),
-  KEY `admin_ctrl` (`sid`,`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin COMMENT='admin controls store in yes no pairs';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `admin_control`
---
-
-LOCK TABLES `admin_control` WRITE;
-/*!40000 ALTER TABLE `admin_control` DISABLE KEYS */;
-INSERT INTO `admin_control` VALUES (0,0,'YES'), (1,2,'NO');
-/*!40000 ALTER TABLE `admin_control` ENABLE KEYS */;
-UNLOCK TABLES;
-
 
 --
 -- Temporary view structure for view `departmentview`
@@ -196,7 +193,7 @@ DROP TABLE IF EXISTS `has`;
 CREATE TABLE `has` (
   `has_did` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
   `has_pid` int NOT NULL,
-  `date_implemented` date NOT NULL,
+  `date_implemented` date DEFAULT NULL,
   PRIMARY KEY (`has_did`,`has_pid`),
   KEY `has_pid` (`has_pid`),
   CONSTRAINT `has_did` FOREIGN KEY (`has_did`) REFERENCES `department` (`did`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -210,6 +207,7 @@ CREATE TABLE `has` (
 
 LOCK TABLES `has` WRITE;
 /*!40000 ALTER TABLE `has` DISABLE KEYS */;
+INSERT INTO `has` VALUES ('CE',1,NULL),('CE',6,NULL),('CS',1,'2011-10-25'),('CS',5,'2011-10-25'),('CS',6,'2013-05-16'),('EE',1,NULL),('EE',2,NULL),('EE',3,NULL),('EE',5,NULL),('EE',6,NULL),('ME',1,NULL),('ME',2,NULL),('ME',3,NULL),('ME',5,NULL),('ME',6,NULL);
 /*!40000 ALTER TABLE `has` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,6 +232,7 @@ CREATE TABLE `program` (
 
 LOCK TABLES `program` WRITE;
 /*!40000 ALTER TABLE `program` DISABLE KEYS */;
+INSERT INTO `program` VALUES (1,'BTech',4),(2,'MTech',2),(3,'Five-year BTech + MTech',5),(4,'MSc',2),(5,'MS(Research)',3),(6,'Doctor of Philosophy ',NULL);
 /*!40000 ALTER TABLE `program` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +312,8 @@ CREATE TABLE `student` (
   `password` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `did` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
   PRIMARY KEY (`sid`),
-  KEY `is_in_idx` (`did`)
+  KEY `is_in_idx` (`did`),
+  CONSTRAINT `is_in` FOREIGN KEY (`did`) REFERENCES `department` (`did`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -409,4 +409,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-09 17:16:54
+-- Dump completed on 2020-11-16  6:16:32

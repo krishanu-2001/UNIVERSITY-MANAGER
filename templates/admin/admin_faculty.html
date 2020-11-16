@@ -237,7 +237,7 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }
-#hodedit,#hodadd{
+#deptedit,#deptadd{
   display: none;
 }	
 </style>
@@ -251,7 +251,7 @@ function ConfirmDelete(elem) {
     localStorage.setItem('deleteId', $(elem).attr('data-id'));
 }
 function Delete() {
-	const Url='/admin_deletedept';
+	const Url='/admin_deletefaculty';
     axios({
 		method: 'post',
         url: Url,
@@ -269,7 +269,7 @@ function Delete() {
 }
 function Edit(elem) {
 	localStorage.setItem('editId', $(elem).attr('data-id'));
-	const Url='/getdepartmentbyid';
+	const Url='/getfacultybyid';
     axios({
 		method: 'post',
         url: Url,
@@ -278,21 +278,24 @@ function Edit(elem) {
         }
     })
 	.then(data=>{
-		var dept = JSON.parse(JSON.stringify(data['data']));
-		$('#editdidorig').val(dept[0]['did']);
-		$('#editdid').val(dept[0]['did']);
-        $('#editdname').val(dept[0]['dname']);
-        $('#editbuilding').val(dept[0]['building']);
-		$('#editphone').val(dept[0]['contact']);
-		$('#editbudget').val(dept[0]['budget']);
-		$('#edithodfid').val(dept[0]['hodfid']);
-		var date=new Date(dept[0]['hodsince']);
-		if(dept[0]['hodsince']==null){
-			$('#edithodsince').val('');
+		var faculty = JSON.parse(JSON.stringify(data['data']));
+		$('#editfidorig').val(faculty[0]['fid']);
+		$('#editfid').val(faculty[0]['fid']);
+        $('#editfname').val(faculty[0]['fname']);
+        $('#editaddress').val(faculty[0]['address']);
+		$('#editphone').val(faculty[0]['phone']);
+		$('#editsalary').val(faculty[0]['salary']);
+        $('#editemail').val(faculty[0]['email']);
+		var date=new Date(faculty[0]['dob']);
+		if(faculty[0]['dob']==null){
+			$('#editdob').val('');
 		}
 		else{
-			$('#edithodsince').val(date.toISOString().slice(0,10));
-		}
+			$('#editdob').val(date.toISOString().slice(0,10));
+        }
+        $('#editgender').val(faculty[0]['gender']);
+        $('#editposition').val(faculty[0]['position']);
+        $('#editdid').val(faculty[0]['did']);
 	})
 	.catch(err=>console.log(err))
 }
@@ -313,30 +316,32 @@ function showhod(elem) {
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2>Manage Departments</h2>
+						<h2>Manage Faculty</h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addDepartmentModal" class="btn btn-success" data-toggle="modal"><i class="material-icons" >&#xE147;</i> <span>Add New Department</span></a>
+						<a href="#addFacultyModal" class="btn btn-success" data-toggle="modal"><i class="material-icons" >&#xE147;</i> <span>Add New Faculty</span></a>
 					</div>
 				</div>
 			</div>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
-						<th><span style="margin: auto 27%;">ID Department</span>  </th>
-						<th><span style="margin: auto 33%;">Name</span> </th>
-						<th><p style="margin: auto 37%;"> Actions</p></th>
+						<th style="text-align: center;">Faculty ID</th>
+                        <th><span style="margin: auto 33%;">Name</span> </th>
+                        <th><span style="margin: auto 33%;">Position</span> </th>
+						<th><p style="margin: auto 37%;">Actions</p></th>
 					</tr>
 				</thead>
 				<tbody>	
-                    {% for i in range(departments|length) %}
+                    {% for i in range(faculty|length) %}
                     <tr>
-                        <td><span style="margin: auto 44%;">{{ departments[i][0] }}</span></td>
-						<td><span style="margin: auto 18%;">{{ departments[i][1] }}</span></td>
+                        <td style="text-align: center;">{{ faculty[i][0] }}</td>
+                        <td style="text-align: center;">{{ faculty[i][1] }}</td>
+                        <td style="text-align: center;">{{ faculty[i][9] }}</td>
 						<td>
 							<div style="text-align: center;">
-							<a data-id={{departments[i][0]}} href="#editDepartmentModal" onclick="Edit(this)" class="edit" data-toggle="modal" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-							<a data-id={{departments[i][0]}} href="#deleteDepartmentModal" onclick="ConfirmDelete(this)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							<a data-id={{faculty[i][0]}} href="#editFacultyModal" onclick="Edit(this)" class="edit" data-toggle="modal" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+							<a data-id={{faculty[i][0]}} href="#deleteFacultyModal" onclick="ConfirmDelete(this)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 							</div>
 						</td>
                     </tr>
@@ -347,44 +352,79 @@ function showhod(elem) {
 	</div>        
 </div>
 <!-- Add Modal HTML -->
-<div id="addDepartmentModal" class="modal fade">
+<div id="addFacultyModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form method="post" action="/admin_adddept">
+			<form method="post" action="/admin_addfaculty">
 				<div class="modal-header">						
-					<h4 class="modal-title">Add Department</h4>
+					<h4 class="modal-title">Add Faculty</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>
 				</div>
 				<div class="modal-body">					
 					<div class="form-group">
-						<label>DID</label>
-						<input type="text" class="form-control" name="did" required>
+						<label>FID</label>
+						<input type="text" class="form-control" name="fid" required>
 					</div>
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control" name="dname" required>
+						<input type="text" class="form-control" name="fname" required>
 					</div>
 					<div class="form-group">
-						<label>Building</label>
-						<textarea class="form-control" name="building" required></textarea>
+						<label>Address</label>
+						<textarea class="form-control" name="address" required></textarea>
 					</div>
 					<div class="form-group">
 						<label>Phone</label>
 						<input type="text" class="form-control" name="phone" required>
 					</div>	
 					<div class="form-group">
-						<label>Budget</label>
-						<input type="number" class="form-control" name="budget" required>
+						<label>Salary</label>
+						<input type="number" class="form-control" name="salary" required>
+                    </div>
+                    <div class="form-group">
+						<label>Email</label>
+						<input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="form-group">
+						<label>Date of Birth</label>
+						<input type="date" class="form-control" name="dob" required>
+                    </div>
+                    <div class="form-group">
+						<label>Gender</label>
+						<select name="gender">
+                            <option value="Male" >
+                                    Male
+                            </option>
+                            <option value="Female">
+                                    Female
+                            </option>
+                            <option value="Other">
+                                    Other
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+						<label>Position</label>
+						<select name="position" >
+                            <option value="Professor">
+                                Professor
+                            </option>
+                            <option value="Associate Professor"}>
+                                Associate Professor
+                            </option>
+                            <option value="Assistant Professor">
+                                Assistant Professor
+                            </option>
+                            <option value="Visting Professor">
+                                Visting Professor
+                        </option>
+                        </select>
 					</div>
-					<button type="button" onclick="showhod('hodadd')">Add HOD</button>
-					<div id="hodadd">
+					<button type="button" onclick="showhod('deptadd')">Add Department</button>
+					<div id="deptadd">
 						<div class="form-group">
-							<label>HOD FID</label>
-							<input type="text" class="form-control" name="hodfid">
-						</div>
-						<div class="form-group">
-							<label>Since</label>
-							<input type="date" class="form-control" name="hodsince">
+							<label>Department ID</label>
+							<input type="text" class="form-control" name="did">
 						</div>
 					</div>					
 				</div>
@@ -397,47 +437,82 @@ function showhod(elem) {
 	</div>
 </div>
 <!-- Edit Modal HTML -->
-<div id="editDepartmentModal" class="modal fade">
+<div id="editFacultyModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form method="post" action="/admin_editdept">
+			<form method="post" action="/admin_editfaculty">
 				<div class="modal-header">						
-					<h4 class="modal-title">Edit Department</h4>
+					<h4 class="modal-title">Edit Faculty</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">	
 					<div class="form-group">
-						<input type="hidden" class="form-control" name="did_orig" id="editdidorig" />
+						<input type="hidden" class="form-control" name="fid_orig" id="editfidorig" />
 					</div>				
 					<div class="form-group">
-						<label>DID</label>
-						<input type="text" class="form-control" name="did" id="editdid" required>
+						<label>FID</label>
+						<input type="text" class="form-control" name="fid" id="editfid" required>
 					</div>
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control" name="dname" id="editdname" required>
+						<input type="text" class="form-control" name="fname" id="editfname" required>
 					</div>
 					<div class="form-group">
-						<label>Building</label>
-						<textarea class="form-control" name="building" id="editbuilding" required></textarea>
+						<label>Address</label>
+						<textarea class="form-control" name="address" id="editaddress" required></textarea>
 					</div>
 					<div class="form-group">
 						<label>Phone</label>
 						<input type="text" class="form-control" name="phone" id="editphone" required>
 					</div>	
 					<div class="form-group">
-						<label>Budget</label>
-						<input type="number" class="form-control" name="budget" id="editbudget" required>
-					</div>	
-					<button type="button" onclick="showhod('hodedit')">Edit HOD</button>
-					<div id="hodedit">
+						<label>Salary</label>
+						<input type="number" class="form-control" name="salary" id="editsalary" required>
+                    </div>
+                    <div class="form-group">
+						<label>Email</label>
+						<input type="email" class="form-control" name="email" id="editemail" required>
+                    </div>
+                    <div class="form-group">
+						<label>Date of Birth</label>
+						<input type="date" class="form-control" name="dob" id="editdob" required>
+                    </div>	
+                    <div class="form-group">
+						<label>Gender</label>
+						<select name="gender" id="editgender">
+                            <option value="Male" >
+                                    Male
+                            </option>
+                            <option value="Female">
+                                    Female
+                            </option>
+                            <option value="Other">
+                                    Other
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+						<label>Position</label>
+						<select name="position" id="editposition">
+                            <option value="Professor">
+                                Professor
+                            </option>
+                            <option value="Associate Professor"}>
+                                Associate Professor
+                            </option>
+                            <option value="Assistant Professor">
+                                Assistant Professor
+                            </option>
+                            <option value="Visting Professor">
+                                Visting Professor
+                        </option>
+                        </select>
+					</div>
+					<button type="button" onclick="showhod('deptedit')">Edit Department</button>
+					<div id="deptedit">
 						<div class="form-group">
-							<label>HOD FID</label>
-							<input type="text" class="form-control" name="hodfid" id="edithodfid">
-						</div>
-						<div class="form-group">
-							<label>Since</label>
-							<input type="date" class="form-control" name="hodsince" id="edithodsince">
+							<label>Department ID</label>
+							<input type="text" class="form-control" name="did" id="editdid">
 						</div>
 					</div>			
 				</div>
@@ -450,12 +525,12 @@ function showhod(elem) {
 	</div>
 </div>
 <!-- Delete Modal HTML -->
-<div id="deleteDepartmentModal" class="modal fade">
+<div id="deleteFacultyModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form>
 				<div class="modal-header">						
-					<h4 class="modal-title">Delete Department</h4>
+					<h4 class="modal-title">Delete Faculty</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					

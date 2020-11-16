@@ -2,20 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>Department</title>
+    <title>Department Student List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
     	body{
-            background-color:#a7d7d7;
+            background-color: #a7d7d7;
     background-image: linear-gradient(250deg, #aaa4a5 10%, #a7d7d7 10%);   
-}
-th, td {
-  padding: 15px;
-  font-family: cursive;
-  font-size: 25px;
 }
 
 #wrapper {
@@ -50,13 +43,14 @@ th, td {
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 0px;
 }
 
 #page-content-wrapper {
     width: 100%;
     position: absolute;
     padding: 15px;
+    margin-left: 20px;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -173,46 +167,12 @@ p {
     border:1px;
     border-bottom: 1px solid #DDDDDD;
 }
-* {
-  box-sizing: border-box;
+table, th, td {
+  border: 1px solid black;
 }
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Float four columns side by side */
-.column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
-}
-
-/* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the counter cards */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-  padding: 16px;
-  text-align: left;
-  background-color:#aaa4a5;
-}
-
-/* Responsive columns - one column layout (vertical) on small screens */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
+th, td {
+  padding: 5px;
+  text-align: center;
 }
 
 btn-menu {
@@ -228,81 +188,45 @@ btn-menu {
 
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div id="wrapper" class="wrapper-content">
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                Departments
-            </li>
-            {% for i in range(departments|length) %}
-            <li>
-                <a href="/department/{{departments[i][0]}}">{{  departments[i][1]  }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div id="page-content-wrapper">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button class="btn-menu btn btn-success btn-toggle-menu" type="button">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="/">
-                                <i class="ti-panel"></i>
-        						<p>Home</p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<div id="page-content-wrapper">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>{{deptinfo[1]}}</h1>
-                    <p>Building - {{deptinfo[2]}}</p>
-                    <p>Contact Number - {{deptinfo[4]}}</p>
-                    <p>Budget - {{deptinfo[3]}}</p>
-                </div>
-                <div class="column">
-                    <div class="card">
-                         <h4 style="text-align: center;">Head Of Department</h4>
-                         <hr>
-                         <h3 style="color: red; text-align: center;">{{deptinfo[6]}}</h3>
-                         <hr>
-                         <h4>Contact(Head)-</h4>
-                         <p>
-                             Phone:  {{deptinfo[7]}} <br/>
-                             Email:  <a href="mailto: {{deptinfo[8]}} ">{{deptinfo[8]}}</a>
-                         </p>
-                    </div>
-                </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">
+                            <i class="ti-panel"></i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/department/{{deptinfo[0]}}">
+                            <i class="ti-panel"></i>
+                            <p>Back</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <br/>    
-                <div class="col-lg-12">
-                    <table>
-                        <tr>
-                        <td>
-                        <a href="/department/{{deptinfo[0]}}/faculty">Faculty List</a>
-                        </td> 
-                        <td>
-                        <a href="/department/{{deptinfo[0]}}/student">Student List</a>
-                        </td>
-                        <td>
-                        <a href="#">Courses Offered</a>
-                        </td>
-                        <td>   
-                        <a href="/department/{{deptinfo[0]}}/programs">Programs Offered</a>
-                        </td>  
-                        </tr>  
-                    </table>
-                </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 style="color: blue;">{{deptinfo[1]}} department offers following Academic Programs:</h1>
+            </div>
+            <div class="col-lg-12">
+                <ol>
+                    {% for i in range(programlist|length) %}
+                        <li><h4>{{ programlist[i][4] }} (implemented on {{ programlist[i][2] }})</h4></li>
+                        <ul>
+                            <li>Duration -- {% if programlist[i][5] == None %} 3-6
+                                {% else %} {{ programlist[i][5] }}
+                                {% endif %}
+                                years</li>
+                        </ul>
+                        <br>  
+                    {% endfor %} 
+                </ol>
             </div>
         </div>
     </div>
@@ -329,6 +253,5 @@ $(function(){
     });
 })
 </script>
-
 </body>
 </html>
