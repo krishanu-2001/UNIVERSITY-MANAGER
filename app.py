@@ -441,14 +441,13 @@ def facultyprofile():
         name = facultyDetails['name']
         dob = facultyDetails['dob']
         gender = facultyDetails['gender']
-        position = facultyDetails['position']
         email = facultyDetails['email']
         phone = facultyDetails['phone']
         address = facultyDetails['address']
-        if(len(phone) > 0 and len(address) > 0 and len(gender) > 0 and len(name) > 0 and len(email) > 0 and len(dob) > 0 and len(position) > 0):
+        if(len(phone) > 0 and len(address) > 0 and len(gender) > 0 and len(name) > 0 and len(email) > 0 and len(dob) > 0 ):
             #pass
             cur = mysql.connection.cursor()
-            cur.execute("UPDATE faculty SET phone = %s, address = %s, gender = %s, fname = %s, email = %s, dob = %s, position = %s WHERE fid = %s",(phone, address, gender, name, email, dob, position, fid))
+            cur.execute("UPDATE faculty SET phone = %s, address = %s, gender = %s, fname = %s, email = %s, dob = %s WHERE fid = %s",(phone, address, gender, name, email, dob, fid))
             mysql.connection.commit()
             cur.close()
         else:
