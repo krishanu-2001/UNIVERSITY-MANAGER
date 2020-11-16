@@ -78,6 +78,23 @@ sr.reveal('.work__img',{interval: 200});
 /*SCROLL CONTACT*/
 sr.reveal('.contact__input',{interval: 200}); 
 
+/* upload image */
+function uploadfile(){
+    
+}
+var openFile = function(event) {
+    var input = event.target;
 
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('profile-image1');
+      output.src = dataURL;
+    };
+    reader.readAsDataURL(input.files[0]);
+
+    var writer = new FileWriter();
+    
+  };
 
 

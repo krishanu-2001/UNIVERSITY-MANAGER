@@ -10,7 +10,7 @@
     </div>
     <div class="login-content">
     
-      <form id=form method="POST" action="">
+      <form id=form method="POST" action="/faclogin">
 
         <img src="/static/img/teacher.png">
         <h2 class="title">Faculty</h2>
@@ -32,11 +32,12 @@
             <input type="password" name="password" class="input">
           </div>
         </div>
-        <a id=a style="display: block;" href="#">Forgot Password?</a>
+        <a id=a style="display: block;" href="/resetrequest/faculty">Forgot Password?</a>
         <input type="submit" class="btn" value="Login">
         <!-- <a id=a href="/login" style="margin: 0 -1% 0 0; ">Are you </a> -->
         <a id=a href="/login" style="margin: 0 0% 0 0; ">Are you Student?</a> <span>|</span>
         <a id=a href="/facsignup" style="margin: 0 3% 0 0; ">Create Account</a>
+        <br>
         {% if flash != '' %}
         <h5 style="color: rgb(255, 25, 25);">{{flash}}</h5>
         {% endif %}

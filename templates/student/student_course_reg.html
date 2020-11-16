@@ -3,7 +3,11 @@
 {% block view_users %}
 <div class="container">
     <h1 id="headCPIPage">-----------course registration-----------</h1>
-
+    {% if flash != "" %}
+    <div class="greenBox">
+        {{flash}}
+    </div>
+    {% endif %}
     <div class="timetableClass ">
         <form method="POST">
             <table class="regCourseTable">

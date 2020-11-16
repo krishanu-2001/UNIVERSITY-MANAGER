@@ -2,157 +2,88 @@
 
 {% block view_users %}
 
-<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-
-<!-- <h1 id="headCPIPage">user information:</h1> -->
-
-<div class="timetableClass userRightPanel" style="margin-top: 0px;">
-  <form method="POST">
-    {% if flash != '' %}
-    <h3 style="color: maroon;">{{flash}}</h3>
-    {% endif %}
-    <table class="regProfileCode">
-      <tr class="regCourseheading">
-        <th style="width: 29% ;  border: #3a4857 2px solid;"></th>
-        <th style=" border: #3a4857 2px solid; padding-left: 30px;">user information</th>
-        <th style=" border: #3a4857 2px solid;"></th>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">First Name</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="text" name="name" value="Kuldeep"
-              placeholder="First Name"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Middle Name</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="text" name="name" value=""
-              placeholder="Middle Name"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Last Name</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="text" name="name" value="Singh"
-              placeholder="Last Name"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">CPI</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="text" name="cpi"
-              value="{{studentDetail[0][4]}}" placeholder="CPI"></span>
-        </td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Semester</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="text" name="class"
-              value="{{studentDetail[0][5]}}" placeholder="Semester"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Program</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="text" name="program"
-              value="{{studentDetail[0][6]}}" placeholder="Program"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Phone No</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="tel" name="phone_no"
-              value="{{studentDetail[0][2]}}" placeholder="Phone No"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Email</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="email" name="email"
-              value="{{studentDetail[0][7]}}" placeholder="Email ID"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Date of Birth</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="date" name="dob"
-              value="{{studentDetail[0][8]}}:{{studentDetail[0][9]}}:{{studentDetail[0][10]}}"
-              placeholder="Date of Birth"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Date of Joining</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="date" name="dob"
-              value="23:7:2019" placeholder="Date of Joining"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=""
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Place of Birth</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"><span class="">:</span></td>
-        <td style=" border: white 2px solid;"><span class="adminprofile"> <input type="text" name="pob" value="Bikaner"
-              placeholder="Place of Birth"></span></td>
-      </tr>
-
-      <tr>
-        <td style=" border: white 2px solid;     font-size: 33px; color:#267caf;"><span class=" "
-            style="padding: 0 0 0 40px; text-align: left; font-weight: bold;">Nationality</span></td>
-        <td style=" border: white 2px solid; color:#267caf; text-align: center;"> <span class=" ">:</span></td>
-        <td style=" border: white 2px solid;"> <span class="adminprofile"> <input type="text" name="nationality"
-              value="Indian" placeholder=""></span></td>
-      </tr>
-
-      <!-- <div class="clearfix"></div>
-                  <div class="bot-border"></div> -->
-    </table>
-    <div class="containerbtn">
-      <input type="submit" value="SUBMIT" />
-    </div>
-  </form>
-</div>
-<!-- 
-  <h2>Fill Details:</h2>
+    <h2>Fill Details</h2>
     <form class="form-center" method="POST" action="">
         {% if flash != '' %}
         <h1 style="color: maroon;">{{flash}}</h1>
         {% endif %}
-        rollno: <input type="text" name="rollno" placeholder={{studentDetail[0][0]}} value={{rollno}} readonly/>
-        <br>
-        phone: <input type="text" name="phone" value={{studentDetail[0][2]}} />
-        <br>
-        address: <input type="text" name="address" value="{{studentDetail[0][3]}}" />
-        <br>
-        cpi: <input type="text" name="cpi" value="{{studentDetail[0][4]}}" />
-        <br>
-        class: <input type="text" name="class" value="{{studentDetail[0][5]}}" />
-        <br>
-        program: <input type="text" name="program" value="{{studentDetail[0][6]}}" />
-        <br>
-        email: <input type="text" name="email" value="{{studentDetail[0][7]}}" />
-        <br>
-        dob_dd: <input type="text" name="dob_dd" value="{{studentDetail[0][8]}}" />
-        <br>
-        dob_mm: <input type="number" name="dob_mm" value="{{studentDetail[0][9]}}" />
-        <br>
-        dob_yy: <input type="number" name="dob_yy" value="{{studentDetail[0][10]}}" />
-        <br>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Rollno</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="rollno" placeholder={{studentDetail[0][0]}} value={{rollno}} readonly/>
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Phone</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="phone" value={{studentDetail[0][2]}} />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Address</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="address" value="{{studentDetail[0][3]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Cpi</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="cpi" value="{{studentDetail[0][4]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Class</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="class" value="{{studentDetail[0][5]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div> 
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">Program</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="program" value="{{studentDetail[0][6]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">email</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="email" value="{{studentDetail[0][7]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">dob_dd</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="text" name="dob_dd" value="{{studentDetail[0][8]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">dob_mm</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="number" name="dob_mm" value="{{studentDetail[0][9]}}" />
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+        </div>
+        <div class="row bot-border1">
+          <div class="col-sm-4 col-xs-6 tital ">dob_yy</div>                
+          <span class="col-sm-2 tital ">:</span>
+          <input type="number" name="dob_yy" value="{{studentDetail[0][10]}}" />
+          <div class="clearfix"></div>
+        </div>
 
-        <input type="submit">
-      </form> -->
+        <input type="submit" class="humble"/>
+      </form>
 
+      <!-- <div class="col-sm-4 col-xs-6 tital ">Email</div>                
+                <span class="col-sm-2 tital ">:</span>
+                <div class="col-sm-2">{{studentDetail[0][7]}}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div> -->
 
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'faculty.html' %}
+{% block view_users %}
+    <h1 id="headCPIPage">-----------Change Password-----------</h1>
+    {% if flash != '' %}
+    <h5 style="color: rgb(255, 25, 25);">{{flash}}</h5>
+    {% endif %}
+    <form method="POST" action="">
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password" class="form-control" name="curpassword" placeholder="Current Password">
+        </div>
+        <div class="form-group">
+            <label>New Password</label>
+            <input type="password" class="form-control" name="newpassword" placeholder="New Password">
+        </div>
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" name="conpassword" placeholder="Confirm Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    
+{% endblock %}

@@ -16,6 +16,12 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        input:invalid{
+            color: red;
+            border-color: red;
+        }
+    </style>
     <script>
        $(document).on('click', '#save', function(event) {
     event.preventDefault();
@@ -35,6 +41,17 @@
 	.then()
 	.catch(err=>console.log(err))
     }); 
+    function validate(elem) {
+        const allowed = new Set(["AA","A","BB","B","AB","F"]);
+        if(!allowed.has(elem.value)){
+            $("input[type=submit]").attr("disabled", "disabled");
+            elem.setCustomValidity("Invalid grade.");
+        }
+        else{
+            $("input[type=submit]").removeAttr("disabled");
+            elem.setCustomValidity("");
+        }
+    }
     </script>
 
     <title>e-univ</title>
@@ -62,8 +79,8 @@
                     <td>{{ coursestudentlist[i][1] }}</td>
                     <div class="form-group">    
                     <td style="display:none;"><input type="hidden" class="form-control" name="sid" value="{{ coursestudentlist[i][0] }}" /></td>    
-                    <td><input type="text" class="form-control" name="grademidsem" value="{{ coursestudentlist[i][2] }}" required></td>
-                    <td><input type="text" class="form-control" name="gradeendsem" value="{{ coursestudentlist[i][3] }}" required></td>
+                    <td><input type="text" class="form-control" name="grademidsem" value="{{ coursestudentlist[i][2] }}" oninput="validate(this)" required></td>
+                    <td><input type="text" class="form-control" name="gradeendsem" value="{{ coursestudentlist[i][3] }}" oninput="validate(this)" required></td>
                     </div>
                 </tr>
             {% endfor %}
