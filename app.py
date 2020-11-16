@@ -25,8 +25,8 @@ app.config['MYSQL_DB'] = db['mysql_db']
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'INSERT EMAIL HERE'
-app.config['MAIL_PASSWORD'] = 'INSERT PASSWORD HERE'
+app.config['MAIL_USERNAME'] = 'ADD EMAIL HERE'
+app.config['MAIL_PASSWORD'] = 'ADD PASSWORD HERE'
 
 mysql = MySQL(app)
 mail = Mail(app)
