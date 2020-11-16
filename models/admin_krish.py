@@ -100,7 +100,7 @@ def admin_deletedept():
         if request.method == 'POST':
             _id = str(request.json['id'])
             cur = mysql.connection.cursor()
-            cur.execute("DELETE FROM department WHERE did=%s",(_id) )
+            cur.execute("DELETE FROM department WHERE did=%s",[_id] )
             mysql.connection.commit()
             cur.close()
         cur = mysql.connection.cursor()
@@ -182,7 +182,8 @@ def admin_addfaculty():
                 #pass
                 cur = mysql.connection.cursor()
                 cur.execute("INSERT INTO faculty (fid, fname, address, salary, phone, email, dob, gender, position, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(fid, fname, address, salary, phone, email, dob, gender, position, password)  )
-                cur.execute("INSERT INTO works_in (fid, did) VALUES (%s, %s)",(fid,did)  )
+                if(did!=None):
+                    cur.execute("INSERT INTO works_in (fid, did) VALUES (%s, %s)",(fid,did)  )
                 mysql.connection.commit()
                 cur.close()
             else:
@@ -233,7 +234,8 @@ def admin_editfaculty():
                 #pass
                 cur = mysql.connection.cursor()
                 cur.execute("UPDATE faculty SET fid = %s, fname= %s, address= %s, salary= %s, phone= %s, email= %s, dob= %s, gender= %s, position= %s WHERE fid = %s",(fid, fname, address, salary, phone, email, dob, gender, position, fidorig)  )
-                cur.execute("UPDATE works_in SET fid = %s,did= %s WHERE fid = %s", (fid,did,fidorig) )
+                if(did!=None):
+                    cur.execute("UPDATE works_in SET fid = %s,did= %s WHERE fid = %s", (fid,did,fidorig) )
                 mysql.connection.commit()
                 cur.close()
             else:
