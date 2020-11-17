@@ -290,6 +290,7 @@ app.add_url_rule('/admin_deletedept', view_func=admin_krish.admin_deletedept, me
 app.add_url_rule('/admin_editdept', view_func=admin_krish.admin_editdept, methods=['GET','POST'])
 app.add_url_rule('/admin_selectfaculty', view_func=admin_krish.admin_selectfaculty, methods=['GET','POST'])
 app.add_url_rule('/admin_addfaculty', view_func=admin_krish.admin_addfaculty, methods=['GET','POST'])
+# app.add_url_rule('/admin_addcourse', view_func=admin_krish.admin_addcourse, methods=['GET','POST'])
 app.add_url_rule('/admin_deletefaculty', view_func=admin_krish.admin_deletefaculty, methods=['GET','POST'])
 app.add_url_rule('/admin_editfaculty', view_func=admin_krish.admin_editfaculty, methods=['GET','POST'])
 app.add_url_rule('/adminShowStudentByProgram', view_func=admin_krish.adminShowStudentByProgram, methods=['GET'])

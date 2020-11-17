@@ -1,47 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+{% extends 'base.html' %}
 
-    <style>
-        td,th{
-            border : 1px solid black ;
-            text-align: center ;
-            padding: 5px;
-        }
-        tr:nth-child(even){
-            background-color: #dddddd ;
-        }
-        .main{
-            width : 100% !important  ;
-            background: url('../../static/img/3.jpeg');
-            height : 100vh ;
-        }
-        table{
-            border-collapse: collapse ;
-        }
-    </style>
-</head>
-<body>
-    <div class=''>
-        <div class='main'>
-            <table>
-                <tr>
-                    <th> Id </th>
-                    <th> Program </th>
-                </tr>
-                {% for i in range(student|length) %}
-                    <tr> 
-                        <td> {{ student[i][0] }} </td> 
-                        <td> {{ student[i][1] }} </td> 
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-        
+
+{% block body %}
+<section class="section">
+    <div class="container ">
+        <div class="row">
+            <a href="/adminShowCourse" class="text-light  bg-primary rounded p-1 mt-2 ">Back</a> 
+        <table class="styled-table table  my-3 ">
+        <thead class="">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Program</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for i in range(student|length) %}
+            <tr class="active-row">
+              <td>{{ student[i][0] }}</td>
+              <td>{{ student[i][1] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+     </div>
     </div>
-</body>
-</html>
+
+</section>
+
+{% endblock %}
