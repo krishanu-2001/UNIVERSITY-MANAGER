@@ -25,8 +25,8 @@ app.config['MYSQL_DB'] = db['mysql_db']
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'INSERT EMAIL HERE'
-app.config['MAIL_PASSWORD'] = 'INSERT PASSWORD HERE'
+app.config['MAIL_USERNAME'] = 'ADD EMAIL HERE'
+app.config['MAIL_PASSWORD'] = 'ADD PASSWORD HERE'
 
 mysql = MySQL(app)
 mail = Mail(app)
@@ -283,6 +283,7 @@ app.add_url_rule('/admin_selectstudent', view_func=admin_krish.admin_selectstude
 app.add_url_rule('/admin_studentprofile', view_func=admin_krish.admin_studentprofile, methods=['GET','POST'])
 app.add_url_rule('/adminShowStudent', view_func=admin_krish.adminShowStudent, methods=['GET'])
 app.add_url_rule('/ExcelDownload', view_func=admin_krish.ExcelDownload, methods=['GET'])
+app.add_url_rule('/ExcelDownload_course', view_func=admin_krish.ExcelDownload_course, methods=['GET'])
 app.add_url_rule('/adminShowCourse', view_func=admin_krish.adminShowCourse, methods=['GET'])
 app.add_url_rule('/admin_selectdept', view_func=admin_krish.admin_selectdept, methods=['GET','POST'])
 app.add_url_rule('/admin_adddept', view_func=admin_krish.admin_adddept, methods=['GET','POST'])
@@ -295,6 +296,7 @@ app.add_url_rule('/admin_deletefaculty', view_func=admin_krish.admin_deletefacul
 app.add_url_rule('/admin_editfaculty', view_func=admin_krish.admin_editfaculty, methods=['GET','POST'])
 app.add_url_rule('/adminShowStudentByProgram', view_func=admin_krish.adminShowStudentByProgram, methods=['GET'])
 app.add_url_rule('/admin_course_req', view_func=admin_krish.admin_course_req, methods=['GET','POST'])
+app.add_url_rule('/add_course', view_func=admin_krish.add_course, methods=['GET','POST'])
 app.add_url_rule('/add_course_req/<id>', view_func=admin_krish.add_course_req, methods=['GET','POST'])
 app.add_url_rule('/del_course_req/<id>', view_func=admin_krish.del_course_req, methods=['GET','POST'])
 
@@ -442,14 +444,13 @@ def facultyprofile():
         name = facultyDetails['name']
         dob = facultyDetails['dob']
         gender = facultyDetails['gender']
-        position = facultyDetails['position']
         email = facultyDetails['email']
         phone = facultyDetails['phone']
         address = facultyDetails['address']
-        if(len(phone) > 0 and len(address) > 0 and len(gender) > 0 and len(name) > 0 and len(email) > 0 and len(dob) > 0 and len(position) > 0):
+        if(len(phone) > 0 and len(address) > 0 and len(gender) > 0 and len(name) > 0 and len(email) > 0 and len(dob) > 0 ):
             #pass
             cur = mysql.connection.cursor()
-            cur.execute("UPDATE faculty SET phone = %s, address = %s, gender = %s, fname = %s, email = %s, dob = %s, position = %s WHERE fid = %s",(phone, address, gender, name, email, dob, position, fid))
+            cur.execute("UPDATE faculty SET phone = %s, address = %s, gender = %s, fname = %s, email = %s, dob = %s WHERE fid = %s",(phone, address, gender, name, email, dob, fid))
             mysql.connection.commit()
             cur.close()
         else:

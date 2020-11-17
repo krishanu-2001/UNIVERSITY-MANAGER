@@ -334,7 +334,7 @@ function showhod(elem) {
 				</thead>
 				<tbody>	
                     {% for i in range(faculty|length) %}
-                    <tr>
+                    <tr id="{{ faculty[i][0] }}">
                         <td style="text-align: center;">{{ faculty[i][0] }}</td>
                         <td style="text-align: center;">{{ faculty[i][1] }}</td>
                         <td style="text-align: center;">{{ faculty[i][9] }}</td>

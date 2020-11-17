@@ -5,4 +5,5 @@ Flask-Excel
 pyexcel-xlsx
 flask_cors
 flask_mail
+gunicorn
 

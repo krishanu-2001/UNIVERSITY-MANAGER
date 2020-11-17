@@ -87,7 +87,7 @@ CREATE TABLE `department` (
   `since` date DEFAULT NULL,
   PRIMARY KEY (`did`),
   KEY `managed_by_idx` (`fid`),
-  CONSTRAINT `managed_by` FOREIGN KEY (`fid`) REFERENCES `faculty` (`fid`)
+  CONSTRAINT `managed_by` FOREIGN KEY (`fid`) REFERENCES `faculty` (`fid`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -97,7 +97,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES ('CE','Civil Engineering','Pod 1D',800000,'9675854417',190001029,NULL),('CS','Computer Science','Pod 1A',1000000,'9876543201',1,'2020-01-23'),('EE','Electrical Engineering','Pod 1B',900000,'2812729',2,NULL),('ME','Mechanical Engineering','Pod 1C',900000,'6282829',NULL,NULL);
+INSERT INTO `department` VALUES ('CE','Civil Engineering','Pod 1D',800000,'9675854417',190001029,NULL),('CS','Computer Science','Pod 2A',1000000,'9876543201',1,'2020-01-23'),('EE','Electrical Engineering','Pod 1B',900000,'2812729',2,NULL),('ME','Mechanical Engineering','Pod 1C',900000,'6282829',NULL,NULL);
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +147,7 @@ CREATE TABLE `enroll` (
 
 LOCK TABLES `enroll` WRITE;
 /*!40000 ALTER TABLE `enroll` DISABLE KEYS */;
-INSERT INTO `enroll` VALUES (1,1,'AA','AB'),(1,3,'A','N'),(190001029,1,'A','AA'),(190001029,2,'A','AA'),(190001090,2,'AB','B'),(190001090,3,'B','B');
+INSERT INTO `enroll` VALUES (1,1,'AA','AB'),(1,3,'A','N'),(190001008,1,'AA','AB'),(190001008,2,'N','N'),(190001029,1,'AB','AA'),(190001029,2,'A','AA'),(190001090,2,'AB','B'),(190001090,3,'B','B');
 /*!40000 ALTER TABLE `enroll` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +179,7 @@ CREATE TABLE `faculty` (
 
 LOCK TABLES `faculty` WRITE;
 /*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
-INSERT INTO `faculty` VALUES (1,'Robert Williams','9999282822','221b , Baker street',50000,'aba@abc.com','1986-01-16','81dc9bdb52d04dc20036dbd8313ed055','Male','Professor'),(2,'Helium','None','None',45000,'helium@institute.in','1994-01-13','81dc9bdb52d04dc20036dbd8313ed055','Female','Assistant Professor'),(3,'Freeman','None','None',45000,'freeman@bmail.com','2020-10-01','81dc9bdb52d04dc20036dbd8313ed055','Male','Visting Professor'),(110109,'krishanu',NULL,NULL,53000,NULL,NULL,'56536b749a7fe62da7f62a04563acf32','Male','Associate Professor'),(190001029,'krishanu',NULL,NULL,45000,NULL,NULL,'56536b749a7fe62da7f62a04563acf32','Male',NULL);
+INSERT INTO `faculty` VALUES (1,'Robert Williams','1234565','221b , Baker street',50000,'aba@abc.com','1986-01-16','81dc9bdb52d04dc20036dbd8313ed055','Male','Professor'),(2,'Helium','None','None',45000,'helium@institute.in','1994-01-13','81dc9bdb52d04dc20036dbd8313ed055','Female','Assistant Professor'),(3,'Freeman','None','None',45000,'freeman@bmail.com','2020-10-01','81dc9bdb52d04dc20036dbd8313ed055','Male','Visting Professor'),(110109,'krishanu',NULL,NULL,53000,NULL,NULL,'56536b749a7fe62da7f62a04563acf32','Male','Associate Professor'),(190001029,'krishanu',NULL,NULL,45000,NULL,NULL,'56536b749a7fe62da7f62a04563acf32','Male',NULL);
 /*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +313,7 @@ CREATE TABLE `student` (
   `did` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
   PRIMARY KEY (`sid`),
   KEY `is_in_idx` (`did`),
-  CONSTRAINT `is_in` FOREIGN KEY (`did`) REFERENCES `department` (`did`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `is_in` FOREIGN KEY (`did`) REFERENCES `department` (`did`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -323,7 +323,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'avc','122','sada',9.90,'2','B Tech','asda@ada.in',2,4,1986,'81dc9bdb52d04dc20036dbd8313ed055','CS'),(190001010,'kuldeep',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'a8029adfae3bca6d42ac99453b200db9','EE'),(190001011,'abc',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'900150983cd24fb0d6963f7d28e17f72','CE'),(190001029,'krishanu','123456789','100-flats',9.00,'2','cse','email@email.com',1,1,2001,'56536b749a7fe62da7f62a04563acf32','CS'),(190001090,'monu','9134530222','123-lankenshire',9.67,'2','cse','cse190001030@iiti.ac.in',38,8,2001,'root','EE');
+INSERT INTO `student` VALUES (1,'avc','122','sada',9.90,'2','B Tech','asda@ada.in',2,4,1986,'81dc9bdb52d04dc20036dbd8313ed055','CS'),(190001008,'krish','171888181','123 lake',7.00,'2','b.tech','123@abc.com',22,10,2001,'81dc9bdb52d04dc20036dbd8313ed055',NULL),(190001010,'kuldeep',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'a8029adfae3bca6d42ac99453b200db9','EE'),(190001011,'abc',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'900150983cd24fb0d6963f7d28e17f72','CE'),(190001029,'krishanu','123456789','100-flats',9.00,'2','cse','email@email.com',1,1,2001,'56536b749a7fe62da7f62a04563acf32','CS'),(190001090,'monu','9134530222','123-lankenshire',9.67,'2','cse','cse190001030@iiti.ac.in',38,8,2001,'root','EE');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,7 +340,7 @@ CREATE TABLE `teaches` (
   PRIMARY KEY (`fid`,`cid`),
   KEY `cid_teaches_idx` (`cid`),
   CONSTRAINT `cid_teaches` FOREIGN KEY (`cid`) REFERENCES `course_list` (`cid`),
-  CONSTRAINT `fid_teaches` FOREIGN KEY (`fid`) REFERENCES `faculty` (`fid`)
+  CONSTRAINT `fid_teaches` FOREIGN KEY (`fid`) REFERENCES `faculty` (`fid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -409,4 +409,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-16  6:16:32
+-- Dump completed on 2020-11-17  2:45:10
