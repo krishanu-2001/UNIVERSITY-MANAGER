@@ -1,3 +1,11 @@
+This is Course project for CS-207. Build by group- G3 
+  
+Krishanu Saini 190001029  
+Kuldeep Singh 190001030  
+Deepkamal Singh 190001011  
+Rahul Kumar 190001049  
+<hr>
+
 Visit https://krishdevtools.pythonanywhere.com for live demo. Frontend and Backend working.
 
 Clone this project  
