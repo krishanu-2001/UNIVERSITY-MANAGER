@@ -1,9 +1,11 @@
+Visit https://krishdevtools.pythonanywhere.com for live demo. Frontend and Backend working.
+
 Clone this project  
   
 ## Installing Requirements  
       1. Mysql (preferably use Mysql Workbench 8.0)  
       
-      2. Python 3.7 / 3.6 ( Not compatible with python 3.9 )  
+      2. Python 3.8 / 3.7 / 3.6 ( Not compatible with python 3.9 )  
  <br ><br ><br > 
         
 ## STEP 1  ( IMPORTING MYSQL DATABASE)
