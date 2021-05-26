@@ -554,6 +554,7 @@ def department_programs(id):
 
 ### Url shortner logic
 app.add_url_rule('/url_shortner_home', view_func=url_shortner.url_shortner_home, methods=['GET','POST'])
+app.add_url_rule('/url_find/<url>', view_func=url_shortner.url_find, methods=['GET'])
 
 
 
