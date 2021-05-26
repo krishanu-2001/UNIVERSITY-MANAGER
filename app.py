@@ -10,6 +10,7 @@ import models.student_krish as student_krish
 import models.admin_krish as admin_krish
 import models.faculty_r as faculty_r
 import models.course_krish as course_krish
+import models.url_shortner as url_shortner
 
 app = Flask(__name__)
 CORS(app)
@@ -544,6 +545,21 @@ def department_programs(id):
     programlist=cur.fetchall();
     cur.close()    
     return render_template('deptprogramlist.html',programlist=programlist,deptinfo=deptinfo)       
+
+
+
+
+
+
+
+### Url shortner logic
+app.add_url_rule('/url_shortner_home', view_func=url_shortner.url_shortner_home, methods=['GET','POST'])
+
+
+
+
+
+
 
 if __name__ == '__main__':
     flag = 0
