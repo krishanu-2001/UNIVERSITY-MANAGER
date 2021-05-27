@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/krishanu-2001/UNIVERSITY-MANAGER.svg?branch=master)](https://travis-ci.com/krishanu-2001/UNIVERSITY-MANAGER)  
+
 #### This is Course project for CS-207. Build by group- G3 
   
 Krishanu Saini 190001029  
