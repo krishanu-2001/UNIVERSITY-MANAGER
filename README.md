@@ -47,3 +47,17 @@ Clone this project
       Use python 3.7 u
 
       The application runs on localhost:5000
+      
+### URL Shortner application  
+  
+      URL shortner for trusted urls   
+      
+      Identify https links and tokenize text  
+      
+      Generate unique urls using collision-free hashing policy
+      
+#### Implementation notice
+urls allow only unreserved characters (URL safe characters) 
+         
+         A-Z a-z 0-9 - . _ ~ ( ) ' ! * : @ , ;
+
